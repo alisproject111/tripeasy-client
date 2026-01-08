@@ -8,7 +8,7 @@ export default defineConfig({
     open: true,
     proxy: {
       "/api": {
-        target: "http://localhost:5000",
+        target: "https://tripeasy-server.vercel.app",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, "/api"),
       },

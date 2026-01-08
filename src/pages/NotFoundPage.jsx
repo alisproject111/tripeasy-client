@@ -19,7 +19,7 @@ const NotFoundPage = () => {
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/destinations")
+        const response = await fetch("https://tripeasy-server.vercel.app/api/destinations")
         const data = await response.json()
 
         if (data.success && data.data.destinations) {

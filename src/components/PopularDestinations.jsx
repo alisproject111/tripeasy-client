@@ -27,11 +27,11 @@ const PopularDestinations = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const destResponse = await fetch("http://localhost:5000/api/destinations")
+        const destResponse = await fetch("https://tripeasy-server.vercel.app/api/destinations")
         const destData = await destResponse.json()
         const destinations = destData.data?.destinations || []
 
-        const packagesResponse = await fetch("http://localhost:5000/api/packages")
+        const packagesResponse = await fetch("https://tripeasy-server.vercel.app/api/packages")
         const packagesData = await packagesResponse.json()
         const packages = packagesData.packages || []
 

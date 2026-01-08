@@ -50,7 +50,7 @@ function CustomizePackage() {
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/destinations")
+        const response = await fetch("https://tripeasy-server.vercel.app/api/destinations")
         const data = await response.json()
 
         if (data.success && data.data.destinations) {
@@ -176,7 +176,7 @@ function CustomizePackage() {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch("http://localhost:5000/api/submit-custom-package", {
+      const response = await fetch("https://tripeasy-server.vercel.app/api/submit-custom-package", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

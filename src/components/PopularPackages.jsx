@@ -17,9 +17,9 @@ const PopularPackages = () => {
   useEffect(() => {
     const fetchPackagesData = async () => {
       try {
-        console.log("[v0] Fetching packages from http://localhost:5000/api/packages")
+        console.log("[v0] Fetching packages from https://tripeasy-server.vercel.app/api/packages")
 
-        const response = await fetch("http://localhost:5000/api/packages", {
+        const response = await fetch("https://tripeasy-server.vercel.app/api/packages", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
