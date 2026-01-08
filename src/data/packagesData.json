@@ -1,0 +1,2017 @@
+{
+  "packages": [
+    {
+      "id": 1,
+      "name": "Cool Daman Getaway",
+      "price": 3999,
+      "duration": 2,
+      "image": "/assets/packages/Daman1.jpg",
+      "detailImage": "/assets/packages/Daman2.jpg",
+      "location": "Daman, Dadra and Nagar Haveli, India",
+      "highlights": [
+        "Jampore Beach",
+        "Devka Beach",
+        "Daman Lighthouse",
+        "Bom Jesus",
+        "Nani Fort"
+      ],
+      "description": "Experience the serene coastline and Portuguese charm of Daman on this 2-day getaway. Visit historical forts, peaceful beaches, and cultural monuments. Includes hotel stay, guided tours, and round-trip transportation from Vapi.",
+      "pdfUrl": "/pdfs/daman.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Historic Forts and Nature",
+          "description": "Kick off the journey with visits to Moti Daman Fort, relaxing moments at Jampore Beach, birdwatching at Daman Aviary, and sunset at Daman Lighthouse.",
+          "activities": [
+            "Moti Daman Fort",
+            "Jampore Beach",
+            "Daman Aviary",
+            "Daman Lighthouse"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Cultural and Colonial Exploration",
+          "description": "Explore the heritage sites including Cathedral of Bom Jesus, Nani Daman Fort, St. Jerome Fort, and the tranquil Dominican Monastery.",
+          "activities": [
+            "Cathedral of Bom Jesus",
+            "Nani Daman Fort",
+            "St Jerome Fort",
+            "Dominican Monastery"
+          ]
+        }
+      ],
+      "food": ["Breakfast", "Dinner"],
+      "category": "Weekend Trip",
+      "featured": true
+    },
+    {
+      "id": 2,
+      "name": "Bali Bliss",
+      "price": 78000,
+      "duration": 6,
+      "image": "/assets/packages/Bali1.jpg",
+      "detailImage": "/assets/packages/Bali2.jpg",
+      "location": "Bali, Indonesia",
+      "highlights": [
+        "Uluwatu Temple",
+        "Tanah Lot",
+        "Monkey Forest",
+        "Mount Batur",
+        "Tegallalang Terrace"
+      ],
+      "description": "Discover the magic of Bali on this 6-day journey through its stunning temples, lush rice terraces, waterfalls, and cultural gems. Perfect for nature lovers, spiritual seekers, and adventure enthusiasts.",
+      "pdfUrl": "/pdfs/bali_bliss.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Temples & Beaches",
+          "description": "Visit Uluwatu Temple and Tanah Lot Temple. Relax at Padang Padang Beach and enjoy local beachside cafes.",
+          "activities": [
+            "Uluwatu Temple",
+            "Tanah Lot",
+            "Padang Padang Beach",
+            "Beachside Cafe"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Waterfalls & Rice Terraces",
+          "description": "Explore Tegallalang Rice Terrace, Tukad Cepung Waterfall, and Tibumana Waterfall. Dine at a local restaurant.",
+          "activities": [
+            "Tegallalang Terrace",
+            "Tukad Cepung",
+            "Tibumana Waterfall"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Wildlife & Culture",
+          "description": "Visit Bali Bird Park, Monkey Forest Ubud, and Garuda Wisnu Kencana Cultural Park.",
+          "activities": ["Bali Bird Park", "Monkey Forest", "GWK Park"]
+        },
+        {
+          "day": 4,
+          "title": "Spiritual & Coastal Views",
+          "description": "Tour Besakih Temple, relax at Balangan Beach, and enjoy a local Warung meal.",
+          "activities": ["Besakih Temple", "Balangan Beach", "Warung Cafe"]
+        },
+        {
+          "day": 5,
+          "title": "Adventure & Wildlife",
+          "description": "Visit Mount Batur and Bali Zoo. Lunch at a local restaurant near the attractions.",
+          "activities": ["Mount Batur", "Bali Zoo", "Local Restaurant"]
+        },
+        {
+          "day": 6,
+          "title": "Markets & Departure",
+          "description": "Explore Ubud Art Market, Sukawati Art Market, and Taman Sari Market. Depart for India.",
+          "activities": [
+            "Ubud Market",
+            "Sukawati Market",
+            "Taman Sari",
+            "Departure"
+          ]
+        }
+      ],
+      "category": "International",
+      "featured": true
+    },
+    {
+      "id": 3,
+      "name": "Dwarka Darshan",
+      "price": 12000,
+      "duration": 4,
+      "image": "/assets/packages/Dwarka1.jpg",
+      "detailImage": "/assets/packages/Dwarka2.jpg",
+      "location": "Dwarka, Gujarat, India",
+      "highlights": [
+        "Dwarka Temple",
+        "Rukmani Temple",
+        "Gita Temple",
+        "Gopi Lake",
+        "Dwarka Beach"
+      ],
+      "description": "Experience a divine 4-day pilgrimage to the sacred city of Dwarka. Explore temples, holy lakes, beaches, and historical sites with seamless transport and virtual travel assistance included.",
+      "pdfUrl": "/pdfs/dwarka.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Temple Start",
+          "description": "Visit the sacred Dwarkadhish Temple, walk along Dwarka Beach, and offer prayers at Gita Temple.",
+          "activities": ["Dwarkadhish Temple", "Dwarka Beach", "Gita Temple"]
+        },
+        {
+          "day": 2,
+          "title": "Island and Jyotirling",
+          "description": "Explore Beyt Dwarka island, visit Nageshwar Jyotirling, Gopi Lake, Mayasar Lake, and Bhadkeshwar Mahadev Temple.",
+          "activities": [
+            "Beyt Dwarka",
+            "Nageshwar Jyotirling",
+            "Gopi Lake",
+            "Mayasar Lake",
+            "Bhadkeshwar Temple"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Shoreline Serenity",
+          "description": "Walk along Gomti Ghat, visit Sudama Setu & Mandir, climb Dwarka Lighthouse, relax at Shivrajpur Beach, and see Rukmani Devi Temple.",
+          "activities": [
+            "Gomti Ghat",
+            "Sudama Setu",
+            "Dwarka Lighthouse",
+            "Shivrajpur Beach",
+            "Rukmani Temple"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Return Journey",
+          "description": "Round-trip train travel and departure from Dwarka with spiritual memories and blessings.",
+          "activities": ["Train Transfer", "Farewell Ceremony"]
+        }
+      ],
+      "category": "Religious Tour",
+      "featured": false
+    },
+    {
+      "id": 4,
+      "name": "Goa Getaway",
+      "price": 10000,
+      "duration": 3,
+      "image": "/assets/packages/Goa1.jpg",
+      "detailImage": "/assets/packages/Goa2.jpg",
+      "location": "Goa, India",
+      "highlights": [
+        "Baga Beach",
+        "Aguada Fort",
+        "Bom Jesus",
+        "Vagator Beach",
+        "Miramar Beach"
+      ],
+      "description": "Enjoy a 3-day vibrant escape to Goa packed with beaches, forts, churches, shopping, and delicious Goan cuisine. Choose between flight or train travel and immerse yourself in the tropical vibe.",
+      "pdfUrl": "/pdfs/goa.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival and Local Markets",
+          "description": "Relish Goan cuisine, check into your hotel, and explore the colorful local markets.",
+          "activities": ["Goan Cuisine", "Hotel Check-in", "Local Market Visit"]
+        },
+        {
+          "day": 2,
+          "title": "Beaches and Forts",
+          "description": "Spend the day at Aguada Fort, Siquerium, Baga, Anjuna, and Vagator Beach.",
+          "activities": [
+            "Aguada Fort",
+            "Siquerium",
+            "Baga Beach",
+            "Anjuna Beach",
+            "Vagator Beach"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Spiritual and Scenic",
+          "description": "Visit Shri Mangesh Temple, Bom Jesus Basilica, Se Cathedral, Miramar Beach, and Dona Paula.",
+          "activities": [
+            "Mangesh Temple",
+            "Bom Jesus Basilica",
+            "Se Cathedral",
+            "Miramar Beach",
+            "Dona Paula"
+          ]
+        }
+      ],
+      "category": "Beach Vacation",
+      "featured": true
+    },
+    {
+      "id": 5,
+      "name": "Hong Kong & Macau Tour",
+      "price": 70000,
+      "duration": 7,
+      "image": "/assets/packages/HongKong1.jpg",
+      "detailImage": "/assets/packages/HongKong2.jpg",
+      "location": "Hong Kong, China",
+      "highlights": [
+        "Sky Terrace",
+        "Star Ferry",
+        "Macau Tower",
+        "Parisian Macau",
+        "Cotai Strip"
+      ],
+      "description": "Discover the perfect blend of urban adventure and cultural charm in this 7-day Hong Kong & Macau package. Enjoy panoramic views, thrilling rides, iconic landmarks, and vibrant nightlife. Includes hotel stay, guided tours, and seamless transfers.",
+      "pdfUrl": "/pdfs/hongkong_macau.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival and Relaxation",
+          "description": "Arrival in Hong Kong. Transfer to hotel and relax. Prepare for the exciting week ahead.",
+          "activities": [
+            "Airport Arrival",
+            "Hotel Check-in",
+            "Evening Free Time"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Peak Tram & Skyline Views",
+          "description": "Ride the iconic Peak Tram to Sky Terrace 428, followed by a scenic Star Ferry ride. End the evening at Temple Street Night Market.",
+          "activities": [
+            "Peak Tram",
+            "Sky Terrace 428",
+            "Star Ferry Ride",
+            "Temple Street Market"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Free Exploration",
+          "description": "Day free for personal shopping or optional city exploration (activities not listed in PDF).",
+          "activities": ["Free Day", "Local Exploration"]
+        },
+        {
+          "day": 4,
+          "title": "Transfer to Macau",
+          "description": "Travel from Hong Kong to Macau. Leisure time and hotel check-in.",
+          "activities": [
+            "Ferry to Macau",
+            "Hotel Check-in",
+            "Evening Free Time"
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Heritage and Skyscrapers",
+          "description": "Visit Monte Fort & Macau Museum in the morning, A-Ma Temple in the afternoon, and end at the Macau Tower Observation Deck.",
+          "activities": [
+            "Monte Fort",
+            "Macau Museum",
+            "A-Ma Temple",
+            "Macau Tower"
+          ]
+        },
+        {
+          "day": 6,
+          "title": "Luxury Experience",
+          "description": "Ride a gondola at The Venetian Macao, explore the Eiffel Tower replica at The Parisian, and enjoy nightlife on Cotai Strip.",
+          "activities": [
+            "The Venetian Macao",
+            "Gondola Ride",
+            "Parisian Macao",
+            "Cotai Strip"
+          ]
+        },
+        {
+          "day": 7,
+          "title": "Farewell and Departure",
+          "description": "Visit the Macau Giant Panda Pavilion in the morning and transfer to the airport/ferry terminal for departure.",
+          "activities": ["Macau Panda Pavilion", "Transfer to Airport"]
+        }
+      ],
+      "category": "International Trip",
+      "featured": true
+    },
+    {
+      "id": 6,
+      "name": "Kashi Darshan",
+      "price": 12000,
+      "duration": 4,
+      "image": "/assets/packages/Kashi1.jpg",
+      "detailImage": "/assets/packages/Kashi2.jpg",
+      "location": "Varanasi, Uttar Pradesh, India",
+      "highlights": [
+        "Sacred Ghats",
+        "Golden Temple",
+        "Ancient Sarnath",
+        "Ganga Aarti",
+        "Royal Fort"
+      ],
+      "description": "Immerse yourself in the spiritual heart of India on this 4-day Kashi pilgrimage. Visit sacred temples, witness the majestic Ganga Aarti, explore historical sites like Sarnath, and stroll through iconic ghats and markets.",
+      "pdfUrl": "/pdfs/kashi.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Ghat and Temple Tour",
+          "description": "Visit Kashi Vishwanath Temple, Dashashwamedh Ghat, Assi Ghat, Manikarnika Ghat, and experience Ganga Aarti.",
+          "activities": [
+            "Kashi Vishwanath Temple",
+            "Dashashwamedh Ghat",
+            "Manikarnika Ghat",
+            "Assi Ghat",
+            "Ganga Aarti"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Cultural Wonders",
+          "description": "Visit Ramnagar Fort, Meer Ghat, Tulsi Ghat, Subah-e-Banaras, Sankat Mochan Temple and local markets.",
+          "activities": [
+            "Ramnagar Fort",
+            "Meer Ghat",
+            "Tulsi Ghat",
+            "Sankat Mochan Temple",
+            "Rajan Silk Market"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Heritage Tour",
+          "description": "Explore Sarnath, Ashoka Pillar, Statue of Buddha, Namo Ghat, and attend the Light & Sound Show.",
+          "activities": [
+            "Sarnath",
+            "Ashoka Pillar",
+            "Standing Buddha",
+            "Namo Ghat",
+            "Sound & Light Show"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Local Varanasi",
+          "description": "Visit Deendayal Statue, Thatheri Bazar, Vishwanath Lane, Godowlia Market and Golghar.",
+          "activities": [
+            "Vishwanath Lane",
+            "Godowlia Market",
+            "Golghar",
+            "Deendayal Statue"
+          ]
+        }
+      ],
+      "category": "Religious Tour",
+      "featured": false
+    },
+    {
+      "id": 7,
+      "name": "Mahakal Darshan (Ujjain)",
+      "price": 12000,
+      "duration": 4,
+      "image": "/assets/packages/Ujjain1.jpg",
+      "detailImage": "/assets/packages/Ujjain2.jpg",
+      "location": "Ujjain, Madhya Pradesh, India",
+      "highlights": [
+        "Mahakal Temple",
+        "Ram Ghat",
+        "Kaal Bhairav",
+        "Shipra River",
+        "Mahakal Lok"
+      ],
+      "description": "Explore the sacred land of Ujjain in this 4-day Mahakal Darshan tour. Witness divine Jyotirlinga rituals, sacred temples, river ghats, and spiritual architecture of Mahakal Lok Corridor.",
+      "pdfUrl": "/pdfs/mahakal.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Jyotirlinga Blessings",
+          "description": "Visit Mahakaleshwar Jyotirlinga, Harsiddhi Temple, Ram Ghat, Kaal Bhairav, and Mangalnath Temple.",
+          "activities": [
+            "Mahakal Temple",
+            "Harsiddhi Temple",
+            "Ram Ghat",
+            "Kaal Bhairav",
+            "Mangalnath Temple"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "City Landmarks",
+          "description": "Explore Jantar Mantar, Kaliadeh Palace, ISKCON Temple, Bharat Mata Mandir, and Triveni Museum.",
+          "activities": [
+            "Jantar Mantar",
+            "Kaliadeh Palace",
+            "ISKCON Temple",
+            "Triveni Museum",
+            "Bharat Mata Mandir"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Spiritual Sites",
+          "description": "Visit Vishnu Sagar, Gaghkalika Mandir, Bhartihari Caves, and Shri Chaubis Khamba Mata Temple.",
+          "activities": [
+            "Vishnu Sagar",
+            "Bhartihari Caves",
+            "Gaghkalika Temple",
+            "Chaubis Khamba Mata"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Mahakal Lok Walk",
+          "description": "End the tour at Mahakaal Lok Corridor, Vikram Kirti Mandir, and Mahamrityunjay Dwar.",
+          "activities": [
+            "Mahakaal Lok Corridor",
+            "Vikram Kirti Mandir",
+            "Mahamrityunjay Dwar"
+          ]
+        }
+      ],
+      "category": "Religious Tour",
+      "featured": false
+    },
+    {
+      "id": 8,
+      "name": "Matheran Nature Trip",
+      "price": 15000,
+      "duration": 3,
+      "image": "/assets/packages/Matheran1.jpg",
+      "detailImage": "/assets/packages/Matheran2.jpg",
+      "location": "Matheran, Maharashtra, India",
+      "highlights": [
+        "Echo Point",
+        "Toy Train",
+        "Louisa Point",
+        "Panorama Point",
+        "Charlotte Lake"
+      ],
+      "description": "Reconnect with nature on this tranquil Matheran escape. Discover waterfalls, lakes, temples, and sunset viewpoints, all nestled in this eco-friendly hill station.",
+      "pdfUrl": "/pdfs/matheran.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Lakes and Temples",
+          "description": "Visit Echo Point, Charlotte Lake, Pisarnath Temple, and Louisa Point. Explore the Shivaji Museum.",
+          "activities": [
+            "Echo Point",
+            "Charlotte Lake",
+            "Pisarnath Temple",
+            "Louisa Point",
+            "Shivaji Museum"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Scenic Views",
+          "description": "Cover One Tree Hill, Alexander Point, Panorama Point, Dodhani Waterfall, and Monkey Point.",
+          "activities": [
+            "One Tree Hill",
+            "Alexander Point",
+            "Panorama Point",
+            "Dodhani Waterfall",
+            "Monkey Point"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Hilltop Retreat",
+          "description": "Visit Khandala Point and enjoy peaceful time in nature before departure.",
+          "activities": ["Khandala Point"]
+        }
+      ],
+      "category": "Hill Station",
+      "featured": true
+    },
+    {
+      "id": 9,
+      "name": "Mount Abu Package",
+      "price": 5999,
+      "duration": 3,
+      "image": "/assets/packages/MountAbu1.jpg",
+      "detailImage": "/assets/packages/MountAbu2.jpg",
+      "location": "Mount Abu, Rajasthan, India",
+      "highlights": [
+        "Nakki Lake",
+        "Dilwara Temple",
+        "Sunset Point",
+        "Toad Rock",
+        "Adhar Devi"
+      ],
+      "description": "Escape to the serene hills of Mount Abu. Discover temples, lakes, and viewpoints in this 3-day package with guided sightseeing, boat rides, and cozy stays.",
+      "pdfUrl": "/pdfs/mountabu.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Lakeside Wonders",
+          "description": "Visit Nakki Lake, Toad Rock, Bharat Mata, Government Museum and enjoy sunset views.",
+          "activities": [
+            "Nakki Lake",
+            "Toad Rock",
+            "Bharat Mata",
+            "Government Museum",
+            "Sunset Point"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Temples and Shopping",
+          "description": "Explore the sacred Dilwara Temple, Adhar Devi Temple, and shop at Mount Abu Bazaar.",
+          "activities": [
+            "Dilwara Temple",
+            "Adhar Devi Temple",
+            "Mount Abu Bazaar"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Hilltop Vibes",
+          "description": "Visit Gabbar Hill, Ambaji Mata Mandir, and enjoy some local shopping before departure.",
+          "activities": ["Gabbar Hill", "Ambaji Mandir", "Local Market"]
+        }
+      ],
+      "category": "Hill Station",
+      "featured": false
+    },
+    {
+      "id": 10,
+      "name": "Oman Odyssey",
+      "price": 50000,
+      "duration": 4,
+      "image": "/assets/packages/Oman1.jpg",
+      "detailImage": "/assets/packages/Oman2.jpg",
+      "location": "Muscat, Oman",
+      "highlights": [
+        "Grand Mosque",
+        "Mutrah Fort",
+        "Daymaniyat Islands",
+        "Wadi Shab",
+        "Dhow Cruise"
+      ],
+      "description": "Discover the magic of Oman in this 5-day exotic getaway. From stunning mosques and souks in Muscat to snorkeling at Daymaniyat Islands, wadis, sinkholes, and desert adventures – this trip offers the perfect blend of luxury, culture, and nature.",
+      "pdfUrl": "/pdfs/oman.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Muscat City Tour",
+          "description": "Visit Sultan Qaboos Grand Mosque, Royal Opera House, Mutrah Fort, and explore the vibrant Mutrah Souk Market. Overnight stay in Muscat.",
+          "activities": [
+            "Grand Mosque",
+            "Royal Opera House",
+            "Mutrah Fort",
+            "Mutrah Souk"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Island Adventure",
+          "description": "Enjoy a boat trip and optional snorkeling experience at Daymaniyat Islands. Return and overnight stay in Muscat.",
+          "activities": ["Boat Trip", "Daymaniyat Islands", "Snorkeling"]
+        },
+        {
+          "day": 3,
+          "title": "Wadis and Sinkholes",
+          "description": "Full-day guided tour of Wadi Shab and Bimmah Sinkhole. Optional Dhow Cruise experience in the evening.",
+          "activities": ["Wadi Shab", "Bimmah Sinkhole", "Optional Dhow Cruise"]
+        },
+        {
+          "day": 4,
+          "title": "Local Culture and Beaches",
+          "description": "Explore Muscat beaches, try dune bashing, and optionally visit Nizwa Fort. Evening transfer to airport.",
+          "activities": [
+            "Muscat Beaches",
+            "Dune Bashing",
+            "Nizwa Fort (Optional)"
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Departure",
+          "description": "Early morning flight back to India. End of a memorable Arabian journey.",
+          "activities": ["Airport Transfer", "Return Flight"]
+        }
+      ],
+      "category": "International Trip",
+      "featured": true
+    },
+    {
+      "id": 11,
+      "name": "Pushkar Tour",
+      "price": 12000,
+      "duration": 5,
+      "image": "/assets/packages/Pushkar1.jpg",
+      "detailImage": "/assets/packages/Pushkar2.jpg",
+      "location": "Pushkar, Rajasthan, India",
+      "highlights": [
+        "Pushkar Lake",
+        "Brahma Temple",
+        "Savitri Temple",
+        "Rose Garden",
+        "Man Mahal"
+      ],
+      "description": "Explore the spiritual charm of Pushkar on this 5-day cultural journey. Visit sacred lakes, vibrant bazaars, ancient temples, and serene hills. Perfect for a peaceful and spiritual getaway.",
+      "pdfUrl": "/pdfs/pushkar.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Lakeside Serenity",
+          "description": "Begin with Pushkar Lake, Brahma Temple, and explore the Main Bazaar.",
+          "activities": ["Pushkar Lake", "Brahma Temple", "Main Bazaar"]
+        },
+        {
+          "day": 2,
+          "title": "Spiritual Trails",
+          "description": "Visit Savitri Temple, Varaha Temple, and Sarafa Bazaar.",
+          "activities": ["Savitri Temple", "Varaha Temple", "Sarafa Bazaar"]
+        },
+        {
+          "day": 3,
+          "title": "Palaces & Bazaars",
+          "description": "Explore Ranji Temple, Man Mahal, and Bada Bazaar.",
+          "activities": ["Ranji Temple", "Man Mahal", "Bada Bazaar"]
+        },
+        {
+          "day": 4,
+          "title": "Hill & Garden Walks",
+          "description": "Visit Gurudwara Singh Sabha, Naga Pahar, Rose Garden, and Sadar Bazaar.",
+          "activities": [
+            "Gurudwara Singh Sabha",
+            "Naga Pahar",
+            "Rose Garden",
+            "Sadar Bazaar"
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Shopping & Farewell",
+          "description": "Final shopping stop at Kishanpura Market before departure.",
+          "activities": ["Kishanpura Market"]
+        }
+      ],
+      "category": "Spiritual Trip",
+      "featured": false
+    },
+    {
+      "id": 12,
+      "name": "Udaipur Royal Escapade",
+      "price": 9600,
+      "duration": 5,
+      "image": "/assets/packages/Rajasthan1.jpg",
+      "detailImage": "/assets/packages/Rajasthan2.jpg",
+      "location": "Udaipur, Rajasthan, India",
+      "highlights": [
+        "City Palace",
+        "Lake Palace",
+        "Sajjangarh Fort",
+        "Bahubali Hills",
+        "Fateh Sagar Lake"
+      ],
+      "description": "Indulge in royalty with this 5-day tour through Udaipur, the City of Lakes. Explore majestic palaces, tranquil lakes, heritage museums, and spiritual sites with stunning landscapes and rich Rajasthani culture.",
+      "pdfUrl": "/pdfs/udaipur.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Palaces and Lakes",
+          "description": "Start your tour with the City Palace, Jagdish Temple, Lake Pichola, Jagmandir, and Fateh Sagar Lake.",
+          "activities": [
+            "City Palace",
+            "Jagdish Temple",
+            "Lake Pichola",
+            "Jagmandir",
+            "Fateh Sagar Lake"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Monsoon Palace & Gardens",
+          "description": "Visit the iconic Lake Palace, Saheliyon Ki Bari, Sajjangarh Palace, Wildlife Sanctuary, and Bahubali Hills.",
+          "activities": [
+            "Lake Palace",
+            "Saheliyon Ki Bari",
+            "Sajjangarh Palace",
+            "Wildlife Sanctuary",
+            "Bahubali Hills"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Museum and History",
+          "description": "Explore the Vintage Car Museum, Ahar Museum, Wax Museum, and Maharana Pratap Smarak.",
+          "activities": [
+            "Vintage Car Museum",
+            "Ahar Museum",
+            "Wax Museum",
+            "Maharana Pratap Smarak",
+            "Aquarium"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Lakeside Leisure",
+          "description": "Relax at Fateh Sagar Pal, visit Nehru Garden, Rajiv Gandhi Garden, Shilpgram, and Ambrai Ghat.",
+          "activities": [
+            "Fateh Sagar Pal",
+            "Nehru Garden",
+            "Rajiv Gandhi Garden",
+            "Shilpgram",
+            "Ambrai Ghat"
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Temples and Culture",
+          "description": "End your tour with visits to Karni Mata Mandir, Bagore Ki Haveli, Eklingji Temple, Sahastra Bahu Temple, and local markets.",
+          "activities": [
+            "Karni Mata Mandir",
+            "Bagore Ki Haveli",
+            "Eklingji Temple",
+            "Sahastra Bahu Temple",
+            "Local Market"
+          ]
+        }
+      ],
+      "category": "Heritage Tour",
+      "featured": true
+    },
+    {
+      "id": 13,
+      "name": "Saputara 2D 1N Tour",
+      "price": 6000,
+      "duration": 2,
+      "image": "/assets/packages/Saputara1.jpg",
+      "detailImage": "/assets/packages/Saputara2.jpg",
+      "location": "Saputara, Gujarat, India",
+      "highlights": [
+        "Saputara Lake",
+        "Sunset Point",
+        "Echo Point",
+        "Step Garden",
+        "Ropeway Ride"
+      ],
+      "description": "Escape into nature with this short and scenic getaway to Saputara. A perfect 2-day tour packed with lakes, viewpoints, gardens, and tribal culture. Includes premium stay and guided sightseeing.",
+      "pdfUrl": "/pdfs/saputara.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Lakes & Landscapes",
+          "description": "Explore Saputara Lake, Lake Garden, Nageshwar Mahadev Temple, Table Land & Ropeway, Step Garden, and Sunset Point.",
+          "activities": [
+            "Saputara Lake",
+            "Lake Garden",
+            "Nageshwar Temple",
+            "Table Land",
+            "Sunset Point"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Cultural Exploration",
+          "description": "Start your day with Sunrise Point, followed by Echo Point, Rose Garden, Tribal Museum, and Artist Village.",
+          "activities": [
+            "Sunrise Point",
+            "Echo Point",
+            "Rose Garden",
+            "Tribal Museum",
+            "Artist Village"
+          ]
+        }
+      ],
+      "category": "Nature Trip",
+      "featured": false
+    },
+    {
+      "id": 14,
+      "name": "Shimla & Manali",
+      "price": 17000,
+      "duration": 6,
+      "image": "/assets/packages/Shimla1.jpg",
+      "detailImage": "/assets/packages/Shimla2.jpg",
+      "location": "Shimla & Manali, Himachal Pradesh, India",
+      "highlights": [
+        "Mall Road",
+        "Rohtang Pass",
+        "Solang Valley",
+        "Christ Church",
+        "Hadimba Temple"
+      ],
+      "description": "This 6-day journey through Shimla and Manali brings you the best of Himachal Pradesh. From colonial charm and scenic valleys to thrilling adventures in snow-clad mountains, experience nature, culture, and calm all in one trip.",
+      "pdfUrl": "/pdfs/shimla_manali.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival in Shimla",
+          "description": "Arrive in Shimla and explore the Ridge, Mall Road, Christ Church, Kali Bari Temple, and enjoy the sunset view.",
+          "activities": [
+            "The Ridge",
+            "Mall Road",
+            "Christ Church",
+            "Kali Bari Temple",
+            "Sunset View"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Historical & Cultural Sites",
+          "description": "Visit Sankat Mochan Temple, Himalayan Bird Park, Tara Devi Temple, Viceregal Lodge, and Kamna Devi Temple.",
+          "activities": [
+            "Sankat Mochan Temple",
+            "Bird Park",
+            "Tara Devi",
+            "Viceregal Lodge",
+            "Kamna Devi"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Scenic Transfer to Manali",
+          "description": "Transfer from Shimla to Manali via scenic stops, visiting Naggar Castle en route.",
+          "activities": ["Scenic Transfer", "Naggar Castle", "Manali Arrival"]
+        },
+        {
+          "day": 4,
+          "title": "Nature & Culture of Manali",
+          "description": "Visit Hidimba Devi Temple, Vashisht Hot Springs, Jogini Waterfall, and local markets.",
+          "activities": [
+            "Hidimba Temple",
+            "Vashisht Springs",
+            "Jogini Waterfall",
+            "Manali Markets"
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Adventure & Snow",
+          "description": "Explore Solang Valley, Rohtang Pass (weather dependent), and Nehru Kund.",
+          "activities": ["Solang Valley", "Rohtang Pass", "Nehru Kund"]
+        },
+        {
+          "day": 6,
+          "title": "Wildlife & Return",
+          "description": "Visit Manali Sanctuary and return to Shimla for departure.",
+          "activities": ["Manali Sanctuary", "Return to Shimla"]
+        }
+      ],
+      "category": "Hill Station",
+      "featured": true
+    },
+    {
+      "id": 15,
+      "name": "Udaipur to Mount Abu",
+      "price": 9920,
+      "duration": 6,
+      "image": "/assets/packages/Rajasthan3.jpg",
+      "detailImage": "/assets/packages/Rajasthan4.jpg",
+      "location": "Udaipur & Mount Abu, Rajasthan, India",
+      "highlights": [
+        "City Palace",
+        "Lake Pichola",
+        "Dilwara Temple",
+        "Wildlife Sanctuary",
+        "Sunset Point"
+      ],
+      "description": "Experience the royal heritage of Udaipur and the serene beauty of Mount Abu in this 6-day journey. Explore palaces, lakes, temples, and hilltop views while discovering Rajasthan's cultural and natural gems.",
+      "pdfUrl": "/pdfs/udaipur_mount_abu.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Udaipur City Tour",
+          "description": "Explore Udaipur's iconic landmarks including City Palace, Jagdish Temple, Lake Pichola, Jagmandir, and Gangaur Ghat.",
+          "activities": [
+            "City Palace",
+            "Jagdish Temple",
+            "Lake Pichola",
+            "Jagmandir",
+            "Gangaur Ghat"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Lakes and Gardens",
+          "description": "Visit Lake Palace, Saheliyon Ki Bari, Fateh Sagar Lake, Ambarai Ghat, and shop at the local market.",
+          "activities": [
+            "Lake Palace",
+            "Saheliyon Ki Bari",
+            "Fateh Sagar Lake",
+            "Ambarai Ghat",
+            "Local Market"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Cultural Heritage",
+          "description": "Explore Chetak Samadhi, Mahakali Mandir, Maharana Pratap Museum, and Maharana Pratap Caves.",
+          "activities": [
+            "Chetak Samadhi",
+            "Mahakali Mandir",
+            "Maharana Pratap Museum",
+            "Maharana Pratap Caves"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Journey to Mount Abu",
+          "description": "Travel to Mount Abu and visit Nakki Lake, Toad Rock, and Sunset Point.",
+          "activities": [
+            "Travel to Mount Abu",
+            "Nakki Lake",
+            "Toad Rock",
+            "Sunset Point"
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Temples & Forts",
+          "description": "Visit the sacred Dilwara Temple, Adhar Devi Temple, Achalgarh Fort, Government Museum, and shop at Mount Abu Bazaar.",
+          "activities": [
+            "Dilwara Temple",
+            "Adhar Devi Temple",
+            "Achalgarh Fort",
+            "Government Museum",
+            "Mount Abu Bazaar"
+          ]
+        },
+        {
+          "day": 6,
+          "title": "Wildlife & Return",
+          "description": "Explore the Mount Abu Wildlife Sanctuary and enjoy treks before traveling back to Udaipur.",
+          "activities": [
+            "Mount Abu Wildlife Sanctuary",
+            "Nature Walks",
+            "Travel Back to Udaipur"
+          ]
+        }
+      ],
+      "category": "Heritage & Nature",
+      "featured": true
+    },
+    {
+      "id": 16,
+      "name": "Thrilling Thailand",
+      "price": 65000,
+      "duration": 6,
+      "image": "/assets/packages/Thailand1.jpg",
+      "detailImage": "/assets/packages/Thailand2.jpg",
+      "location": "Phuket, Krabi & Bangkok, Thailand",
+      "highlights": [
+        "Phuket Beaches",
+        "Tiger Kingdom",
+        "Big Buddha",
+        "Phi Phi Islands",
+        "Wat Arun",
+        "Grand Palace"
+      ],
+      "description": "Embark on a 6-day adventure across Thailand's top destinations: Phuket, Krabi, and Bangkok. From serene beaches and spiritual landmarks to bustling city streets and cultural treasures, experience the thrill and charm of Thailand in one perfect holiday.",
+      "pdfUrl": "/pdfs/thrilling_thailand.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival in Phuket",
+          "description": "Check in to your hotel and explore the popular Patong area known for its nightlife and beaches.",
+          "activities": ["Hotel Check-in", "Patong Beach", "Local Markets"]
+        },
+        {
+          "day": 2,
+          "title": "Phuket Sightseeing",
+          "description": "Discover Phuket's famous attractions including the Tiger Kingdom, Big Buddha, and Chaitharaman Temple.",
+          "activities": [
+            "Tiger Kingdom",
+            "Big Buddha",
+            "Chaitharaman Temple",
+            "Local Market Walk"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Transfer to Krabi & Phi Phi Islands",
+          "description": "Travel to Krabi and enjoy a scenic day exploring the famous Phi Phi Islands.",
+          "activities": [
+            "Transfer to Krabi",
+            "Phi Phi Islands Tour",
+            "Island Hopping"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Spiritual & Nature Tour in Krabi",
+          "description": "Visit Tiger Cave Temple, Elephant Sanctuary, and Wat Kaew Korawaram in Krabi.",
+          "activities": [
+            "Tiger Cave Temple",
+            "Krabi Elephant Sanctuary",
+            "Wat Kaew Korawaram"
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Arrival in Bangkok & City Tour",
+          "description": "Arrive in Bangkok and explore the city's iconic temples and vibrant culture.",
+          "activities": [
+            "Travel to Bangkok",
+            "Wat Arun",
+            "Emerald Buddha Temple",
+            "Bangkok Streets"
+          ]
+        },
+        {
+          "day": 6,
+          "title": "Bangkok Highlights & Departure",
+          "description": "Visit Wat Pho, Ocean World, and the Grand Palace before your journey ends.",
+          "activities": ["Wat Pho", "Ocean World", "Grand Palace"]
+        }
+      ],
+      "category": "International",
+      "featured": true
+    },
+    {
+      "id": 17,
+      "name": "Udaipur Majestic Journey",
+      "price": 9600,
+      "duration": 5,
+      "image": "/assets/packages/Rajasthan5.jpg",
+      "detailImage": "/assets/packages/Rajasthan6.jpg",
+      "location": "Udaipur, Rajasthan, India",
+      "highlights": [
+        "City Palace",
+        "Lake Pichola",
+        "Saheliyon Ki Bari",
+        "Fateh Sagar Lake",
+        "Kumbhalgarh Fort"
+      ],
+      "description": "Explore the regal beauty of Udaipur over 5 enriching days. This journey takes you through royal palaces, tranquil lakes, majestic forts, and cultural landmarks, giving you a taste of Rajasthan's timeless elegance.",
+      "pdfUrl": "/pdfs/udaipur_majestic.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Royal Welcome in Udaipur",
+          "description": "Visit City Palace, Jagdish Temple, Lake Pichola, Jagmandir, and Gangaur Ghat for a royal experience.",
+          "activities": [
+            "City Palace",
+            "Jagdish Temple",
+            "Lake Pichola",
+            "Jagmandir",
+            "Gangaur Ghat"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Gardens & Lakes",
+          "description": "Explore Lake Palace, Saheliyon Ki Bari, Fateh Sagar Lake, Ambarai Ghat, and shop in the local market.",
+          "activities": [
+            "Lake Palace",
+            "Saheliyon Ki Bari",
+            "Fateh Sagar Lake",
+            "Ambarai Ghat",
+            "Local Market"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Museums & Memorials",
+          "description": "Visit the Vintage Car Museum, Ahar Museum, Wax Museum, Maharana Pratap Smarak, and Under the Sun Aquarium.",
+          "activities": [
+            "Vintage Car Museum",
+            "Ahar Museum",
+            "Wax Museum",
+            "Maharana Pratap Smarak",
+            "Under the Sun Aquarium"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Historical Sites",
+          "description": "Discover Chetak Samadhi, Mahakali Mandir, Maharana Pratap Museum, and Haldighati's historic sites.",
+          "activities": [
+            "Chetak Samadhi",
+            "Mahakali Mandir",
+            "Maharana Pratap Museum",
+            "Maharana Pratap Caves",
+            "Haldighati"
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Fort & Farewell",
+          "description": "End your journey with a visit to Kumbhalgarh Fort, Karni Mata Mandir, Nehru Garden, and local shopping.",
+          "activities": [
+            "Kumbhalgarh Fort",
+            "Kumbhalgarh Wildlife Sanctuary",
+            "Karni Mata Mandir",
+            "Nehru Garden",
+            "Local Market"
+          ]
+        }
+      ],
+      "category": "Heritage",
+      "featured": true
+    },
+    {
+      "id": 18,
+      "name": "Udaipur Splendor",
+      "price": 9600,
+      "duration": 5,
+      "image": "/assets/packages/Rajasthan7.jpg",
+      "detailImage": "/assets/packages/Rajasthan8.jpg",
+      "location": "Udaipur, Rajasthan, India",
+      "highlights": [
+        "City Palace",
+        "Lake Pichola",
+        "Sajjangarh Palace",
+        "Fateh Sagar Lake",
+        "Karni Mata Mandir"
+      ],
+      "description": "This 5-day heritage tour of Udaipur unveils the regal charm, historic landmarks, serene lakes, and vibrant culture of the City of Lakes. Discover palaces, museums, gardens, and the soul of Rajasthan with comfort and elegance.",
+      "pdfUrl": "/pdfs/udaipur_splendor.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Royal Beginnings",
+          "description": "Kickstart the journey by visiting Udaipur City Palace, Jagdish Temple, Lake Pichola, Jagmandir, and Gangaur Ghat.",
+          "activities": [
+            "City Palace",
+            "Jagdish Temple",
+            "Lake Pichola",
+            "Jagmandir",
+            "Gangaur Ghat"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Palaces and Wildlife",
+          "description": "Explore Lake Palace, Saheliyon Ki Bari, Sajjangarh Palace, Sajjangarh Wildlife Sanctuary, and Fateh Sagar Lake.",
+          "activities": [
+            "Lake Palace",
+            "Saheliyon Ki Bari",
+            "Sajjangarh Palace",
+            "Sajjangarh Wildlife Sanctuary",
+            "Fateh Sagar Lake"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Museums & Memorials",
+          "description": "Visit the Vintage Car Museum, Ahar Museum, Wax Museum, Maharana Pratap Smarak, and Under the Sun Aquarium.",
+          "activities": [
+            "Vintage Car Museum",
+            "Ahar Museum",
+            "Wax Museum",
+            "Maharana Pratap Smarak",
+            "Under the Sun Aquarium"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Lakeside Gardens",
+          "description": "Relax at Fateh Sagar Pal, Nehru Garden, Rajiv Gandhi Garden, Shilpgram, and Ambarai Ghat.",
+          "activities": [
+            "Fateh Sagar Pal",
+            "Nehru Garden",
+            "Rajiv Gandhi Garden",
+            "Shilpgram",
+            "Ambarai Ghat"
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Cultural Wrap-up",
+          "description": "Wrap up the journey with a visit to Karni Mata Mandir and enjoy shopping in the local market.",
+          "activities": ["Karni Mata Mandir", "Local Market"]
+        }
+      ],
+      "category": "Cultural",
+      "featured": true
+    },
+    {
+      "id": 19,
+      "name": "Somnath Darshan",
+      "price": 12000,
+      "duration": 4,
+      "image": "/assets/packages/Somnath1.jpg",
+      "detailImage": "/assets/packages/Somnath2.jpg",
+      "location": "Somnath, Gujarat, India",
+      "highlights": [
+        "Somnath Temple",
+        "Triveni Sangam",
+        "Bhalka Tirth",
+        "Sunset View",
+        "Light and Sound Show"
+      ],
+      "description": "Dive into divine tranquility on this 4-day spiritual journey to Somnath. Witness sacred temples, coastal beauty, and mythological sites that connect you to India's deep-rooted cultural and spiritual heritage.",
+      "pdfUrl": "/pdfs/somnath_darshan.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Darshan",
+          "description": "Arrive at Somnath, check-in to hotel, visit Somnath Temple for Sandhya Aarti and receive Prasadam.",
+          "activities": [
+            "Hotel Check-in",
+            "Somnath Temple",
+            "Sandhya Aarti",
+            "Prasadam"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Seaside Pilgrimage",
+          "description": "Explore Somnath Beach, Bhalka Tirth, Prabhas Patan Museum, Triveni Sangam, and enjoy the Light & Sound Show.",
+          "activities": [
+            "Somnath Beach",
+            "Bhalka Tirth",
+            "Prabhas Patan Museum",
+            "Triveni Sangam",
+            "Light & Sound Show"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Mythological Sites",
+          "description": "Visit Suraj Mandir, Laxmi-Narayan Temple, Dehotsarg Tirth, Gita Mandir, and relax with a Sunset View.",
+          "activities": [
+            "Suraj Mandir",
+            "Laxmi-Narayan Temple",
+            "Dehotsarg Tirth",
+            "Gita Mandir",
+            "Sunset View"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Final Blessings & Departure",
+          "description": "Attend Mangal Aarti at Somnath Temple, receive Prasadam, and visit the beach before departure.",
+          "activities": [
+            "Mangal Aarti",
+            "Prasadam",
+            "Somnath Temple",
+            "Somnath Beach"
+          ]
+        }
+      ],
+      "category": "Spiritual",
+      "featured": true
+    },
+    {
+      "id": 20,
+      "name": "Singapore Delight",
+      "price": 78000,
+      "duration": 6,
+      "image": "/assets/packages/Singapore1.jpg",
+      "detailImage": "/assets/packages/Singapore2.jpg",
+      "location": "Singapore",
+      "highlights": [
+        "Marina Bay Sands",
+        "Universal Studios",
+        "Gardens by the Bay",
+        "Sentosa Island",
+        "Merlion Park"
+      ],
+      "description": "This 6-day trip to Singapore blends futuristic skylines, theme park thrills, and rich cultural experiences. Enjoy the iconic Marina Bay, Sentosa's fun, and the charm of a global city that's clean, green, and stunningly modern.",
+      "pdfUrl": "/pdfs/singapore_trip.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Cityscape Drive",
+          "description": "Arrive in Singapore, check in, and enjoy a night city drive including Marina Bay Sands and Clarke Quay.",
+          "activities": [
+            "Arrival",
+            "Hotel Check-in",
+            "Night Drive",
+            "Marina Bay Sands",
+            "Clarke Quay"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "City Tour & Merlion Park",
+          "description": "Explore Singapore's famous landmarks including Merlion Park, Orchard Road, and Chinatown.",
+          "activities": [
+            "Merlion Park",
+            "Orchard Road",
+            "Chinatown",
+            "Esplanade"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Sentosa Island Adventures",
+          "description": "Full-day at Sentosa Island with attractions like S.E.A. Aquarium, Wings of Time, and cable car ride.",
+          "activities": [
+            "Sentosa Cable Car",
+            "S.E.A. Aquarium",
+            "Wings of Time",
+            "Beach Activities"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Universal Studios",
+          "description": "Spend a thrilling day at Universal Studios Singapore enjoying themed rides and entertainment.",
+          "activities": [
+            "Universal Studios",
+            "Hollywood Zone",
+            "Jurassic Park",
+            "Revenge of the Mummy Ride"
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Nature & Night Safari",
+          "description": "Visit Gardens by the Bay and experience Singapore's famous Night Safari tour.",
+          "activities": [
+            "Gardens by the Bay",
+            "Flower Dome",
+            "Cloud Forest",
+            "Night Safari"
+          ]
+        },
+        {
+          "day": 6,
+          "title": "Leisure & Departure",
+          "description": "Free time for shopping or leisure activities before airport transfer and departure.",
+          "activities": [
+            "Leisure Time",
+            "Shopping",
+            "Airport Transfer",
+            "Departure"
+          ]
+        }
+      ],
+      "category": "International",
+      "featured": true
+    },
+    {
+      "id": 21,
+      "name": "Vrindavan Darshan",
+      "price": 12000,
+      "duration": 5,
+      "image": "/assets/packages/Vrindavan1.jpg",
+      "detailImage": "/assets/packages/Vrindavan2.jpg",
+      "location": "Vrindavan, Uttar Pradesh, India",
+      "highlights": [
+        "Prem Mandir",
+        "Banke Bihari Mandir",
+        "ISKCON Temple",
+        "Keshi Ghat",
+        "Nidhivan"
+      ],
+      "description": "Experience the spiritual bliss of Vrindavan on this 5-day journey. Explore sacred temples, lively bazaars, and mystical ghats as you connect with the eternal love of Radha-Krishna in the divine land of Braj.",
+      "pdfUrl": "/pdfs/vrindavan_darshan.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Divine Beginnings",
+          "description": "Visit the beautiful Prem Mandir and stroll through its garden, then explore Banke Bihari Market.",
+          "activities": [
+            "Prem Mandir",
+            "Prem Mandir Garden",
+            "Banke Bihari Market"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Sacred Temples & Shopping",
+          "description": "Seek blessings at ISKCON Vrindavan and Banke Bihari Mandir, followed by shopping at Loi Bazaar.",
+          "activities": [
+            "ISKCON Vrindavan",
+            "Banke Bihari Mandir",
+            "Loi Bazaar"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Mythical Legends",
+          "description": "Explore Radha Raman Temple, Katyayani Peeth, Nidhivan, and Radha Madan Mohan Temple.",
+          "activities": [
+            "Radha Raman Temple",
+            "Katyayani Peeth",
+            "Nidhivan",
+            "Radha Madan Mohan Temple",
+            "Madan Mohan Market"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Riverfront Wonders",
+          "description": "Visit Jugal Ghat, the holy Vrindavan Dham, and explore the vibrant Vrindavan Market.",
+          "activities": ["Jugal Ghat", "Vrindavan Dham", "Vrindavan Market"]
+        },
+        {
+          "day": 5,
+          "title": "Serenity at Keshi Ghat",
+          "description": "Spend your final day soaking in the tranquil vibes of Keshi Ghat before departure.",
+          "activities": ["Keshi Ghat"]
+        }
+      ],
+      "category": "Spiritual",
+      "featured": true
+    },
+    {
+      "id": 22,
+      "name": "Luxury Vietnam",
+      "price": 98000,
+      "duration": 7,
+      "image": "/assets/packages/Vietnam1.jpg",
+      "detailImage": "/assets/packages/Vietnam2.jpg",
+      "location": "Hanoi & Ho Chi Minh City, Vietnam",
+      "highlights": [
+        "Hanoi Tour",
+        "Halong Cruise",
+        "Golden Bridge",
+        "Phu Quoc",
+        "Ho Chi Minh"
+      ],
+      "description": "Experience the best of Vietnam on this 7-day luxury escape. From iconic cities and serene beaches to heritage towns and floating cruises, enjoy 4-star stays, domestic flights, and curated cultural experiences throughout your journey.",
+      "pdfUrl": "/pdfs/vietnam_luxury.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Welcome to Hanoi",
+          "description": "Explore Hanoi's iconic sites: One Pillar Pagoda, Tran Que Pagoda, Ho Chi Minh Mausoleum, and Train Street.",
+          "activities": [
+            "One Pillar Pagoda",
+            "Tran Que Pagoda",
+            "Ho Chi Minh Mausoleum",
+            "Temple of Literature",
+            "Train Street",
+            "Night Market"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Halong Bay Cruise",
+          "description": "Cruise through Halong Bay with cave exploration, kayaking, and an overnight stay on board.",
+          "activities": [
+            "Cruise Around Halong Bay",
+            "Limestone Caves",
+            "Ti Top Island",
+            "Kayaking",
+            "Dinner on Board"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Da Nang & Hoi An",
+          "description": "Fly to Da Nang, visit Dragon Bridge, Cham Museum, and enjoy the lantern-lit town of Hoi An.",
+          "activities": [
+            "Flight to Da Nang",
+            "Dragon Bridge",
+            "Da Nang Museum of Cham Sculpture",
+            "Lantern River Boat Ride"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Bana Hills & Golden Bridge",
+          "description": "Experience the iconic Golden Bridge, take a scenic cable ride, and explore the indoor amusement park.",
+          "activities": ["Golden Bridge", "Cable Ride", "Indoor Amusement Park"]
+        },
+        {
+          "day": 5,
+          "title": "Island Life – Phu Quoc",
+          "description": "Discover Starfish Beach, Phu Quoc National Park, Dinh Cau Market, and temple visits.",
+          "activities": [
+            "Starfish Beach",
+            "Phu Quoc National Park",
+            "Phu Quoc Temple",
+            "Dinh Cau Night Market"
+          ]
+        },
+        {
+          "day": 6,
+          "title": "Ho Chi Minh City Tour",
+          "description": "Visit Independence Palace, Ben Thanh Market, Walking Street, and the famous Chu Chi Tunnels.",
+          "activities": [
+            "Independence Palace",
+            "Ben Thanh Market",
+            "Walking Street",
+            "Chu Chi Tunnels"
+          ]
+        },
+        {
+          "day": 7,
+          "title": "Shopping & Departure",
+          "description": "Enjoy last-minute shopping at Ho Chi Minh City Centre before your return flight.",
+          "activities": ["Shopping in Local Market", "Flight to Ahmedabad"]
+        }
+      ],
+      "category": "International",
+      "featured": true
+    },
+    {
+      "id": 23,
+      "name": "Vietnam Budget Tour",
+      "price": 60000,
+      "duration": 5,
+      "image": "/assets/packages/Vietnam3.jpg",
+      "detailImage": "/assets/packages/Vietnam4.jpg",
+      "location": "Ho Chi Minh City, Vietnam",
+      "highlights": [
+        "Hanoi Heritage",
+        "Golden Bridge",
+        "Hoi An",
+        "Ho Chi Minh",
+        "Cu Chi Tunnels"
+      ],
+      "description": "Discover the vibrant culture, historical landmarks, and breathtaking views of Vietnam on a 5-day budget-friendly journey. Perfectly designed for travelers who want comfort, value, and unforgettable moments.",
+      "pdfUrl": "/pdfs/vietnam_budget.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Hanoi Heritage Tour",
+          "description": "Begin your journey with Hanoi's top cultural sites including pagodas, mausoleums, and vibrant markets.",
+          "activities": [
+            "One Pillar Pagoda",
+            "Tran Que Pagoda",
+            "Ho Chi Minh Mausoleum",
+            "Temple of Literature",
+            "Train Street",
+            "Night Market"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Da Nang & Hoi An",
+          "description": "Enjoy river rides and explore Da Nang's famous Dragon Bridge and cultural museums.",
+          "activities": [
+            "Lantern River Boat Ride",
+            "Dragon Bridge",
+            "Da Nang Museum of Cham Sculpture"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Golden Bridge Experience",
+          "description": "A day of thrill at Bana Hills with Golden Bridge, cable rides, and amusement park fun.",
+          "activities": ["Golden Bridge", "Cable Ride", "Indoor Amusement Park"]
+        },
+        {
+          "day": 4,
+          "title": "Ho Chi Minh Exploration",
+          "description": "Visit key attractions like Independence Palace, bustling Ben Thanh Market, and Cu Chi Tunnels.",
+          "activities": [
+            "Independence Palace",
+            "Ben Thanh Market",
+            "Walking Street",
+            "Cu Chi Tunnels"
+          ]
+        },
+        {
+          "day": 5,
+          "title": "City Shopping & Departure",
+          "description": "Wrap up with shopping in the local city markets of Ho Chi Minh before heading home.",
+          "activities": ["Local Market Shopping", "Flight to Ahmedabad"]
+        }
+      ],
+      "category": "International",
+      "featured": true
+    },
+    {
+      "id": 24,
+      "name": "Gangtok & Darjeeling",
+      "price": 30000,
+      "duration": 5,
+      "image": "/assets/packages/Shimla1.jpg",
+      "detailImage": "/assets/packages/Shimla2.jpg",
+      "location": "Gangtok & Darjeeling, West Bengal, India",
+      "highlights": [
+        "Changu Lake",
+        "Baba Mandir",
+        "Tiger Hill",
+        "Peace Pagoda",
+        "Tenzing Rock"
+      ],
+      "description": "Experience the serenity and charm of Gangtok and Darjeeling in this 5-day Himalayan escape. From sacred lakes and monasteries to sunrise views from Tiger Hill and vibrant local culture, this journey blends spirituality, nature, and adventure perfectly.",
+      "pdfUrl": "/pdfs/gangtok_darjeeling.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival in Gangtok",
+          "description": "Arrive at Bagdogra and travel to Gangtok via a scenic drive. Check into your hotel and relax.",
+          "activities": ["Bagdogra Arrival", "Road Transfer", "Hotel Check-in"]
+        },
+        {
+          "day": 2,
+          "title": "Excursion to Changu Lake & Baba Mandir",
+          "description": "Visit the beautiful glacial Changu Lake and pay respects at the New Baba Mandir.",
+          "activities": ["Changu Lake", "Baba Mandir"]
+        },
+        {
+          "day": 3,
+          "title": "Monasteries & Transfer to Darjeeling",
+          "description": "Explore Enchery Monastery and Bakthang Waterfall before driving to Darjeeling.",
+          "activities": [
+            "Enchery Monastery",
+            "Bakthang Waterfall",
+            "Drive to Darjeeling"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Darjeeling Local Sightseeing",
+          "description": "Catch the sunrise at Tiger Hill, followed by Batasia Loop, Zoological Park, Tenzing Rock, HMI, Peace Pagoda, and Japanese Temple.",
+          "activities": [
+            "Tiger Hill",
+            "Batasia Loop",
+            "Zoological Park",
+            "Tenzing Rock",
+            "HMI",
+            "Peace Pagoda",
+            "Japanese Temple"
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Departure",
+          "description": "Return from Darjeeling with beautiful memories of the Himalayas.",
+          "activities": ["Darjeeling", "Return Journey"]
+        }
+      ],
+      "category": "Hill Station",
+      "featured": true
+    },
+    {
+      "id": 25,
+      "name": "Char Dham Yatra",
+      "price": 25000,
+      "duration": 11,
+      "image": "/assets/packages/CharDham1.jpg",
+      "detailImage": "/assets/packages/CharDham2.jpg",
+      "location": "Char Dham, Uttarakhand, India",
+      "highlights": [
+        "Kedarnath Temple",
+        "Badrinath Temple",
+        "Gangotri Shrine",
+        "Yamunotri Trek",
+        "Mana Village"
+      ],
+      "description": "Embark on a divine 10-day journey through Uttarakhand to visit the sacred Char Dhams – Yamunotri, Gangotri, Kedarnath, and Badrinath. Reconnect with spirituality amidst the majestic Himalayas and holy rivers.",
+      "pdfUrl": "/pdfs/char_dham_yatra.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival at Haridwar",
+          "description": "Arrive in Haridwar and visit Har Ki Pauri for Ganga Aarti.",
+          "activities": ["Haridwar Arrival", "Har Ki Pauri", "Ganga Aarti"]
+        },
+        {
+          "day": 2,
+          "title": "Journey to Barkot",
+          "description": "Drive to Barkot via Mussoorie and check in at the hotel.",
+          "activities": ["Drive to Barkot", "Mussoorie Stop", "Hotel Check-in"]
+        },
+        {
+          "day": 3,
+          "title": "Yamunotri Darshan",
+          "description": "Drive to Janki Chatti and trek to Yamunotri Temple. Return to Barkot.",
+          "activities": ["Janki Chatti", "Yamunotri Trek", "Temple Visit"]
+        },
+        {
+          "day": 4,
+          "title": "Travel to Uttarkashi",
+          "description": "Head to Uttarkashi, visit Kashi Vishwanath Temple.",
+          "activities": ["Drive to Uttarkashi", "Kashi Vishwanath Temple"]
+        },
+        {
+          "day": 5,
+          "title": "Gangotri Darshan",
+          "description": "Visit Gangotri Temple and return to Uttarkashi.",
+          "activities": ["Gangotri Temple", "Scenic Drive"]
+        },
+        {
+          "day": 6,
+          "title": "Guptkashi via Tehri",
+          "description": "Drive to Guptkashi via scenic Tehri Lake. Overnight in Phata/Guptkashi.",
+          "activities": ["Tehri Lake", "Drive to Guptkashi"]
+        },
+        {
+          "day": 7,
+          "title": "Kedarnath Trek",
+          "description": "Drive to Gaurikund and trek to Kedarnath. Overnight stay.",
+          "activities": ["Gaurikund", "Kedarnath Trek", "Temple Visit"]
+        },
+        {
+          "day": 8,
+          "title": "Return to Guptkashi",
+          "description": "Return trek from Kedarnath to Gaurikund, drive back to Guptkashi.",
+          "activities": ["Trek Back", "Drive to Guptkashi"]
+        },
+        {
+          "day": 9,
+          "title": "Visit Badrinath",
+          "description": "Travel to Badrinath, visit the temple and Mana Village.",
+          "activities": ["Badrinath Temple", "Mana Village", "Hot Springs"]
+        },
+        {
+          "day": 10,
+          "title": "Return Journey",
+          "description": "Depart for Haridwar. Tour ends with spiritual memories.",
+          "activities": ["Drive to Haridwar", "Tour End"]
+        }
+      ],
+      "category": "Pilgrimage",
+      "featured": true
+    },
+    {
+      "id": 26,
+      "name": "Thailand Explorer",
+      "price": 75000,
+      "duration": 8,
+      "image": "/assets/packages/Thailand3.jpg",
+      "detailImage": "/assets/packages/Thailand4.jpg",
+      "location": "Phuket, Krabi, Bangkok & Pattaya, Thailand",
+      "highlights": [
+        "Phuket FantaSea",
+        "Phi Phi",
+        "Tiger Kingdom",
+        "Coral Island",
+        "Grand Palace"
+      ],
+      "description": "Dive into Thailand's best with this 8-day journey through Phuket, Krabi, Bangkok, and Pattaya. From dazzling temples and cultural sites to exotic beaches and vibrant nightlife, this tour promises adventure and relaxation in equal measure.",
+      "pdfUrl": "/pdfs/thailand_explorer.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival in Phuket",
+          "description": "Check into your hotel and visit The Big Buddha, Chaitharaman Temple, and enjoy the Phuket FantaSea show.",
+          "activities": [
+            "Hotel Check-in",
+            "Big Buddha",
+            "Chaitharaman Temple",
+            "Phuket FantaSea"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Explore Phuket",
+          "description": "Discover Patong, visit the Tiger Kingdom, shop in local markets, and enjoy Phuket's nightlife.",
+          "activities": [
+            "Patong Beach",
+            "Tiger Kingdom",
+            "Local Markets",
+            "Nightlife"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Transfer to Krabi",
+          "description": "Travel to Krabi, visit the Tiger Cave Temple, and explore the local area.",
+          "activities": [
+            "Drive to Krabi",
+            "Tiger Cave Temple",
+            "Local Exploration"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Islands & Nature",
+          "description": "Visit Phi Phi Island, Krabi Elephant Sanctuary, and Wat Kaew Korawaram.",
+          "activities": ["Phi Phi Island", "Elephant Sanctuary", "Wat Kaew"]
+        },
+        {
+          "day": 5,
+          "title": "Travel to Bangkok",
+          "description": "Arrive in Bangkok and visit Wat Arun, Emerald Buddha Temple, and enjoy vibrant city life.",
+          "activities": ["Wat Arun", "Emerald Buddha", "City Tour"]
+        },
+        {
+          "day": 6,
+          "title": "Bangkok Sightseeing",
+          "description": "Explore the Grand Palace, Ocean World, Dream World, and other attractions.",
+          "activities": ["Grand Palace", "Ocean World", "Dream World"]
+        },
+        {
+          "day": 7,
+          "title": "Pattaya Day Tour",
+          "description": "Travel to Pattaya and visit Frost Magical Ice of Siam, Sanctuary of Truth, Dolphin World, and more.",
+          "activities": [
+            "Sanctuary of Truth",
+            "Frost Ice Siam",
+            "Dolphin World"
+          ]
+        },
+        {
+          "day": 8,
+          "title": "Coral Island & Departure",
+          "description": "Visit Coral Island and Lan Pho Na Kluea Market. Departure from Thailand to India.",
+          "activities": ["Coral Island", "Lan Pho Market", "Return Flight"]
+        }
+      ],
+      "category": "International",
+      "featured": true
+    },
+    {
+      "id": 27,
+      "name": "Kashmir of the West",
+      "price": 3999,
+      "duration": 2,
+      "image": "/assets/packages/Dudhani1.jpg",
+      "detailImage": "/assets/packages/Dudhani2.jpg",
+      "location": "Silvassa & Dudhani, India",
+      "highlights": [
+        "Nakshatra Van",
+        "Tribal Museum",
+        "Vanganga Garden",
+        "Dudhani Lake",
+        "Lion Safari"
+      ],
+      "description": "Discover why Silvassa is known as the 'Kashmir of the West' with this 2-day itinerary. Explore serene lakes, lush gardens, tribal heritage, and exciting wildlife adventures — a perfect weekend escape.",
+      "pdfUrl": "/pdfs/dudhani.pdf",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Silvassa – Tribal Culture & Nature Trails",
+          "description": "Immerse yourself in Silvassa's culture and nature by visiting Nakshatra Van, Tribal Cultural Museum, and the peaceful Vanganga Garden.",
+          "activities": [
+            "Nakshatra Van",
+            "Tribal Cultural Museum",
+            "Vanganga Garden"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Dudhani – Lakeside Bliss & Adventure",
+          "description": "Experience the charm of Dudhani with a visit to Dudhani Lake, Madhuban Dam, and the thrilling Vasona Lion Safari Park.",
+          "activities": [
+            "Dudhani Lake",
+            "Madhuban Dam",
+            "Vasona Lion Safari Park"
+          ]
+        }
+      ],
+      "category": "Domestic",
+      "featured": true
+    }
+  ],
+  "destinations": [
+    {
+      "id": 1,
+      "name": "Goa",
+      "image": "/assets/packages/Goa1.jpg",
+      "description": "Explore the beauty and culture of Goa with our curated travel packages.",
+      "location": "Goa, India"
+    },
+    {
+      "id": 2,
+      "name": "Shimla & Manali",
+      "image": "/assets/packages/Shimla1.jpg",
+      "description": "Explore the beauty and culture of Shimla & Manali with our curated travel packages.",
+      "location": "Himachal Pradesh, India"
+    },
+    {
+      "id": 3,
+      "name": "Daman",
+      "image": "/assets/packages/Daman1.jpg",
+      "description": "Explore the beauty and culture of Daman with our curated travel packages.",
+      "location": "Dadra and Nagar Haveli, India"
+    },
+    {
+      "id": 4,
+      "name": "Mount Abu",
+      "image": "/assets/packages/MountAbu1.jpg",
+      "description": "Explore the beauty and culture of Mount Abu with our curated travel packages.",
+      "location": "Rajasthan, India"
+    },
+    {
+      "id": 5,
+      "name": "Somnath",
+      "image": "/assets/packages/Somnath1.jpg",
+      "description": "Explore the beauty and culture of Somnath with our curated travel packages.",
+      "location": "Gujarat, India"
+    },
+    {
+      "id": 6,
+      "name": "Vietnam",
+      "image": "/assets/packages/Vietnam1.jpg",
+      "description": "Explore the beauty and culture of Vietnam with our curated travel packages.",
+      "location": "Vietnam"
+    },
+    {
+      "id": 7,
+      "name": "Bali",
+      "image": "/assets/packages/Bali1.jpg",
+      "description": "Explore the beauty and culture of Bali with our curated travel packages.",
+      "location": "Indonesia"
+    },
+    {
+      "id": 8,
+      "name": "Pushkar",
+      "image": "/assets/packages/Pushkar1.jpg",
+      "description": "Explore the beauty and culture of Pushkar with our curated travel packages.",
+      "location": "Rajasthan, India"
+    },
+    {
+      "id": 9,
+      "name": "Thailand",
+      "image": "/assets/packages/Thailand1.jpg",
+      "description": "Explore the beauty and culture of Thailand with our curated travel packages.",
+      "location": "Thailand"
+    },
+    {
+      "id": 10,
+      "name": "Udaipur",
+      "image": "/assets/packages/Rajasthan1.jpg",
+      "description": "Explore the beauty and culture of Udaipur with our curated travel packages.",
+      "location": "Rajasthan, India"
+    },
+    {
+      "id": 11,
+      "name": "Vrindavan",
+      "image": "/assets/packages/Vrindavan1.jpg",
+      "description": "Explore the beauty and culture of Vrindavan with our curated travel packages.",
+      "location": "Uttar Pradesh, India"
+    },
+    {
+      "id": 12,
+      "name": "Darjeeling & Gangtok",
+      "image": "/assets/packages/Shimla2.jpg",
+      "description": "Explore the beauty and culture of Darjeeling & Gangtok with our curated travel packages.",
+      "location": "West Bengal, India"
+    },
+    {
+      "id": 13,
+      "name": "Singapore",
+      "image": "/assets/packages/Singapore1.jpg",
+      "description": "Explore the beauty and culture of Singapore with our curated travel packages.",
+      "location": "Singapore"
+    },
+    {
+      "id": 14,
+      "name": "Uttarakhand",
+      "image": "/assets/packages/Uttarakhand1.jpg",
+      "description": "Explore the beauty and culture of Uttarakhand with our curated travel packages.",
+      "location": "Uttarakhand, India"
+    },
+    {
+      "id": 15,
+      "name": "Dubai",
+      "image": "/assets/packages/Dubai1.jpg",
+      "description": "Explore the beauty and culture of Dubai with our curated travel packages.",
+      "location": "UAE"
+    },
+    {
+      "id": 16,
+      "name": "Hong Kong",
+      "image": "/assets/packages/HongKong1.jpg",
+      "description": "Explore the beauty and culture of Hong Kong with our curated travel packages.",
+      "location": "China"
+    },
+    {
+      "id": 17,
+      "name": "Oman",
+      "image": "/assets/packages/Oman1.jpg",
+      "description": "Explore the beauty and culture of Oman with our curated travel packages.",
+      "location": "Oman"
+    },
+    {
+      "id": 18,
+      "name": "Varanasi",
+      "image": "/assets/packages/Kashi1.jpg",
+      "description": "Explore the beauty and culture of Varanasi with our curated travel packages.",
+      "location": "Uttar Pradesh, India"
+    },
+    {
+      "id": 19,
+      "name": "Ujjain",
+      "image": "/assets/packages/Ujjain1.jpg",
+      "description": "Explore the beauty and culture of Ujjain with our curated travel packages.",
+      "location": "Madhya Pradesh, India"
+    },
+    {
+      "id": 20,
+      "name": "Matheran",
+      "image": "/assets/packages/Matheran1.jpg",
+      "description": "Explore the beauty and culture of Matheran with our curated travel packages.",
+      "location": "Maharashtra, India"
+    },
+    {
+      "id": 21,
+      "name": "Saputara",
+      "image": "/assets/packages/Saputara1.jpg",
+      "description": "Explore the beauty and culture of Saputara with our curated travel packages.",
+      "location": "Gujarat, India"
+    },
+    {
+      "id": 22,
+      "name": "Dwarka",
+      "image": "/assets/packages/Dwarka1.jpg",
+      "description": "Explore the beauty and culture of Dwarka with our curated travel packages.",
+      "location": "Gujarat, India"
+    }
+  ]
+}

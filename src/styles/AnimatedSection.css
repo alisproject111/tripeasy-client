@@ -1,0 +1,38 @@
+.animated-section {
+  position: relative;
+}
+
+.animated-section.stagger-children>* {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.animated-section.stagger-children.animate>*:nth-child(1) {
+  transition-delay: calc(var(--stagger-delay) * 1);
+}
+
+.animated-section.stagger-children.animate>*:nth-child(2) {
+  transition-delay: calc(var(--stagger-delay) * 2);
+}
+
+.animated-section.stagger-children.animate>*:nth-child(3) {
+  transition-delay: calc(var(--stagger-delay) * 3);
+}
+
+.animated-section.stagger-children.animate>*:nth-child(4) {
+  transition-delay: calc(var(--stagger-delay) * 4);
+}
+
+.animated-section.stagger-children.animate>*:nth-child(5) {
+  transition-delay: calc(var(--stagger-delay) * 5);
+}
+
+.animated-section.stagger-children.animate>*:nth-child(6) {
+  transition-delay: calc(var(--stagger-delay) * 6);
+}
+
+.animated-section.stagger-children.animate>* {
+  opacity: 1;
+  transform: translateY(0);
+}

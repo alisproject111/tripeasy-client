@@ -1,0 +1,15 @@
+.home-page {
+  min-height: 100vh;
+}
+
+.search-bar-wrapper {
+  position: relative;
+  z-index: 20;
+  margin-top: -120px;
+}
+
+@media (max-width: 768px) {
+  .search-bar-wrapper {
+    margin-top: -80px;
+  }
+}

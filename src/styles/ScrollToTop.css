@@ -1,0 +1,91 @@
+.scroll-top-button {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  transition: all 0.3s ease;
+}
+
+.scroll-top-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.5s ease;
+}
+
+.scroll-top-button:hover {
+  transform: scale(1.1);
+  background-color: #c0392b;
+  box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+}
+
+.scroll-top-button:hover::before {
+  transform: scale(1.5);
+  opacity: 0;
+}
+
+.scroll-top-button i {
+  font-size: 1.4rem;
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.scroll-top-button:hover i {
+  animation: top-btn-pulse 1s infinite;
+}
+
+@keyframes top-btn-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@media (max-width: 768px) {
+  .scroll-top-button {
+    width: 50px;
+    height: 50px;
+    right: 20px;
+    bottom: 20px;
+  }
+
+  .scroll-top-button i {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .scroll-top-button {
+    width: 45px;
+    height: 45px;
+    right: 15px;
+    bottom: 15px;
+  }
+
+  .scroll-top-button i {
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,1348 @@
+/* Booking Page Styles */
+.bp-booking-page {
+  min-height: 100vh;
+}
+
+/* Removed background-image from CSS since it's now in JSX */
+.bp-booking-header {
+  /* Background image is now set inline in JSX */
+  /* The following properties are now set inline:
+     background-size: cover;
+     background-position: center;
+     color: white;
+     padding: 60px 0;
+     text-align: center;
+  */
+}
+
+.bp-booking-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  margin: 40px 0;
+}
+
+/* Booking Summary Styles */
+.bp-booking-summary {
+  background-color: white;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+  transition: all 0.3s ease;
+}
+
+.bp-booking-summary:hover {
+  box-shadow: 0 8px 25px rgba(227, 30, 36, 0.15);
+  transform: translateY(-5px);
+}
+
+.bp-summary-title {
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+  color: #333;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bp-summary-icon {
+  color: #e31e24;
+}
+
+.bp-summary-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #e31e24;
+}
+
+.bp-summary-details {
+  margin-top: 20px;
+}
+
+.bp-summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  transition: all 0.3s ease;
+}
+
+.bp-summary-item:hover {
+  transform: translateX(5px);
+}
+
+.bp-summary-item:last-child {
+  border-bottom: none;
+}
+
+.bp-summary-item-icon-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bp-summary-item-icon {
+  color: #e31e24;
+  width: 20px;
+  text-align: center;
+}
+
+.bp-summary-label {
+  color: #666;
+  font-weight: 500;
+}
+
+.bp-summary-value {
+  color: #333;
+  font-weight: 600;
+}
+
+.bp-summary-item.bp-total {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 2px solid #eee;
+  border-bottom: none;
+}
+
+.bp-summary-item.bp-total .bp-summary-label,
+.bp-summary-item.bp-total .bp-summary-value {
+  font-size: 1.2rem;
+  color: #e31e24;
+  font-weight: 700;
+}
+
+.bp-summary-features {
+  margin-top: 25px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.bp-summary-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.bp-summary-feature:hover {
+  transform: translateX(5px);
+}
+
+.bp-summary-feature i {
+  color: #28a745;
+  font-size: 1rem;
+}
+
+/* Booking Form Styles */
+.bp-booking-form-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.bp-booking-form-container:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.bp-form-title {
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 10px;
+  color: #333;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bp-form-icon {
+  color: #e31e24;
+}
+
+.bp-form-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #e31e24;
+}
+
+.bp-booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bp-travelers-selector {
+  margin-bottom: 20px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.bp-travelers-selector:hover {
+  background-color: #f0f0f0;
+}
+
+.bp-travelers-label {
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bp-travelers-input-group {
+  width: 100px;
+}
+
+.bp-travelers-input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.bp-travelers-input-group input:focus {
+  border-color: #e31e24;
+  box-shadow: 0 0 0 3px rgba(227, 30, 36, 0.1);
+}
+
+.bp-traveler-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.bp-traveler-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bp-traveler-header {
+  background-color: #f8f9fa;
+  padding: 15px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #f8f9fa;
+}
+
+.bp-traveler-header:hover {
+  background-color: #f0f0f0;
+}
+
+.bp-traveler-header.bp-active {
+  background-color: #e31e24;
+  color: white;
+}
+
+.bp-traveler-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bp-traveler-subtitle {
+  font-weight: normal;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.bp-toggle-icon {
+  transition: transform 0.3s ease;
+}
+
+.bp-traveler-header.bp-active .bp-toggle-icon {
+  transform: rotate(180deg);
+}
+
+.bp-traveler-content {
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.bp-traveler-content-active {
+  padding: 20px;
+  max-height: 1000px;
+  overflow-y: auto;
+}
+
+.bp-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.bp-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  /* Increased from original value */
+}
+
+.bp-form-group label {
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bp-required {
+  color: #e31e24;
+}
+
+.bp-form-group input,
+.bp-form-group textarea,
+.bp-form-group select {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+}
+
+.bp-form-group input:focus,
+.bp-form-group textarea:focus,
+.bp-form-group select:focus {
+  outline: none;
+  border-color: #e31e24;
+  box-shadow: 0 0 0 3px rgba(227, 30, 36, 0.1);
+  background-color: #fff;
+}
+
+.bp-form-group input.bp-error,
+.bp-form-group textarea.bp-error,
+.bp-form-group select.bp-error {
+  border-color: #e31e24;
+  background-color: rgba(227, 30, 36, 0.05);
+}
+
+.bp-error-message {
+  color: #e31e24;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+
+/* Special Requests Section */
+.bp-special-requests-section {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.bp-special-requests-section:hover {
+  background-color: #f0f0f0;
+}
+
+.bp-special-requests-title {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bp-special-requests-title i {
+  color: #e31e24;
+}
+
+.bp-special-requests-textarea {
+  font-size: 0.9rem !important;
+  min-height: 80px;
+}
+
+/* Terms and Conditions */
+.bp-terms-group {
+  margin-top: 10px;
+}
+
+.bp-terms-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.bp-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bp-checkbox-container input[type="checkbox"] {
+  margin-top: 0;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  position: relative;
+  background-color: #f8f9fa;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.bp-checkbox-container input[type="checkbox"]:checked {
+  background-color: #e31e24;
+  border-color: #e31e24;
+}
+
+.bp-checkbox-container input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 10px;
+}
+
+.bp-checkbox-container input[type="checkbox"].bp-error {
+  border-color: #e31e24;
+}
+
+.bp-checkbox-container label {
+  font-weight: normal;
+  font-size: 0.9rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.bp-checkbox-container a {
+  color: #e31e24;
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+
+.bp-checkbox-container a:hover {
+  color: #c41a1f;
+}
+
+.bp-terms-error {
+  text-align: left;
+}
+
+.bp-form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  gap: 15px;
+}
+
+.bp-back-link {
+  background-color: #f8f9fa;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  flex: 1;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  height: 48px;
+}
+
+.bp-back-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.05), transparent);
+  transition: all 0.5s ease;
+}
+
+.bp-back-link:hover {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bp-back-link:hover::before {
+  left: 100%;
+}
+
+.bp-back-link i {
+  transition: transform 0.3s ease;
+}
+
+.bp-back-link:hover i {
+  transform: translateX(-5px);
+}
+
+.bp-continue-button {
+  background-color: #e31e24;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  height: 48px;
+}
+
+.bp-continue-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.5s ease;
+}
+
+.bp-continue-button:hover {
+  background-color: #c41a1f;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(227, 30, 36, 0.3);
+}
+
+.bp-continue-button:hover::before {
+  left: 100%;
+}
+
+.bp-continue-button i {
+  transition: transform 0.3s ease;
+}
+
+.bp-continue-button:hover i {
+  transform: translateX(5px);
+}
+
+/* Added styles for send request button with similar styling to continue button */
+.bp-send-request-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  height: 48px;
+}
+
+/* Added before pseudo-element for send request button animation */
+.bp-send-request-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.5s ease;
+}
+
+/* Added hover effects for send request button */
+.bp-send-request-button:hover {
+  background-color: #218838;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+/* Added hover animation for send request button */
+.bp-send-request-button:hover::before {
+  left: 100%;
+}
+
+/* Added icon transition for send request button */
+.bp-send-request-button i {
+  transition: transform 0.3s ease;
+}
+
+/* Added icon hover effect for send request button */
+.bp-send-request-button:hover i {
+  transform: translateX(5px);
+}
+
+/* Confirmation Modal Styles */
+.bp-confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+}
+
+.bp-confirmation-content {
+  background-color: white;
+  border-radius: 12px;
+  padding: 0;
+  max-width: 550px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: bp-modalFadeIn 0.3s ease;
+  overflow: hidden;
+}
+
+.bp-confirmation-header {
+  background-color: #e31e24;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.bp-confirmation-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  display: block;
+  animation: bp-pulse 2s infinite;
+}
+
+@keyframes bp-pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bp-confirmation-header h2 {
+  margin: 0 0 10px 0;
+  font-size: 1.8rem;
+}
+
+.bp-confirmation-header p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 1rem;
+}
+
+@keyframes bp-modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bp-confirmation-details {
+  padding: 20px;
+}
+
+.bp-confirmation-package-info {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.bp-confirmation-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.bp-confirmation-package-details h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.bp-confirmation-package-details p {
+  margin: 0;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bp-confirmation-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.bp-confirmation-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f8f9fa;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.bp-confirmation-item:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-3px);
+}
+
+.bp-confirmation-item-icon {
+  color: #e31e24;
+  font-size: 1.2rem;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bp-confirmation-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.bp-confirmation-value {
+  display: block;
+  font-weight: 600;
+  color: #333;
+}
+
+.bp-confirmation-actions {
+  display: flex;
+  padding: 20px;
+  background-color: #f8f9fa;
+  gap: 15px;
+}
+
+.bp-cancel-button,
+.bp-confirm-button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.bp-cancel-button::before,
+.bp-confirm-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.5s ease;
+}
+
+.bp-cancel-button {
+  background-color: #f8f9fa;
+  color: #666;
+  border: 1px solid #ddd;
+}
+
+.bp-cancel-button:hover {
+  background-color: #eee;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bp-cancel-button:hover::before {
+  left: 100%;
+}
+
+.bp-confirm-button {
+  background-color: #e31e24;
+  color: white;
+  border: none;
+}
+
+.bp-confirm-button:hover {
+  background-color: #c41a1f;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(227, 30, 36, 0.3);
+}
+
+.bp-confirm-button:hover::before {
+  left: 100%;
+}
+
+/* Loading and Error Styles */
+.bp-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 20px;
+}
+
+.bp-loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #e31e24;
+  border-radius: 50%;
+  animation: bp-spin 1s linear infinite;
+}
+
+@keyframes bp-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.bp-error-container {
+  text-align: center;
+  padding: 80px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bp-error-container i {
+  color: #e31e24;
+  margin-bottom: 20px;
+}
+
+.bp-error-container h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.bp-error-container p {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.bp-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background-color: #e31e24;
+  color: white;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.bp-back-button:hover {
+  background-color: #c41a1f;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(227, 30, 36, 0.3);
+}
+
+/* Add styles for field icons */
+.bp-field-icon {
+  color: #e31e24;
+  margin-right: 5px;
+  width: 16px;
+  text-align: center;
+}
+
+/* Ensure smooth transitions for all hover effects */
+.bp-traveler-card,
+.bp-highlight-item,
+.bp-detail-item,
+.bp-back-link,
+.bp-continue-button,
+.bp-send-request-button,
+.bp-cancel-button,
+.bp-confirm-button,
+.bp-summary-feature,
+.bp-form-group input,
+.bp-form-group textarea,
+.bp-form-group select {
+  transition: all 0.3s ease;
+}
+
+/* Sending Animation Overlay Styles */
+.bp-sending-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: bp-fadeIn 0.3s ease;
+}
+
+.bp-sending-content {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  animation: bp-slideUp 0.5s ease;
+}
+
+.bp-sending-spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #28a745;
+  border-radius: 50%;
+  animation: bp-spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+.bp-sending-content h3 {
+  color: #333;
+  margin: 0 0 10px 0;
+  font-size: 1.5rem;
+}
+
+.bp-sending-content p {
+  color: #666;
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Success Message Overlay Styles */
+.bp-success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: bp-fadeIn 0.3s ease;
+}
+
+.bp-success-content {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  animation: bp-slideUp 0.5s ease;
+  position: relative;
+}
+
+.bp-success-icon {
+  font-size: 4rem;
+  color: #28a745;
+  margin-bottom: 20px;
+  animation: bp-bounceIn 0.8s ease;
+}
+
+.bp-success-content h3 {
+  color: #333;
+  margin: 0 0 15px 0;
+  font-size: 1.5rem;
+}
+
+.bp-success-content p {
+  color: #666;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.bp-success-checkmark {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #28a745;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  animation: bp-checkmarkPop 0.6s ease 0.5s both;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .bp-booking-container {
+    grid-template-columns: 1fr;
+  }
+
+  .bp-booking-summary {
+    position: static;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bp-booking-header {
+    padding: 40px 0;
+  }
+
+  .bp-booking-container {
+    margin: 30px 0;
+  }
+
+  .bp-booking-summary,
+  .bp-booking-form-container {
+    padding: 20px;
+  }
+
+  .bp-summary-title,
+  .bp-form-title {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+
+  .bp-form-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .bp-form-group input,
+  .bp-form-group textarea,
+  .bp-form-group select {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .bp-form-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .bp-back-link,
+  .bp-continue-button,
+  .bp-send-request-button {
+    width: 100%;
+    justify-content: center;
+    height: 44px;
+    font-size: 0.9rem;
+  }
+
+  .bp-confirmation-content {
+    padding: 0;
+  }
+
+  .bp-confirmation-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bp-confirmation-actions {
+    flex-direction: column;
+  }
+
+  .bp-cancel-button,
+  .bp-confirm-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  /* Adjust the booking summary for better mobile display */
+  .bp-booking-summary {
+    position: static;
+    width: 100%;
+    padding: 15px;
+  }
+
+  .bp-summary-details {
+    margin-top: 15px;
+  }
+
+  .bp-summary-item {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+
+  /* Reduce icon sizes */
+  .bp-summary-item-icon,
+  .bp-summary-icon,
+  .bp-field-icon,
+  .bp-confirmation-item-icon {
+    font-size: 0.9rem;
+  }
+
+  /* Adjust confirmation modal for smaller screens */
+  .bp-confirmation-content {
+    max-width: 100%;
+    margin: 0 10px;
+  }
+
+  .bp-confirmation-info-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .bp-confirmation-item {
+    padding: 10px;
+  }
+
+  /* Adjust font sizes */
+  .bp-summary-label,
+  .bp-summary-value {
+    font-size: 0.9rem;
+  }
+
+  .bp-summary-item.bp-total .bp-summary-label,
+  .bp-summary-item.bp-total .bp-summary-value {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .bp-booking-header {
+    padding: 30px 0;
+  }
+
+  .bp-page-title {
+    font-size: 1.8rem;
+  }
+
+  .bp-page-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .bp-booking-summary,
+  .bp-booking-form-container {
+    padding: 15px;
+  }
+
+  .bp-summary-item {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .bp-booking-container {
+    margin: 20px 0;
+  }
+
+  .bp-summary-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .bp-summary-value {
+    margin-left: 25px;
+    /* Align with the label */
+  }
+
+  /* Further reduce font and icon sizes */
+  .bp-summary-item-icon,
+  .bp-summary-icon,
+  .bp-field-icon {
+    font-size: 0.8rem;
+  }
+
+  .bp-summary-label,
+  .bp-summary-value {
+    font-size: 0.85rem;
+  }
+
+  /* Adjust confirmation modal */
+  .bp-confirmation-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+  }
+
+  .bp-confirmation-header p {
+    font-size: 0.85rem;
+  }
+
+  .bp-confirmation-icon {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+  }
+
+  .bp-confirmation-details {
+    padding: 15px;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .bp-confirmation-info-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .bp-confirmation-item {
+    padding: 8px;
+  }
+
+  .bp-confirmation-label {
+    font-size: 0.7rem;
+  }
+
+  .bp-confirmation-value {
+    font-size: 0.8rem;
+  }
+
+  .bp-confirmation-actions {
+    padding: 15px;
+    position: sticky;
+    bottom: 0;
+    background-color: #f8f9fa;
+    z-index: 10;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .bp-cancel-button,
+  .bp-confirm-button {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+/* New Animations */
+@keyframes bp-fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bp-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bp-bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bp-checkmarkPop {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  80% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

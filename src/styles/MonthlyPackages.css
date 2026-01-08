@@ -1,0 +1,268 @@
+.monthly-destinations {
+  background-color: #f8f9fa;
+  position: relative;
+  padding: 60px 0;
+}
+
+.month-selector {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 30px;
+}
+
+.month-btn {
+  padding: 6px 12px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.month-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.month-btn.active {
+  background-color: #e31e24;
+  color: white;
+  border-color: #e31e24;
+}
+
+.monthly-destinations-container {
+  position: relative;
+  padding: 0 40px;
+}
+
+.destinations-scroll-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Center the scroll buttons vertically */
+.scroll-buttons {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+  pointer-events: none;
+  padding: 0 10px;
+}
+
+.scroll-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.scroll-button:hover:not(.disabled) {
+  background-color: #e31e24;
+  color: white;
+  border-color: #e31e24;
+}
+
+.scroll-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f5f5f5;
+  color: #ccc;
+}
+
+.destinations-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  max-width: calc(270px * 4);
+  margin: 0 auto;
+  min-height: 300px;
+  will-change: transform, scroll-position;
+  -webkit-overflow-scrolling: touch;
+  transform: translateZ(0);
+  scroll-snap-type: x proximity;
+  touch-action: pan-x;
+  user-select: none;
+}
+
+/* Add scroll snap alignment to destination cards */
+.destinations-scroll>* {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+.destinations-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.no-destinations {
+  text-align: center;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+.no-destinations i {
+  font-size: 3rem;
+  color: #e31e24;
+  margin-bottom: 15px;
+}
+
+/* Enhance mobile responsiveness */
+@media (max-width: 1200px) {
+  .destinations-scroll {
+    max-width: calc(230px * 3);
+    min-height: 280px;
+  }
+
+  .month-btn {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .monthly-destinations {
+    padding: 50px 0;
+  }
+
+  .destinations-scroll {
+    max-width: calc(220px * 2);
+    min-height: 260px;
+  }
+
+  .month-btn {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  .scroll-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .no-destinations {
+    padding: 30px;
+  }
+
+  .no-destinations i {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .monthly-destinations {
+    padding: 40px 0;
+  }
+
+  .month-selector {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    justify-content: flex-start;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 5px;
+  }
+
+  .month-selector::-webkit-scrollbar {
+    display: none;
+  }
+
+  .month-btn {
+    flex: 0 0 auto;
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+
+  .monthly-destinations-container {
+    padding: 0 30px;
+  }
+
+  .destinations-scroll {
+    max-width: calc(200px * 1.5);
+    min-height: 240px;
+    gap: 15px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .scroll-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .no-destinations {
+    padding: 25px;
+    font-size: 0.9rem;
+  }
+
+  .no-destinations i {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .monthly-destinations {
+    padding: 30px 0;
+  }
+
+  .monthly-destinations-container {
+    padding: 0 25px;
+  }
+
+  .destinations-scroll {
+    max-width: calc(180px * 1.5);
+    min-height: 220px;
+    gap: 12px;
+  }
+
+  .scroll-button {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+
+  .no-destinations {
+    padding: 20px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .monthly-destinations-container {
+    padding: 0 20px;
+  }
+
+  .destinations-scroll {
+    max-width: calc(160px * 1.5);
+    min-height: 200px;
+  }
+
+  .scroll-button {
+    width: 24px;
+    height: 24px;
+    font-size: 0.7rem;
+  }
+}

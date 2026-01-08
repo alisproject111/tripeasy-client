@@ -1,0 +1,306 @@
+.footer {
+  background-color: #222;
+  color: #fff;
+  padding-top: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #222;
+  z-index: 0;
+}
+
+.footer-container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.footer-section h3 {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-section h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #e31e24;
+}
+
+.footer-section p {
+  color: #ccc;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background-color: red;
+  transform: translateY(-3px);
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: #ccc;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-icon {
+  color: #e31e24;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  color: #e31e24;
+}
+
+.contact-info p {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  color: #ccc;
+}
+
+.contact-info a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.contact-info a:hover {
+  color: #e31e24;
+}
+
+.contact-info i {
+  color: #e31e24;
+  font-size: 1.1rem;
+  margin-top: 3px;
+}
+
+/* Remove animations from footer */
+.footer-section {
+  overflow: visible;
+}
+
+.footer-section>div {
+  animation: none;
+}
+
+.footer-bottom {
+  position: relative;
+  z-index: 1;
+  background-color: #111;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+/* Updated footer bottom container with flex layout */
+.footer-bottom-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.footer-bottom p {
+  color: #bbb;
+  margin: 0;
+}
+
+/* Add styles for policy links in footer */
+.footer-policies {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  /* Allow wrapping if needed */
+}
+
+.footer-policy-link {
+  color: #bbb;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.footer-policy-link:not(:last-child)::after {
+  content: "|";
+  position: absolute;
+  right: -12px;
+  color: #666;
+}
+
+.footer-policy-link:hover {
+  color: #e31e24;
+}
+
+@media (max-width: 992px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding-top: 40px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .footer-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+
+  .footer-section p {
+    font-size: 0.9rem;
+  }
+
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+
+  .footer-links a,
+  .contact-info a,
+  .contact-info p {
+    font-size: 0.9rem;
+  }
+
+  .social-link {
+    width: 36px;
+    height: 36px;
+  }
+
+  .footer-bottom {
+    margin-top: 30px;
+    padding: 15px 0;
+  }
+
+  .footer-bottom p {
+    font-size: 0.85rem;
+  }
+
+  /* Stack footer bottom elements on mobile */
+  .footer-bottom-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .footer-policies {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  /* Reduce font size for policy links */
+  .footer-policy-link {
+    font-size: 0.85rem;
+  }
+}
+
+
+
+/* Update the footer policy links for better mobile display */
+@media (max-width: 576px) {
+
+  .footer-bottom-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-policies {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Make the policy links even smaller */
+  .footer-policy-link {
+    font-size: 0.65rem;
+  }
+
+  /* Adjust the separator */
+  .footer-policy-link:not(:last-child)::after {
+    right: -4px;
+  }
+
+  /* Reduce copyright text size */
+  .footer-copyright {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* For extremely small screens, make the footer bottom stack vertically */
+@media (max-width: 380px) {
+  .footer-bottom-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-policies {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Make the policy links even smaller */
+  .footer-policy-link {
+    font-size: 0.65rem;
+  }
+
+  /* Adjust the separator */
+  .footer-policy-link:not(:last-child)::after {
+    right: -4px;
+  }
+
+  /* Reduce copyright text size */
+  .footer-copyright {
+    font-size: 0.75rem !important;
+  }
+}

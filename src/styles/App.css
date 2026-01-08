@@ -1,0 +1,251 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
+
+/* Icons */
+.location-icon::before {
+  content: "📍";
+  margin-right: 5px;
+}
+
+.calendar-icon::before {
+  content: "📅";
+  margin-right: 5px;
+}
+
+.group-icon::before {
+  content: "👥";
+  margin-right: 5px;
+}
+
+.check-icon::before {
+  content: "✓";
+  margin-right: 5px;
+  color: #ff6b6b;
+}
+
+.phone-icon::before {
+  content: "📞";
+  margin-right: 5px;
+}
+
+.email-icon::before {
+  content: "✉️";
+  margin-right: 5px;
+}
+
+.hours-icon::before {
+  content: "🕒";
+  margin-right: 5px;
+}
+
+.social-icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-color: #f8f9fa;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.facebook::before {
+  content: "f";
+  font-weight: bold;
+}
+
+.twitter::before {
+  content: "t";
+  font-weight: bold;
+}
+
+.instagram::before {
+  content: "i";
+  font-weight: bold;
+}
+
+/* Enhanced Loading spinner */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  text-align: center;
+  padding: 20px;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(227, 30, 36, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #e31e24;
+  position: relative;
+  animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px rgba(227, 30, 36, 0.2);
+}
+
+.loading-spinner::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(227, 30, 36, 0.1);
+  animation: pulse 1.5s ease-out infinite;
+}
+
+.loading-spinner::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 40%;
+  border-radius: 50%;
+  background: rgba(227, 30, 36, 0.05);
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+@keyframes glow {
+  0% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}
+
+.loading-container p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-top: 10px;
+  animation: fadeInOut 1.5s ease-in-out infinite;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+@keyframes fadeInOut {
+
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.error-container {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff6b6b;
+  color: white;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #ff5252;
+}
+
+/* Page headers */
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Add these responsive adjustments at the end of the file */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px;
+  }
+
+  .section {
+    padding: 40px 0;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .loading-container {
+    height: 200px;
+  }
+
+  .loading-spinner {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}

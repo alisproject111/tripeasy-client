@@ -1,0 +1,401 @@
+.package-card {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  /* Added for positioning the download notification */
+}
+
+.package-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: 0px solid rgba(0, 0, 0, 0.2);
+}
+
+.package-image-container {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.package-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+  image-rendering: -webkit-optimize-contrast;
+  /* Improve image quality in Chrome */
+  image-rendering: crisp-edges;
+  /* Improve image quality in Firefox */
+}
+
+.package-image-container:hover .package-image {
+  transform: scale(1.1);
+}
+
+.package-duration {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.package-duration i {
+  font-size: 0.8rem;
+}
+
+/* Package action buttons styles */
+.package-actions {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+
+.package-action-btn {
+  background-color: rgba(227, 30, 36, 0.9);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.package-action-btn:hover {
+  background-color: #c41a1f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.package-action-btn i {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.package-action-btn:hover i {
+  transform: scale(1.1);
+}
+
+/* Preloader for download button */
+.btn-preloader {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.package-action-btn.checking {
+  background-color: #888;
+  cursor: wait;
+}
+
+.package-content {
+  padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.package-title1 {
+  font-size: 1.3rem !important;
+  /* Force consistent size */
+  margin-bottom: 8px;
+  color: black;
+  transition: color 0.3s ease;
+  font-weight: 600;
+  height: 2.6rem;
+  /* Fixed height for title */
+  overflow: hidden;
+  display: -webkit-box;
+  /* -webkit-line-clamp: 2; */
+  -webkit-box-orient: vertical;
+}
+
+.package-card:hover .package-title1 {
+  color: red;
+}
+
+.package-location {
+  display: flex;
+  align-items: center;
+  /* color: #666; */
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  gap: 5px;
+  height: 1.2rem;
+  /* Fixed height for location */
+}
+
+.package-location i {
+  color: red;
+}
+
+.package-features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+  flex-grow: 1;
+  /* Allow features to take available space */
+}
+
+.feature-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #555;
+  width: 48%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.feature-item i {
+  color: #e31e24;
+  font-size: 0.8rem;
+  min-width: 14px;
+}
+
+.package-price-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+  height: 4.5rem;
+  /* Fixed height for price container */
+}
+
+.price-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.original-price {
+  color: #999;
+  font-size: 0.9rem;
+  text-decoration: line-through;
+}
+
+.current-price {
+  color: #e31e24;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.price-per {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.read-more-btn {
+  background-color: #e31e24;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.read-more-btn:hover {
+  background-color: #c41a1f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(227, 30, 36, 0.3);
+}
+
+.read-more-btn i {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.read-more-btn:hover i {
+  transform: scale(1.1);
+}
+
+/* Enhance mobile responsiveness */
+@media (max-width: 1200px) {
+  .package-image-container {
+    height: 170px;
+  }
+
+  .package-title1 {
+    font-size: 1.2rem !important;
+  }
+
+  .current-price {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .package-card {
+    max-width: 100%;
+  }
+
+  .package-image-container {
+    height: 160px;
+  }
+
+  .package-title1 {
+    font-size: 1.1rem !important;
+    height: 2.2rem;
+  }
+
+  .current-price {
+    font-size: 1.3rem;
+  }
+}
+
+/* Ensure package cards are visible on mobile */
+@media (max-width: 768px) {
+  .package-card {
+    margin: 0;
+    max-width: 450px;
+    opacity: 1 !important;
+    /* Force opacity to be visible */
+    display: flex !important;
+    /* Ensure display is flex */
+  }
+
+  .package-image-container {
+    height: 200px;
+  }
+
+  .package-content {
+    padding: 12px;
+  }
+
+  .package-title1 {
+    font-size: 1.1rem !important;
+    margin-bottom: 5px;
+  }
+
+  .package-location {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+
+  .feature-row {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .feature-item {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .package-price-container {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    height: auto;
+    padding-top: 8px;
+  }
+
+  .current-price {
+    font-size: 1.3rem;
+  }
+
+  .read-more-btn {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .package-card {
+    max-width: 100%;
+  }
+
+  .package-image-container {
+    height: 180px;
+  }
+
+  .package-action-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .package-title1 {
+    font-size: 1rem !important;
+  }
+
+  .current-price {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .package-image-container {
+    height: 160px;
+  }
+
+  .package-title1 {
+    font-size: 0.95rem !important;
+  }
+
+  .feature-item {
+    font-size: 0.75rem;
+  }
+
+  .current-price {
+    font-size: 1.1rem;
+  }
+
+  .read-more-btn {
+    font-size: 0.8rem;
+  }
+}

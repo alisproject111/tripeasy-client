@@ -1,0 +1,723 @@
+.ps-payment-status-container {
+  padding: 40px 0;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f9fa;
+}
+
+.ps-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+}
+
+.ps-loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #e53935;
+  animation: spin 1s ease-in-out infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ps-status-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 100%;
+  max-width: 700px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.ps-status-card.ps-success {
+  border-top: 5px solid #28a745;
+}
+
+.ps-status-card.ps-error {
+  border-top: 5px solid #dc3545;
+}
+
+.ps-status-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.ps-status-card.ps-success .ps-status-icon {
+  color: #28a745;
+}
+
+.ps-status-card.ps-error .ps-status-icon {
+  color: #dc3545;
+}
+
+.ps-status-title {
+  font-size: 28px;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.ps-status-message {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.ps-order-details {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.ps-order-details h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.ps-details-icon {
+  margin-right: 10px;
+  color: #e53935;
+}
+
+.ps-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.ps-detail-item {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.ps-detail-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.ps-detail-label i {
+  margin-right: 8px;
+  color: #e53935;
+}
+
+.ps-detail-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.ps-status-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #28a745;
+  color: white;
+}
+
+.ps-action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.ps-home-button,
+.ps-retry-button,
+.ps-download-button {
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.ps-home-button {
+  background-color: #e53935;
+  color: white;
+  border: none;
+}
+
+.ps-home-button:hover {
+  background-color: #c62828;
+}
+
+.ps-retry-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.ps-retry-button:hover {
+  background-color: #c82333;
+}
+
+.ps-download-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+}
+
+.ps-download-button:hover {
+  background-color: #218838;
+}
+
+.ps-home-button i,
+.ps-retry-button i,
+.ps-download-button i {
+  margin-right: 8px;
+}
+
+.ps-receipt-info {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #ffebee;
+  border-radius: 8px;
+  color: #c62828;
+  font-size: 16px;
+}
+
+.ps-receipt-info i {
+  margin-right: 8px;
+}
+
+/* Receipt Modal */
+.ps-receipt-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.ps-receipt-modal-content {
+  background-color: white;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.ps-receipt-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 10;
+}
+
+.ps-receipt-modal-header h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.ps-modal-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+}
+
+.ps-receipt-modal-body {
+  padding: 20px;
+}
+
+.ps-receipt-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 15px 20px;
+  border-top: 1px solid #e0e0e0;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+}
+
+.ps-print-button {
+  padding: 10px 20px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ps-print-button:hover {
+  background-color: #5a6268;
+}
+
+.ps-ticket-info {
+  background-color: #fff8e1;
+  border-left: 4px solid #ffc107;
+  padding: 15px;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.ps-ticket-info i {
+  font-size: 24px;
+  color: #ffc107;
+  margin-right: 15px;
+}
+
+.ps-ticket-info p {
+  margin: 0;
+  color: #5d4037;
+  font-size: 15px;
+}
+
+
+
+/* Add styles for email sending progress bar and animated success icon */
+.ps-email-sending-container {
+  margin: 15px 0;
+}
+
+.ps-email-progress-container {
+  width: 100%;
+  height: 8px;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ps-email-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.ps-email-progress-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  animation: shimmer 1.5s infinite;
+}
+
+.ps-email-progress-percentage {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Fullscreen email sending loader */
+.ps-email-sending-fullscreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.ps-email-sending-fullscreen .ps-email-progress-container {
+  width: 300px;
+  height: 12px;
+  background-color: #f1f1f1;
+  border-radius: 6px;
+  margin: 20px 0;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ps-email-sending-fullscreen .ps-email-progress-bar {
+  height: 100%;
+  background: linear-gradient(0, 0, 0.1);
+}
+
+.ps-email-sending-fullscreen .ps-email-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  border-radius: 6px;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 15px rgba(46, 204, 113, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.ps-email-sending-fullscreen .ps-email-progress-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  animation: shimmer 1.5s infinite;
+}
+
+.ps-email-sending-fullscreen .ps-email-progress-percentage {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.ps-email-message {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.ps-email-message p {
+  font-size: 18px;
+  color: #333;
+  font-weight: 500;
+  margin: 5px 0;
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.7;
+  }
+}
+
+/* Email animation container */
+.ps-email-animation-container {
+  margin-bottom: 30px;
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.ps-email-icon {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Envelope animation */
+.ps-envelope {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: bounce 2s infinite;
+}
+
+.ps-envelope-body {
+  position: absolute;
+  width: 100%;
+  height: 80%;
+  bottom: 0;
+  background-color: #e53935;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.ps-envelope-top {
+  position: absolute;
+  width: 100%;
+  height: 40%;
+  top: 0;
+  border-top: 40px solid #c62828;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  box-sizing: border-box;
+  transform-origin: top;
+  animation: flapOpen 4s infinite;
+}
+
+.ps-envelope-paper {
+  position: absolute;
+  width: 80%;
+  height: 70%;
+  background-color: white;
+  top: 15%;
+  left: 10%;
+  border-radius: 3px;
+  z-index: -1;
+  transform: translateY(0);
+  animation: paperSlide 4s infinite;
+}
+
+/* Email waves animation */
+.ps-email-waves {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 40px;
+}
+
+.ps-wave {
+  position: absolute;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(229, 57, 53, 0.3);
+  animation: wave 2s infinite;
+  opacity: 0;
+}
+
+.ps-wave1 {
+  width: 30px;
+  bottom: 0;
+  animation-delay: 0s;
+}
+
+.ps-wave2 {
+  width: 60px;
+  bottom: 10px;
+  animation-delay: 0.2s;
+}
+
+.ps-wave3 {
+  width: 90px;
+  bottom: 20px;
+  animation-delay: 0.4s;
+}
+
+@keyframes wave {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes flapOpen {
+
+  0%,
+  30%,
+  70%,
+  100% {
+    transform: rotateX(0deg);
+  }
+
+  40%,
+  60% {
+    transform: rotateX(-60deg);
+  }
+}
+
+@keyframes paperSlide {
+
+  0%,
+  30% {
+    transform: translateY(0);
+  }
+
+  40%,
+  55% {
+    transform: translateY(-30px);
+  }
+
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Animated success icon */
+.ps-animated-success {
+  animation: successPulse 1.5s ease-in-out infinite;
+  color: #27ae60;
+  /* Green theme */
+  font-size: 3.5rem;
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Update status card with green theme for success elements */
+.ps-status-card.ps-success {
+  /* border-color: #e53935;  */
+}
+
+.ps-status-card .ps-status-icon {
+  color: #27ae60;
+  /* Green for success icon */
+}
+
+.ps-status-badge {
+  /* background-color: #e53935; / */
+}
+
+.ps-download-button,
+.ps-home-button,
+.ps-retry-button {
+  /* background-color: #e53935;  */
+}
+
+
+
+.ps-details-icon {
+  color: #e53935;
+  /* Keep red for details icon */
+}
+
+
+@media (max-width: 768px) {
+  .ps-status-card {
+    padding: 20px;
+  }
+
+  .ps-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ps-action-buttons {
+    flex-direction: column;
+  }
+
+  .ps-home-button,
+  .ps-retry-button,
+  .ps-download-button {
+    width: 100%;
+  }
+}
+
+@media print {
+
+  /* Hide all print-related elements */
+  .ps-receipt-modal-header,
+  .ps-receipt-modal-footer,
+  .ps-action-buttons,
+  .ps-status-icon,
+  .ps-status-title,
+  .ps-status-message,
+  .ps-receipt-info,
+  .ps-print-button {
+    display: none !important;
+  }
+
+  .ps-receipt-modal {
+    position: absolute;
+    background: none;
+  }
+
+  .ps-receipt-modal-content {
+    box-shadow: none;
+    max-height: none;
+  }
+
+  .ps-receipt-modal-body {
+    padding: 0;
+  }
+}

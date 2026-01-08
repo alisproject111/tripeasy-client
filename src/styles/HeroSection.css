@@ -1,0 +1,279 @@
+.hero-section {
+  height: 80vh;
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+  /* This ensures content doesn't spill out */
+  margin-bottom: 70px;
+  /* Add space for the search bar to overlap */
+}
+
+.hero-slider {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  z-index: 1;
+}
+
+/* Hero image container to maintain aspect ratio */
+.hero-image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Hero image styling */
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* This ensures the image covers the container */
+  object-position: center;
+  /* Centers the image */
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Overlay for better text visibility */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Semi-transparent overlay */
+  z-index: 0;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 3;
+  /* Increased z-index to ensure content is above overlay */
+  text-align: center;
+  color: white;
+}
+
+.hero-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  animation: fadeInUp 1s ease;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  /* Enhanced text shadow for better readability */
+}
+
+.hero-subtitle {
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+  animation: fadeInUp 1s ease 0.2s;
+  animation-fill-mode: both;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  /* Enhanced text shadow for better readability */
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  animation: fadeInUp 1s ease 0.4s;
+  animation-fill-mode: both;
+  position: absolute;
+  bottom: 100px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 500;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #e31e24;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #c41a1f;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(227, 30, 36, 0.3);
+}
+
+.btn-contact {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn-contact:hover {
+  background-color: #e31e24;
+  color: white;
+  border-color: #e31e24;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(227, 30, 36, 0.3);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1200px) {
+  .hero-title {
+    font-size: 1.9rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-section {
+    height: 70vh;
+    margin-bottom: 60px;
+  }
+
+  .hero-title {
+    font-size: 1.7rem;
+    margin-bottom: 15px;
+  }
+
+  .hero-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+  }
+
+  .hero-buttons {
+    bottom: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 60vh;
+    margin-bottom: 50px;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .hero-subtitle {
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+  }
+
+  .hero-buttons {
+    flex-direction: row;
+    /* Keep buttons side by side */
+    gap: 10px;
+    bottom: 60px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    /* Reduce padding */
+    font-size: 0.85rem;
+    /* Reduce font size */
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-section {
+    height: 50vh;
+    min-height: 350px;
+    margin-bottom: 40px;
+  }
+
+  .hero-title {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .hero-subtitle {
+    font-size: 0.75rem;
+    margin-bottom: 15px;
+  }
+
+  .hero-buttons {
+    bottom: 50px;
+  }
+
+  .btn {
+    padding: 6px 12px;
+    /* Further reduce padding */
+    font-size: 0.8rem;
+    /* Further reduce font size */
+    gap: 6px;
+    /* Reduce gap between icon and text */
+  }
+}
+
+@media (max-width: 375px) {
+  .hero-section {
+    height: 45vh;
+    min-height: 300px;
+  }
+
+  .hero-title {
+    font-size: 1.1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.7rem;
+  }
+
+  .btn {
+    padding: 5px 10px;
+    /* Minimum padding for very small screens */
+    font-size: 0.75rem;
+    /* Minimum font size */
+  }
+}
