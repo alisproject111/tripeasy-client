@@ -1,42 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import "../styles/PackageCard.css";
 import AnimatedElement from "./AnimatedElement";
 import Toast from "./Toast";
+import LazyImage from "./LazyImage";
 
 function PackageCard({ package: pkg }) {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState("success");
   const [isCheckingPdf, setIsCheckingPdf] = useState(false);
+  const [isPdfLoading, setIsPdfLoading] = useState(false);
 
   // Format duration as nights/days (e.g., 4N/5D)
-  const formatDuration = (days) => {
+  const formatDuration = useCallback((days) => {
     const nights = days - 1;
     return `${nights}N/${days}D`;
-  };
+  }, []);
 
   // Calculate discount percentage
-  const calculateDiscount = (originalPrice, currentPrice) => {
+  const calculateDiscount = useCallback((originalPrice, currentPrice) => {
     return Math.round(((originalPrice - currentPrice) / originalPrice) * 100);
-  };
+  }, []);
 
-  // Original price (10-20% higher than the actual price for display purposes)
-  const originalPrice = Math.round(pkg.price * (1 + Math.random() * 0.1 + 0.1));
+  // Memoize original price calculation
+  const originalPrice = useMemo(() => {
+    return Math.round(pkg.price * (1 + Math.random() * 0.1 + 0.1));
+  }, [pkg.price]);
 
   // Handle sharing functionality
-  const handleShare = (e) => {
+  const handleShare = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    // Create the share URL for the package
     const shareUrl = `${window.location.origin}/package/${pkg.name
       .toLowerCase()
       .replace(/\s+/g, "-")}`;
 
-    // Check if Web Share API is available
     if (navigator.share) {
       navigator
         .share({
@@ -46,73 +48,85 @@ function PackageCard({ package: pkg }) {
         })
         .catch((error) => {
           console.error("Error sharing:", error);
-          // Fallback to clipboard copy
           copyToClipboard(shareUrl);
         });
     } else {
-      // Fallback for browsers that don't support Web Share API
       copyToClipboard(shareUrl);
     }
-  };
+  }, [pkg.name]);
 
-  // Helper function to copy to clipboard without toast for sharing
-  const copyToClipboard = (text) => {
+  // Copy to clipboard
+  const copyToClipboard = useCallback((text) => {
     navigator.clipboard.writeText(text).catch((error) => {
       console.error("Error copying to clipboard:", error);
     });
-  };
+  }, []);
 
-  // Updated handleDownload function to use pdfUrl from JSON data
-  const handleDownload = (e) => {
+  // Optimized PDF download with on-demand loading
+  const handleDownload = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (isCheckingPdf) return; // Prevent multiple clicks while checking
+    if (isCheckingPdf || isPdfLoading) return;
 
     setIsCheckingPdf(true);
+    setIsPdfLoading(true);
 
-    // Check if the package has a PDF URL defined in the JSON
+    // Check if the package has a PDF URL
     if (pkg.pdfUrl && pkg.pdfUrl.trim() !== "") {
-      // PDF exists in JSON data, proceed with download
       const packageFileName = pkg.name.replace(/\s+/g, "-").toLowerCase();
 
-      // Create a link element and trigger download
-      const link = document.createElement("a");
-      link.href = pkg.pdfUrl;
-      link.download = `${packageFileName}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      // Load PDF on-demand when user clicks download
+      const pdfLink = document.createElement("a");
+      pdfLink.href = pkg.pdfUrl;
+      pdfLink.download = `${packageFileName}.pdf`;
+      pdfLink.style.display = "none";
 
-      // Show success toast notification
-      setToastMessage("PDF downloaded successfully!");
-      setToastType("success");
-      setShowToast(true);
+      // Add to DOM and trigger download
+      document.body.appendChild(pdfLink);
+
+      // Use setTimeout to ensure browser recognizes the element
+      setTimeout(() => {
+        pdfLink.click();
+        document.body.removeChild(pdfLink);
+
+        // Show success toast
+        setToastMessage("PDF downloaded successfully!");
+        setToastType("success");
+        setShowToast(true);
+
+        setIsCheckingPdf(false);
+        setIsPdfLoading(false);
+
+        // Hide notification after 3 seconds
+        setTimeout(() => {
+          setShowToast(false);
+        }, 3000);
+      }, 100);
     } else {
-      // No PDF URL in JSON data, show error toast
+      // Show error if PDF not available
       setToastMessage("PDF not available for this package");
       setToastType("error");
       setShowToast(true);
+      setIsCheckingPdf(false);
+      setIsPdfLoading(false);
+
+      setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
     }
-
-    // Reset checking state
-    setIsCheckingPdf(false);
-
-    // Hide notification after 3 seconds
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
-  };
+  }, [pkg.name, pkg.pdfUrl, isCheckingPdf, isPdfLoading]);
 
   return (
     <AnimatedElement animation="fade-up">
       <div className="package-card">
         <div className="package-image-container">
-          <img
+          <LazyImage
             src={pkg.image || "/placeholder.svg"}
             alt={pkg.name}
             className="package-image"
             loading="lazy"
+            decoding="async"
           />
           <div className="package-duration">
             <i className="fas fa-clock"></i> {formatDuration(pkg.duration)}
@@ -120,13 +134,14 @@ function PackageCard({ package: pkg }) {
           <div className="package-actions">
             <button
               className={`package-action-btn download-btn ${
-                isCheckingPdf ? "checking" : ""
+                isCheckingPdf || isPdfLoading ? "checking" : ""
               }`}
               onClick={handleDownload}
               aria-label="Download PDF"
-              disabled={isCheckingPdf}
+              disabled={isCheckingPdf || isPdfLoading}
+              title="Download package itinerary"
             >
-              {isCheckingPdf ? (
+              {isCheckingPdf || isPdfLoading ? (
                 <div className="btn-preloader"></div>
               ) : (
                 <i className="fas fa-download"></i>

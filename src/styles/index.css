@@ -66,13 +66,14 @@ button {
 }
 
 .section-title {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-    color: #333;
+    font-size: 2rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 15px !important;
+    color: #333 !important;
     position: relative;
     display: inline-block;
     padding-bottom: 10px;
+    text-align: center;
 }
 
 .section-title::after {
@@ -91,6 +92,31 @@ button {
     color: #666;
     max-width: 600px;
     margin: 0 auto;
+}
+
+/* Responsive section-title sizing */
+@media (max-width: 1200px) {
+    .section-title {
+        font-size: 1.6rem !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .section-title {
+        font-size: 1.4rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-title {
+        font-size: 1.1rem !important;
+    }
 }
 
 .btn {

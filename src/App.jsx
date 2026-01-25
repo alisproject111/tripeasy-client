@@ -6,7 +6,6 @@ import {
   Routes,
   Route,
   useLocation,
-  useNavigate,
 } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Navbar from "./components/Navbar";
@@ -40,7 +39,6 @@ const ProtectedRoute = lazy(() => import("./components/admin/ProtectedRoute"));
 // ScrollToTop component to handle scrolling on route change
 function ScrollToTopOnNavigation() {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Check if we're navigating to home page and if we came from a package detail page

@@ -304,7 +304,8 @@ const PopularDestinations = () => {
 
         {loading ? (
           <div style={{ textAlign: "center", padding: "40px 20px" }}>
-            <p>Loading destinations...</p>
+            <div className="loading-spinner"></div>
+            <p style={{ marginTop: "20px" }}>Discovering amazing destinations...</p>
           </div>
         ) : (
           <>

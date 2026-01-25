@@ -1,12 +1,13 @@
 "use client";
 
+import { useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import "../styles/DestinationCard.css";
+import LazyImage from "./LazyImage";
 
 function DestinationCard({ destination }) {
-  // Generate a search query that will match packages more effectively
-  const generateSearchQuery = () => {
-    // Extract main location names from the destination
+  // Memoized search query generation
+  const generateSearchQuery = useCallback(() => {
     const commonWords = [
       "india",
       "the",
@@ -46,23 +47,25 @@ function DestinationCard({ destination }) {
       .split(/[\s,&-]+/)
       .filter((word) => word.length > 2 && !commonWords.includes(word));
 
-    // Use the first two significant words for the search query
     return destinationWords.slice(0, 2).join(" ");
-  };
+  }, [destination.name]);
+
+  const searchQuery = useMemo(() => generateSearchQuery(), [generateSearchQuery]);
 
   return (
     <div className="destination-card">
       <div className="destination-image-container">
-        <img
+        <LazyImage
           src={destination.image || "/placeholder.svg"}
           alt={destination.name}
           className="destination-image"
           loading="lazy"
+          decoding="async"
         />
         <div className="destination-overlay">
           <Link
             to={`/packages?destination=${encodeURIComponent(
-              generateSearchQuery()
+              searchQuery
             )}#package-list`}
             className="explore-btn"
           >

@@ -12,6 +12,8 @@ const PopularPackages = () => {
   const [loading, setLoading] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
   const [error, setError] = useState(null)
+  const [retryCount, setRetryCount] = useState(0)
+  const [isRetrying, setIsRetrying] = useState(false)
 
   // Fetch packages data from API
   useEffect(() => {
@@ -51,13 +53,23 @@ const PopularPackages = () => {
         console.error("[v0] Error fetching packages data:", error.message)
         setError(error.message)
         setPopularPackages([])
+        if (retryCount < 2) {
+          setIsRetrying(true)
+          setRetryCount(retryCount + 1)
+          setTimeout(() => {
+            setLoading(true)
+            setError(null)
+            setRetryCount(0)
+            setIsRetrying(false)
+          }, 2000)
+        }
       } finally {
         setLoading(false)
       }
     }
 
     fetchPackagesData()
-  }, [])
+  }, [retryCount])
 
   useEffect(() => {
     // Check if we're on mobile
@@ -95,7 +107,10 @@ const PopularPackages = () => {
       <section className="popular-packages section">
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title">Loading packages...</h2>
+            <h2 className="section-title">Finding best travel packages for you...</h2>
+            <div style={{ textAlign: "center", padding: "30px 0" }}>
+              <div className="loading-spinner"></div>
+            </div>
           </div>
         </div>
       </section>

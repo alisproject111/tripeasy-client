@@ -13,6 +13,8 @@ function PackageList({ filters = {}, packageType = "all" }) {
   const packageListRef = useRef(null)
   const [packagesData, setPackagesData] = useState([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [retryCount, setRetryCount] = useState(0)
 
   useEffect(() => {
     const fetchPackagesData = async () => {
@@ -44,14 +46,20 @@ function PackageList({ filters = {}, packageType = "all" }) {
         }
       } catch (error) {
         console.error("[v0] Error fetching packages data:", error)
-        setPackagesData([])
+        setError(`Error fetching packages data: ${error.message}`)
+        setRetryCount((prevCount) => prevCount + 1)
+        if (retryCount < 3) {
+          setTimeout(fetchPackagesData, 2000)
+        } else {
+          setRetryCount(0)
+        }
       } finally {
         setLoading(false)
       }
     }
 
     fetchPackagesData()
-  }, [])
+  }, [retryCount])
 
   // Get current page from URL
   const getPageFromUrl = () => {
@@ -238,7 +246,8 @@ function PackageList({ filters = {}, packageType = "all" }) {
     return (
       <div className="package-list-container" ref={packageListRef}>
         <div className="package-loading">
-          <p>Loading packages...</p>
+          <div className="loading-spinner"></div>
+          <p>Loading amazing packages for you...</p>
         </div>
       </div>
     )
