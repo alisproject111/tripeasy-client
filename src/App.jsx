@@ -12,6 +12,9 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import { useToast } from "./components/Toast";
+
+// ADD THIS LINE: Import Toastify CSS BEFORE your custom CSS
+import "react-toastify/dist/ReactToastify.css";
 import "./styles/App.css";
 
 // Lazy load pages for better performance
