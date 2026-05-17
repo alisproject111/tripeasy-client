@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import "../styles/ContactPage.css";
 import AnimatedElement from "../components/AnimatedElement";
 import AnimatedSection from "../components/AnimatedSection";
@@ -28,6 +29,8 @@ const ContactPage = () => {
   const [countdown, setCountdown] = useState(3);
 
   // Validate form fields and return an error object
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
+
   const validateForm = () => {
     const errors = {};
 
@@ -169,6 +172,10 @@ const ContactPage = () => {
 
   return (
     <div className="contact-page">
+      <Helmet>
+        <link rel="preconnect" href="https://maps.google.com" />
+        <link rel="preconnect" href="https://maps.gstatic.com" crossOrigin="anonymous" />
+      </Helmet>
       <SEOHead
         title="Contact TripEasy - Travel Agency in Vadodara | Book Tour Packages"
         description="Contact TripEasy for best travel packages. Located in Vadodara, Gujarat. Call +91-9157450389 or email contact.us.tripeasy@gmail.com. Get expert travel advice & book your dream vacation."
@@ -423,14 +430,28 @@ const ContactPage = () => {
             </div>
           </AnimatedElement>
           <AnimatedElement animation="zoom-in" delay={300}>
-            <div className="map-container">
+            <div className="map-container" style={{ position: "relative" }}>
+              {!isMapLoaded && (
+                <div className="map-skeleton-loader">
+                  <div className="map-skeleton-icon">
+                    <i className="fas fa-map-marker-alt fa-3x pulsing-marker"></i>
+                  </div>
+                  <h3>Loading Interactive Map...</h3>
+                  <p>Establishing secure connection to Google Maps</p>
+                </div>
+              )}
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d461.38220708861104!2d73.18106761565096!3d22.31365911089673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc575c736f7db%3A0x2bd8a3c08cdad680!2sFlyAnyTrip.com!5e0!3m2!1sen!2sin!4v1742556553157!5m2!1sen!2sin"
                 width="100%"
                 height="450"
-                style={{ border: 0 }}
+                style={{ 
+                  border: 0,
+                  opacity: isMapLoaded ? 1 : 0,
+                  transition: "opacity 0.5s ease"
+                }}
                 allowFullScreen=""
-                loading="lazy"
+                loading="eager"
+                onLoad={() => setIsMapLoaded(true)}
                 title="Office Location"
               ></iframe>
             </div>

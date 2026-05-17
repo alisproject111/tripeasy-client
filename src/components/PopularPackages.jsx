@@ -18,6 +18,7 @@ const PopularPackages = () => {
 
   // Fetch packages data from API
   useEffect(() => {
+    let active = true
     const fetchPackagesData = async () => {
       try {
         const fetchUrl = `${apiEndpoints.getAllPackages}?limit=6&featured=true`
@@ -38,33 +39,28 @@ const PopularPackages = () => {
         console.log("[v0] Packages API response:", data)
 
         if (data.success && data.packages) {
-          console.log("[v0] Featured packages loaded:", data.packages.length)
-          setPopularPackages(data.packages)
-          setError(null)
+          if (active) {
+            console.log("[v0] Featured packages loaded:", data.packages.length)
+            setPopularPackages(data.packages)
+            setError(null)
+            setLoading(false)
+          }
         } else {
           throw new Error(data.message || "Failed to fetch packages")
         }
       } catch (error) {
-        console.error("[v0] Error fetching packages data:", error.message)
-        setError(error.message)
-        setPopularPackages([])
-        if (retryCount < 2) {
-          setIsRetrying(true)
-          setRetryCount(retryCount + 1)
-          setTimeout(() => {
-            setLoading(true)
-            setError(null)
-            setRetryCount(0)
-            setIsRetrying(false)
-          }, 2000)
+        console.error("[v0] Error fetching packages data, retrying in 3s:", error.message)
+        if (active) {
+          setTimeout(fetchPackagesData, 3000)
         }
-      } finally {
-        setLoading(false)
       }
     }
 
     fetchPackagesData()
-  }, [retryCount])
+    return () => {
+      active = false
+    }
+  }, [])
 
   useEffect(() => {
     // Check if we're on mobile
@@ -82,20 +78,7 @@ const PopularPackages = () => {
     return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
-  if (error) {
-    return (
-      <section className="popular-packages section">
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">Error Loading Packages</h2>
-            <p className="section-subtitle" style={{ color: "red" }}>
-              {error}
-            </p>
-          </div>
-        </div>
-      </section>
-    )
-  }
+
 
   if (loading) {
     return (

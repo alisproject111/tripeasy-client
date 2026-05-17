@@ -26,6 +26,7 @@ const PopularDestinations = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    let active = true
     const fetchData = async () => {
       try {
         console.log("[v0] Fetching destinations from:", apiEndpoints.getDestinations)
@@ -39,16 +40,23 @@ const PopularDestinations = () => {
         const internationalDestinations = destinations
           .filter((dest) => !dest.location || !dest.location.toLowerCase().includes("india"))
 
-        setDomesticDestinations(domesticDestinations)
-        setInternationalDestinations(internationalDestinations)
-        setLoading(false)
+        if (active) {
+          setDomesticDestinations(domesticDestinations)
+          setInternationalDestinations(internationalDestinations)
+          setLoading(false)
+        }
       } catch (error) {
-        console.error("[v0] Error fetching destinations:", error)
-        setLoading(false)
+        console.error("[v0] Error fetching destinations, retrying in 3s:", error)
+        if (active) {
+          setTimeout(fetchData, 3000)
+        }
       }
     }
 
     fetchData()
+    return () => {
+      active = false
+    }
   }, [])
 
   // Handle touch events for mobile devices

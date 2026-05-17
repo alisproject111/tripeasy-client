@@ -38,6 +38,7 @@ function MonthlyDestinations() {
   ]
 
   useEffect(() => {
+    let active = true
     const fetchPackagesData = async () => {
       try {
         console.log("[v0] Fetching destinations from:", apiEndpoints.getDestinations)
@@ -57,24 +58,29 @@ function MonthlyDestinations() {
         console.log("[v0] Monthly destinations API response:", data)
 
         if (data.success && data.data?.destinations) {
-          setPackagesData({
-            packages: [],
-            destinations: data.data.destinations || [],
-          })
-          setError(null)
+          if (active) {
+            setPackagesData({
+              packages: [],
+              destinations: data.data.destinations || [],
+            })
+            setError(null)
+            setLoading(false)
+          }
         } else {
           throw new Error("Failed to fetch destinations data")
         }
-      } catch (error) {
-        console.error("[v0] Error fetching destinations data:", error.message)
-        setError(error.message)
-        setPackagesData({ packages: [], destinations: [] })
-      } finally {
-        setLoading(false)
+      } catch (err) {
+        console.error("[v0] Error fetching destinations data, retrying in 3s:", err.message)
+        if (active) {
+          setTimeout(fetchPackagesData, 3000)
+        }
       }
     }
 
     fetchPackagesData()
+    return () => {
+      active = false
+    }
   }, [])
 
   const getMonthlyDestinations = (month) => {
@@ -217,27 +223,15 @@ function MonthlyDestinations() {
     return () => clearInterval(scrollInterval)
   }, [isPaused, monthlyDestinationsList, autoScrollEnabled, scrollDirection, isTouchScrolling])
 
-  if (error) {
-    return (
-      <section className="monthly-destinations section" id="monthly-destinations">
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">Error Loading Destinations</h2>
-            <p className="section-subtitle" style={{ color: "red" }}>
-              {error}
-            </p>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
   if (loading) {
     return (
       <section className="monthly-destinations section" id="monthly-destinations">
         <div className="container">
           <div className="section-header">
             <h2 className="section-title">Loading destinations...</h2>
+            <div style={{ textAlign: "center", padding: "30px 0" }}>
+              <div className="loading-spinner"></div>
+            </div>
           </div>
         </div>
       </section>

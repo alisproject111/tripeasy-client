@@ -22,6 +22,7 @@ function PackageDetailPage() {
     // Scroll to top when component mounts
     window.scrollTo({ top: 0, behavior: "smooth" })
 
+    let active = true
     const fetchPackageData = async () => {
       try {
         const fetchUrl = apiEndpoints.getPackageById(id)
@@ -37,21 +38,27 @@ function PackageDetailPage() {
         console.log("[v0] Package response:", data)
 
         if (data.success && data.package) {
-          setPackageData(data.package)
-          console.log("[v0] Package loaded successfully:", data.package.name)
+          if (active) {
+            setPackageData(data.package)
+            setError(null)
+            setLoading(false)
+            console.log("[v0] Package loaded successfully:", data.package.name)
+          }
         } else {
-          setError("Package not found")
-          console.error("[v0] Package not found in response")
+          throw new Error("Package not found")
         }
       } catch (err) {
-        console.error("[v0] Error fetching package:", err)
-        setError("Error loading package details. Please try again.")
-      } finally {
-        setLoading(false)
+        console.error("[v0] Error fetching package, retrying in 3s:", err)
+        if (active) {
+          setTimeout(fetchPackageData, 3000)
+        }
       }
     }
 
     fetchPackageData()
+    return () => {
+      active = false
+    }
   }, [id])
 
   // Effect for sticky sidebar that stays visible until footer

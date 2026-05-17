@@ -8,6 +8,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
@@ -18,7 +19,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "./styles/App.css";
 
 // Lazy load pages for better performance
-const HomePage = lazy(() => import("./pages/HomePage"));
 const PackagesPage = lazy(() => import("./pages/PackagesPage"));
 const PackageDetailPage = lazy(() => import("./pages/PackageDetailPage"));
 const BookingPage = lazy(() => import("./pages/BookingPage"));

@@ -16,8 +16,7 @@ const loadHtml2Pdf = () => {
       return
     }
     const script = document.createElement("script")
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-    script.integrity = "sha512-GsLlZN/3F2ErC5IfS5QtgpiJtWd67OghLxz1xa8t3g+teKCqx38Rqvh1oYBvWpW5V57HyVWZ1t8cTx37seRhnA=="
+    script.src = "https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"
     script.crossOrigin = "anonymous"
     script.referrerPolicy = "no-referrer"
     script.onload = () => resolve(window.html2pdf)
@@ -563,6 +562,36 @@ function PaymentStatus() {
       })
 
       setIsSendingEmail(true)
+      setEmailSendProgress(10)
+
+      // Wait a moment for DOM to update and render the hidden receipt template
+      await new Promise((resolve) => setTimeout(resolve, 300))
+      setEmailSendProgress(30)
+
+      // Generates the PDF base64 client-side
+      let pdfBase64 = null
+      try {
+        const html2pdf = await loadHtml2Pdf()
+        const element = document.getElementById("hidden-receipt-pdf")
+        if (element) {
+          const opt = {
+            margin: [10, 10, 10, 10],
+            filename: `TripEasy_Receipt_${orderData.order_id}.pdf`,
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, logging: false },
+            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+          }
+          const pdfDataUri = await html2pdf().set(opt).from(element).outputPdf('datauristring')
+          // Extract base64
+          pdfBase64 = pdfDataUri.substring(pdfDataUri.indexOf(',') + 1)
+          console.log("[v0] PDF generated client-side successfully")
+        } else {
+          console.error("[v0] Hidden receipt element not found in DOM")
+        }
+      } catch (pdfGenErr) {
+        console.error("[v0] Failed to generate PDF client-side for email attachment:", pdfGenErr)
+      }
+
       setEmailSendProgress(50) // Update progress to 50%
 
       const response = await fetch(
@@ -576,6 +605,7 @@ function PaymentStatus() {
             orderData,
             bookingDetails: finalBookingDetails,
             packageDetails: finalPackageDetails,
+            pdfBase64: pdfBase64, // Send base64 to server!
           }),
         },
       )
@@ -833,6 +863,19 @@ function PaymentStatus() {
             <p>{loadingMessage}</p>
           </div>
         </div>
+
+        {/* Hidden receipt element for client-side PDF generation */}
+        {paymentStatus.orderDetails && bookingDetails && packageDetails && (
+          <div style={{ position: "absolute", left: "-9999px", top: "-9999px" }}>
+            <div id="hidden-receipt-pdf">
+              <ReceiptTemplate
+                orderData={paymentStatus.orderDetails}
+                bookingDetails={bookingDetails}
+                packageDetails={packageDetails}
+              />
+            </div>
+          </div>
+        )}
       </div>
     )
   }

@@ -68,11 +68,30 @@ function HeroSection() {
                 zIndex: 0,
               }}
             ></div>
-            <LazyImage
-              src={slide.image || "/placeholder.svg"}
-              alt={slide.title}
-              className="hero-image"
-            />
+            {index === 0 ? (
+              <img
+                src={slide.image}
+                alt={slide.title}
+                className="hero-image"
+                loading="eager"
+                fetchPriority="high"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  zIndex: -1,
+                }}
+              />
+            ) : (
+              <LazyImage
+                src={slide.image || "/placeholder.svg"}
+                alt={slide.title}
+                className="hero-image"
+              />
+            )}
             <div className="hero-content">
               <h1 className="hero-title">{slide.title}</h1>
               <p className="hero-subtitle">{slide.subtitle}</p>
