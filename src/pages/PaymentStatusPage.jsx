@@ -8,6 +8,24 @@ import Toast from "../components/Toast"
 import ReceiptTemplate from "../components/ReceiptTemplate"
 import { apiEndpoints } from "../config/api"
 
+// Dynamic script loader helper for html2pdf.js
+const loadHtml2Pdf = () => {
+  return new Promise((resolve, reject) => {
+    if (window.html2pdf) {
+      resolve(window.html2pdf)
+      return
+    }
+    const script = document.createElement("script")
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+    script.integrity = "sha512-GsLlZN/3F2ErC5IfS5QtgpiJtWd67OghLxz1xa8t3g+teKCqx38Rqvh1oYBvWpW5V57HyVWZ1t8cTx37seRhnA=="
+    script.crossOrigin = "anonymous"
+    script.referrerPolicy = "no-referrer"
+    script.onload = () => resolve(window.html2pdf)
+    script.onerror = (err) => reject(err)
+    document.body.appendChild(script)
+  })
+}
+
 function PaymentStatus() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
@@ -620,9 +638,11 @@ function PaymentStatus() {
   const downloadReceipt = async () => {
     try {
       // Check server status first
-      const isServerRunning = await checkServerStatus()
-      if (!isServerRunning) {
-        throw new Error("Server connection error. Please make sure the server is running.")
+      let isServerRunning = false
+      try {
+        isServerRunning = await checkServerStatus()
+      } catch (err) {
+        console.warn("Could not check server status, proceeding to try download anyway", err)
       }
 
       if (!paymentStatus.orderDetails) {
@@ -632,12 +652,12 @@ function PaymentStatus() {
         return
       }
 
-      if (!bookingDetails || !packageDetails) {
-        // Try to retrieve booking details one more time
-        const storedPackageId = sessionStorage.getItem("currentPackageId")
-        let retrievedBookingDetails = bookingDetails
-        let retrievedPackageDetails = packageDetails
+      // Check / retrieve booking and package details if missing in state
+      let retrievedBookingDetails = bookingDetails
+      let retrievedPackageDetails = packageDetails
 
+      if (!retrievedBookingDetails || !retrievedPackageDetails) {
+        const storedPackageId = sessionStorage.getItem("currentPackageId")
         if (storedPackageId) {
           try {
             const storedBookingDetails = JSON.parse(sessionStorage.getItem(`bookingDetails_${storedPackageId}`))
@@ -646,21 +666,21 @@ function PaymentStatus() {
             if (storedBookingDetails) retrievedBookingDetails = storedBookingDetails
             if (storedPackageDetails) retrievedPackageDetails = storedPackageDetails
           } catch (err) {
-            console.error("[v0] Error retrieving booking details", err)
+            console.error("[v0] Error retrieving booking details from sessionStorage", err)
           }
         }
-
-        if (!retrievedBookingDetails || !retrievedPackageDetails) {
-          setToastMessage("Cannot generate receipt: missing booking details")
-          setToastType("error")
-          setShowToast(true)
-          return
-        }
-
-        // Update state with retrieved details
-        if (!bookingDetails) setBookingDetails(retrievedBookingDetails)
-        if (!packageDetails) setPackageDetails(retrievedPackageDetails)
       }
+
+      if (!retrievedBookingDetails || !retrievedPackageDetails) {
+        setToastMessage("Cannot generate receipt: missing booking or package details")
+        setToastType("error")
+        setShowToast(true)
+        return
+      }
+
+      // Update state if retrieved
+      if (!bookingDetails) setBookingDetails(retrievedBookingDetails)
+      if (!packageDetails) setPackageDetails(retrievedPackageDetails)
 
       // Show loading state
       setIsDownloading(true)
@@ -668,57 +688,93 @@ function PaymentStatus() {
       setToastType("info")
       setShowToast(true)
 
-      // Direct approach - fetch the PDF as a blob
-      const response = await fetch(
-        `${apiEndpoints.createBookingRequest.replace("/api/booking-requests", "/api/generate-receipt")}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            orderData: paymentStatus.orderDetails,
-            bookingDetails: bookingDetails,
-            packageDetails: packageDetails,
-          }),
-          // Add timeout to prevent hanging requests
-          signal: AbortSignal.timeout(30000), // 30 second timeout
-        },
-      )
+      let downloadSuccess = false
 
-      if (!response.ok) {
-        throw new Error(`Failed to generate receipt: ${response.statusText}`)
+      // Try server-side generation first if server is running
+      if (isServerRunning) {
+        try {
+          const response = await fetch(
+            `${apiEndpoints.generateReceipt || apiEndpoints.createBookingRequest.replace("/api/booking-requests", "/api/generate-receipt")}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                orderData: paymentStatus.orderDetails,
+                bookingDetails: retrievedBookingDetails,
+                packageDetails: retrievedPackageDetails,
+              }),
+              signal: AbortSignal.timeout(15000), // 15 second timeout for server-side
+            }
+          )
+
+          if (response.ok) {
+            const blob = await response.blob()
+            const url = window.URL.createObjectURL(blob)
+            const link = document.createElement("a")
+            link.href = url
+            link.download = `TripEasy_Receipt_${paymentStatus.orderDetails.order_id}.pdf`
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+            window.URL.revokeObjectURL(url)
+            
+            downloadSuccess = true
+          } else {
+            const errData = await response.json().catch(() => ({}))
+            console.warn("Server PDF generation returned status:", response.status, errData.message)
+          }
+        } catch (serverError) {
+          console.warn("Server-side PDF generation failed or timed out, falling back to client-side:", serverError)
+        }
       }
 
-      // Get the blob from the response
-      const blob = await response.blob()
+      // If server-side generation failed/skipped, run client-side PDF generation
+      if (!downloadSuccess) {
+        console.log("Running client-side PDF generation...")
+        try {
+          // Dynamically load html2pdf
+          setToastMessage("Generating receipt directly in browser...")
+          const html2pdf = await loadHtml2Pdf()
 
-      // Create a URL for the blob
-      const url = window.URL.createObjectURL(blob)
+          // Get the hidden element
+          const element = document.getElementById("hidden-receipt-pdf")
+          if (!element) {
+            throw new Error("Hidden receipt element not found in DOM")
+          }
 
-      // Create a temporary link element
-      const link = document.createElement("a")
-      link.href = url
-      link.download = `TripEasy_Receipt_${paymentStatus.orderDetails.order_id}.pdf`
+          const opt = {
+            margin: [10, 10, 10, 10],
+            filename: `TripEasy_Receipt_${paymentStatus.orderDetails.order_id}.pdf`,
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, logging: false },
+            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+          }
 
-      // Append to the document, click it, and remove it
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+          // Generate PDF and save
+          await html2pdf().set(opt).from(element).save()
+          downloadSuccess = true
+        } catch (clientPdfError) {
+          console.error("Client-side PDF generation failed, falling back to printing:", clientPdfError)
+          
+          // Final fallback: standard browser print dialog
+          setToastMessage("Opening browser print dialog...")
+          window.print()
+          downloadSuccess = true
+        }
+      }
 
-      // Clean up the URL
-      window.URL.revokeObjectURL(url)
-
-      // Reset downloading state
       setIsDownloading(false)
-
-      // Show success toast
       setShowToast(false)
-      setTimeout(() => {
-        setToastMessage("Receipt downloaded successfully")
-        setToastType("success")
-        setShowToast(true)
-      }, 300)
+
+      if (downloadSuccess) {
+        setTimeout(() => {
+          setToastMessage("Receipt downloaded successfully")
+          setToastType("success")
+          setShowToast(true)
+        }, 300)
+      }
     } catch (error) {
       console.error("[v0] Error downloading receipt:", error)
       setIsDownloading(false)
@@ -938,6 +994,19 @@ function PaymentStatus() {
           </div>
         )}
       </div>
+
+      {/* Hidden receipt element for client-side PDF generation */}
+      {paymentStatus.orderDetails && bookingDetails && packageDetails && (
+        <div style={{ position: "absolute", left: "-9999px", top: "-9999px" }}>
+          <div id="hidden-receipt-pdf">
+            <ReceiptTemplate
+              orderData={paymentStatus.orderDetails}
+              bookingDetails={bookingDetails}
+              packageDetails={packageDetails}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Toast notification */}
       {showToast && <Toast message={toastMessage} type={toastType} onClose={() => setShowToast(false)} />}
