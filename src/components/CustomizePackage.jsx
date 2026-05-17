@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import "../styles/CustomizePackage.css"
 import AnimatedElement from "./AnimatedElement"
 import Toast from "./Toast"
+import { apiEndpoints } from "../config/api"
 
 function CustomizePackage() {
   const navigate = useNavigate()
@@ -50,7 +51,8 @@ function CustomizePackage() {
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
-        const response = await fetch("https://tripeasy-server.vercel.app/api/destinations")
+        console.log("[v0] Fetching custom page destinations from:", apiEndpoints.getDestinations)
+        const response = await fetch(apiEndpoints.getDestinations)
         const data = await response.json()
 
         if (data.success && data.data.destinations) {
@@ -176,7 +178,8 @@ function CustomizePackage() {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch("https://tripeasy-server.vercel.app/api/submit-custom-package", {
+      console.log("[v0] Submitting custom package request to:", apiEndpoints.createCustomPackageRequest)
+      const response = await fetch(apiEndpoints.createCustomPackageRequest, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

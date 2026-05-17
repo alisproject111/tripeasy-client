@@ -40,7 +40,6 @@ const LazyImage = ({
 
             // Preload image to ensure it's loaded before displaying
             const img = new Image();
-            img.crossOrigin = "anonymous";
             img.onload = () => {
               setIsLoading(false);
               setHasError(false);

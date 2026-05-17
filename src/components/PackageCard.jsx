@@ -6,6 +6,7 @@ import "../styles/PackageCard.css";
 import AnimatedElement from "./AnimatedElement";
 import Toast from "./Toast";
 import LazyImage from "./LazyImage";
+import { downloadPDFOnDemand } from "../utils/pdfOptimizaion";
 
 function PackageCard({ package: pkg }) {
   const [showToast, setShowToast] = useState(false);
@@ -63,7 +64,7 @@ function PackageCard({ package: pkg }) {
   }, []);
 
   // Optimized PDF download with on-demand loading
-  const handleDownload = useCallback((e) => {
+  const handleDownload = useCallback(async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -76,25 +77,19 @@ function PackageCard({ package: pkg }) {
     if (pkg.pdfUrl && pkg.pdfUrl.trim() !== "") {
       const packageFileName = pkg.name.replace(/\s+/g, "-").toLowerCase();
 
-      // Load PDF on-demand when user clicks download
-      const pdfLink = document.createElement("a");
-      pdfLink.href = pkg.pdfUrl;
-      pdfLink.download = `${packageFileName}.pdf`;
-      pdfLink.style.display = "none";
-
-      // Add to DOM and trigger download
-      document.body.appendChild(pdfLink);
-
-      // Use setTimeout to ensure browser recognizes the element
-      setTimeout(() => {
-        pdfLink.click();
-        document.body.removeChild(pdfLink);
+      try {
+        // Load PDF on-demand as a Blob dynamically only when clicked
+        await downloadPDFOnDemand(pkg.pdfUrl, `${packageFileName}.pdf`);
 
         // Show success toast
         setToastMessage("PDF downloaded successfully!");
         setToastType("success");
+      } catch (err) {
+        console.error("[v0] Error fetching PDF brochure:", err);
+        setToastMessage("Failed to download PDF brochure. Please try again.");
+        setToastType("error");
+      } finally {
         setShowToast(true);
-
         setIsCheckingPdf(false);
         setIsPdfLoading(false);
 
@@ -102,7 +97,7 @@ function PackageCard({ package: pkg }) {
         setTimeout(() => {
           setShowToast(false);
         }, 3000);
-      }, 100);
+      }
     } else {
       // Show error if PDF not available
       setToastMessage("PDF not available for this package");

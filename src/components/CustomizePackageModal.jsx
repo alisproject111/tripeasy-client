@@ -34,7 +34,8 @@ function CustomizePackageModal({ onClose }) {
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
-        const response = await fetch("https://tripeasy-server.vercel.app/api/destinations")
+        console.log("[v0] Fetching modal destinations from:", apiEndpoints.getDestinations)
+        const response = await fetch(apiEndpoints.getDestinations)
         const data = await response.json()
 
         if (data.success && data.data.destinations) {

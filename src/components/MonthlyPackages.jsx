@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import DestinationCard from "./DestinationCard"
 import "../styles/MonthlyPackages.css"
 import AnimatedElement from "./AnimatedElement"
+import { apiEndpoints } from "../config/api"
 
 function MonthlyDestinations() {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
@@ -39,9 +40,9 @@ function MonthlyDestinations() {
   useEffect(() => {
     const fetchPackagesData = async () => {
       try {
-        console.log("[v0] Fetching packages from https://tripeasy-server.vercel.app/api/packages")
+        console.log("[v0] Fetching destinations from:", apiEndpoints.getDestinations)
 
-        const response = await fetch("https://tripeasy-server.vercel.app/api/packages", {
+        const response = await fetch(apiEndpoints.getDestinations, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -53,21 +54,19 @@ function MonthlyDestinations() {
         }
 
         const data = await response.json()
-        console.log("[v0] Monthly packages API response:", data)
+        console.log("[v0] Monthly destinations API response:", data)
 
-        if (data.success) {
+        if (data.success && data.data?.destinations) {
           setPackagesData({
-            packages: data.packages || [],
-            destinations: data.destinations || [],
+            packages: [],
+            destinations: data.data.destinations || [],
           })
           setError(null)
-          console.log("[v0] Packages loaded:", data.packages?.length || 0)
-          console.log("[v0] Destinations loaded:", data.destinations?.length || 0)
         } else {
-          throw new Error(data.message || "Failed to fetch packages")
+          throw new Error("Failed to fetch destinations data")
         }
       } catch (error) {
-        console.error("[v0] Error fetching packages data:", error.message)
+        console.error("[v0] Error fetching destinations data:", error.message)
         setError(error.message)
         setPackagesData({ packages: [], destinations: [] })
       } finally {
@@ -77,57 +76,6 @@ function MonthlyDestinations() {
 
     fetchPackagesData()
   }, [])
-
-  // Function to calculate package count for a destination
-  const getPackageCountForDestination = (destination) => {
-    const destinationName = destination.name.toLowerCase()
-
-    const commonWords = [
-      "india",
-      "the",
-      "and",
-      "&",
-      "of",
-      "in",
-      "at",
-      "to",
-      "for",
-      "with",
-      "by",
-      "a",
-      "an",
-      "escape",
-      "retreat",
-      "tour",
-      "adventure",
-      "getaway",
-      "vacation",
-      "holiday",
-      "trip",
-      "experience",
-      "expedition",
-      "journey",
-      "splendor",
-      "bliss",
-      "explorer",
-      "package",
-      "packages",
-    ]
-    const locationWords = destinationName
-      .split(/[\s,&-]+/)
-      .filter((word) => word.length > 2 && !commonWords.includes(word))
-
-    const matchingPackages = packagesData.packages.filter((pkg) => {
-      if (!pkg.location) return false
-
-      const packageLocation = pkg.location.toLowerCase()
-      const packageName = pkg.name.toLowerCase()
-
-      return locationWords.some((word) => packageLocation.includes(word) || packageName.includes(word))
-    })
-
-    return matchingPackages.length
-  }
 
   const getMonthlyDestinations = (month) => {
     return packagesData.destinations.filter((dest) => dest.favorableMonths && dest.favorableMonths.includes(month))
@@ -350,13 +298,8 @@ function MonthlyDestinations() {
               >
                 {monthlyDestinationsList && monthlyDestinationsList.length > 0 ? (
                   monthlyDestinationsList.map((destination, index) => {
-                    const destinationWithDynamicCount = {
-                      ...destination,
-                      count: getPackageCountForDestination(destination),
-                    }
-
                     return (
-                      <DestinationCard key={`${destination.id}-${index}`} destination={destinationWithDynamicCount} />
+                      <DestinationCard key={`${destination.id || destination._id}-${index}`} destination={destination} />
                     )
                   })
                 ) : (

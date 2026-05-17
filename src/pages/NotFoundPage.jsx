@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect, useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { Helmet } from "react-helmet"
 import "../styles/NotFoundPage.css"
+import { apiEndpoints } from "../config/api"
 
 const NotFoundPage = () => {
   const [searchQuery, setSearchQuery] = useState("")
@@ -19,7 +20,8 @@ const NotFoundPage = () => {
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
-        const response = await fetch("https://tripeasy-server.vercel.app/api/destinations")
+        console.log("[v0] Fetching 404 page destinations from:", apiEndpoints.getDestinations)
+        const response = await fetch(apiEndpoints.getDestinations)
         const data = await response.json()
 
         if (data.success && data.data.destinations) {

@@ -6,6 +6,7 @@ import PackageCard from "./PackageCard"
 import "../styles/PopularPackages.css"
 import AnimatedSection from "./AnimatedSection"
 import AnimatedElement from "./AnimatedElement"
+import { apiEndpoints } from "../config/api"
 
 const PopularPackages = () => {
   const [popularPackages, setPopularPackages] = useState([])
@@ -19,9 +20,10 @@ const PopularPackages = () => {
   useEffect(() => {
     const fetchPackagesData = async () => {
       try {
-        console.log("[v0] Fetching packages from https://tripeasy-server.vercel.app/api/packages")
+        const fetchUrl = `${apiEndpoints.getAllPackages}?limit=6&featured=true`
+        console.log("[v0] Fetching packages from:", fetchUrl)
 
-        const response = await fetch("https://tripeasy-server.vercel.app/api/packages", {
+        const response = await fetch(fetchUrl, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -36,15 +38,8 @@ const PopularPackages = () => {
         console.log("[v0] Packages API response:", data)
 
         if (data.success && data.packages) {
-          let featured = data.packages.filter((pkg) => pkg.featured).slice(0, 6)
-
-          // If no featured packages, show all packages (first 6)
-          if (featured.length === 0) {
-            featured = data.packages.slice(0, 6)
-          }
-
-          console.log("[v0] Featured packages loaded:", featured.length)
-          setPopularPackages(featured)
+          console.log("[v0] Featured packages loaded:", data.packages.length)
+          setPopularPackages(data.packages)
           setError(null)
         } else {
           throw new Error(data.message || "Failed to fetch packages")

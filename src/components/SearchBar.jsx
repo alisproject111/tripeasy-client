@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import "../styles/SearchBar.css"
+import { apiEndpoints } from "../config/api"
 
 function SearchBar() {
   const [destination, setDestination] = useState("")
@@ -29,7 +30,8 @@ function SearchBar() {
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
-        const response = await fetch("https://tripeasy-server.vercel.app/api/destinations")
+        console.log("[v0] Fetching search destinations from:", apiEndpoints.getDestinations)
+        const response = await fetch(apiEndpoints.getDestinations)
         const data = await response.json()
 
         if (data.success && data.data.destinations) {

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/HeroSection.css";
+import LazyImage from "./LazyImage";
 
 function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -67,7 +68,7 @@ function HeroSection() {
                 zIndex: 0,
               }}
             ></div>
-            <img
+            <LazyImage
               src={slide.image || "/placeholder.svg"}
               alt={slide.title}
               className="hero-image"

@@ -2,6 +2,7 @@ import "../styles/AboutPage.css";
 import AnimatedElement from "../components/AnimatedElement";
 import CounterAnimation from "../components/CounterAnimation";
 import SEOHead from "../components/SEOHead";
+import LazyImage from "../components/LazyImage";
 
 function AboutPage() {
   return (
@@ -79,8 +80,8 @@ function AboutPage() {
 
             <AnimatedElement animation="fade-left">
               <div className="about-content-image">
-                <img
-                  src="/assets/about/about-img-1.jpg" // Updated path
+                <LazyImage
+                  src="/assets/about/about-img-1.jpg"
                   alt="Our team planning travel experiences"
                 />
               </div>
@@ -265,8 +266,8 @@ function AboutPage() {
 
             <AnimatedElement animation="fade-right">
               <div className="about-content-image">
-                <img
-                  src="/assets/about/about-img-2.jpeg" // Updated path
+                <LazyImage
+                  src="/assets/about/about-img-2.jpeg"
                   alt="Beautiful destination"
                 />
               </div>
@@ -347,8 +348,8 @@ function AboutPage() {
               <div className="about-team-member">
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
-                    <img
-                      src="/assets/team/anshuman.jpg" // Updated path
+                    <LazyImage
+                      src="/assets/team/anshuman.jpg"
                       alt="Anshuman Singh"
                       className="about-team-image"
                     />
@@ -383,8 +384,8 @@ function AboutPage() {
               <div className="about-team-member">
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
-                    <img
-                      src="/assets/team/vibhu.jpg" // Updated path
+                    <LazyImage
+                      src="/assets/team/vibhu.jpg"
                       alt="Vibhu Panchal"
                       className="about-team-image"
                     />
@@ -419,8 +420,8 @@ function AboutPage() {
               <div className="about-team-member">
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
-                    <img
-                      src="/assets/team/alis.jpg" // Updated path
+                    <LazyImage
+                      src="/assets/team/alis.jpg"
                       alt="Alis Patel"
                       className="about-team-image"
                     />
@@ -455,8 +456,8 @@ function AboutPage() {
               <div className="about-team-member">
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
-                    <img
-                      src="/assets/team/abhishek.jpg" // Updated path
+                    <LazyImage
+                      src="/assets/team/abhishek.jpg"
                       alt="Abhishek Jha"
                       className="about-team-image"
                     />
@@ -490,8 +491,8 @@ function AboutPage() {
               <div className="about-team-member">
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
-                    <img
-                      src="/assets/team/swastik.jpg" // Updated path
+                    <LazyImage
+                      src="/assets/team/swastik.jpg"
                       alt="Swastik Moolya"
                       className="about-team-image"
                     />
@@ -525,8 +526,8 @@ function AboutPage() {
               <div className="about-team-member">
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
-                    <img
-                      src="/assets/team/divya.jpg" // Updated path
+                    <LazyImage
+                      src="/assets/team/divya.jpg"
                       alt="Divya Panchariya"
                       className="about-team-image"
                     />
@@ -561,8 +562,8 @@ function AboutPage() {
               <div className="about-team-member">
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
-                    <img
-                      src="/assets/team/ayushi.jpg" // Updated path
+                    <LazyImage
+                      src="/assets/team/ayushi.jpg"
                       alt="Ayushi Babu"
                       className="about-team-image"
                     />
@@ -596,8 +597,8 @@ function AboutPage() {
               <div className="about-team-member">
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
-                    <img
-                      src="/assets/team/parth.jpg" // Updated path
+                    <LazyImage
+                      src="/assets/team/parth.jpg"
                       alt="Parth Raval"
                       className="about-team-image"
                     />

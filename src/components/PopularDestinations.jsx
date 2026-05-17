@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react"
 import DestinationCard from "./DestinationCard"
 import "../styles/PopularDestinations.css"
 import AnimatedElement from "./AnimatedElement"
+import { apiEndpoints } from "../config/api"
 
 const PopularDestinations = () => {
   const domesticRef = useRef(null)
@@ -27,76 +28,16 @@ const PopularDestinations = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const destResponse = await fetch("https://tripeasy-server.vercel.app/api/destinations")
+        console.log("[v0] Fetching destinations from:", apiEndpoints.getDestinations)
+        const destResponse = await fetch(apiEndpoints.getDestinations)
         const destData = await destResponse.json()
         const destinations = destData.data?.destinations || []
 
-        const packagesResponse = await fetch("https://tripeasy-server.vercel.app/api/packages")
-        const packagesData = await packagesResponse.json()
-        const packages = packagesData.packages || []
-
-        const getPackageCountForDestination = (destination) => {
-          const destinationName = destination.name.toLowerCase()
-
-          const commonWords = [
-            "india",
-            "the",
-            "and",
-            "&",
-            "of",
-            "in",
-            "at",
-            "to",
-            "for",
-            "with",
-            "by",
-            "a",
-            "an",
-            "escape",
-            "retreat",
-            "tour",
-            "adventure",
-            "getaway",
-            "vacation",
-            "holiday",
-            "trip",
-            "experience",
-            "expedition",
-            "journey",
-            "splendor",
-            "bliss",
-            "explorer",
-            "package",
-            "packages",
-          ]
-
-          const locationWords = destinationName
-            .split(/[\s,&-]+/)
-            .filter((word) => word.length > 2 && !commonWords.includes(word))
-
-          const matchingPackages = packages.filter((pkg) => {
-            if (!pkg.location) return false
-            const packageLocation = pkg.location.toLowerCase()
-            const packageName = pkg.name.toLowerCase()
-            return locationWords.some((word) => packageLocation.includes(word) || packageName.includes(word))
-          })
-
-          return matchingPackages.length
-        }
-
         const domesticDestinations = destinations
           .filter((dest) => dest.location && dest.location.toLowerCase().includes("india"))
-          .map((dest) => ({
-            ...dest,
-            count: getPackageCountForDestination(dest),
-          }))
 
         const internationalDestinations = destinations
           .filter((dest) => !dest.location || !dest.location.toLowerCase().includes("india"))
-          .map((dest) => ({
-            ...dest,
-            count: getPackageCountForDestination(dest),
-          }))
 
         setDomesticDestinations(domesticDestinations)
         setInternationalDestinations(internationalDestinations)
