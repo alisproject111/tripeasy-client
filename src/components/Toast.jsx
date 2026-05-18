@@ -6,6 +6,19 @@ import "../styles/Toast.css";
 
 function Toast({ message, type = "success", duration = 3000, onClose }) {
   const [isExiting, setIsExiting] = useState(false);
+  const [wrapperElement, setWrapperElement] = useState(null);
+
+  useEffect(() => {
+    // Dynamically find or create the toast-wrapper element in client-side document body
+    let wrapper = document.getElementById("toast-wrapper");
+    if (!wrapper) {
+      wrapper = document.createElement("div");
+      wrapper.id = "toast-wrapper";
+      wrapper.className = "toast-wrapper";
+      document.body.appendChild(wrapper);
+    }
+    setWrapperElement(wrapper);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,7 +31,10 @@ function Toast({ message, type = "success", duration = 3000, onClose }) {
     return () => clearTimeout(timer);
   }, [duration, onClose]);
 
-  // Create a portal to render the toast at the top level of the DOM
+  // SSR safety guard
+  if (!wrapperElement) return null;
+
+  // Render the toast inside our single shared toast-wrapper portal
   return ReactDOM.createPortal(
     <div className={`toast-container ${type} ${isExiting ? "fade-out" : ""}`}>
       <div className="toast-content">
@@ -48,7 +64,7 @@ function Toast({ message, type = "success", duration = 3000, onClose }) {
         style={{ animationDuration: `${duration}ms` }}
       ></div>
     </div>,
-    document.body
+    wrapperElement
   );
 }
 
@@ -69,7 +85,8 @@ export const useToast = () => {
   const ToastContainer = () => {
     if (toasts.length === 0) return null;
 
-    return ReactDOM.createPortal(
+    // Toast components will dynamically portal themselves to our shared #toast-wrapper
+    return (
       <>
         {toasts.map((toast) => (
           <Toast
@@ -80,8 +97,7 @@ export const useToast = () => {
             onClose={() => hideToast(toast.id)}
           />
         ))}
-      </>,
-      document.body
+      </>
     );
   };
 

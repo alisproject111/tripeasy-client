@@ -98,7 +98,8 @@
   -ms-overflow-style: none;
   /* IE and Edge */
   width: 100%;
-  /* Prevent vertical movement */
+  max-width: 100%; /* Spans full container width */
+  margin: 0 auto;
   min-height: 300px;
   will-change: transform, scroll-position;
   /* Optimize for animations */
@@ -125,13 +126,6 @@
   /* Chrome, Safari, Opera */
 }
 
-/* Set width to show exactly 4 cards */
-.destinations-scroll {
-  max-width: calc(270px * 4);
-  /* 250px card width + 20px gap */
-  margin: 0 auto;
-}
-
 @media (max-width: 1200px) {
   .popular-destinations {
     padding: 50px 0;
@@ -146,8 +140,7 @@
   }
 
   .destinations-scroll {
-    max-width: calc(230px * 3);
-    /* Show 3 cards on medium screens with adjusted card width */
+    max-width: 100%;
     min-height: 280px;
   }
 
@@ -171,8 +164,7 @@
   }
 
   .destinations-scroll {
-    max-width: calc(220px * 2);
-    /* Show 2 cards on smaller screens with adjusted card width */
+    max-width: 100%;
     min-height: 260px;
   }
 
@@ -216,12 +208,10 @@
   }
 
   .destinations-scroll {
-    max-width: calc(200px * 1.5);
-    /* Show 1.5 cards on mobile to indicate more content */
+    max-width: 100%;
     min-height: 240px;
     gap: 15px;
     scroll-snap-type: x mandatory;
-    /* Stronger snap behavior on mobile */
   }
 
   .scroll-button {
@@ -249,7 +239,7 @@
   }
 
   .destinations-scroll {
-    max-width: calc(180px * 1.5);
+    max-width: 100%;
     min-height: 220px;
     gap: 12px;
   }
@@ -267,7 +257,7 @@
 
 @media (max-width: 375px) {
   .destinations-scroll {
-    max-width: calc(160px * 1.5);
+    max-width: 100%;
     min-height: 200px;
   }
 

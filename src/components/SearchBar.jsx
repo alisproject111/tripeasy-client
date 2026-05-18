@@ -302,22 +302,6 @@ function SearchBar() {
                   autoComplete="off"
                   ref={destinationInputRef}
                 />
-                {showSuggestions && suggestions.length > 0 && (
-                  <div className="suggestions-container" ref={suggestionsRef}>
-                    <ul className="suggestions-list">
-                      {suggestions.map((suggestion, index) => (
-                        <li
-                          key={index}
-                          className={`suggestion-item ${focusedSuggestionIndex === index ? "focused" : ""}`}
-                          onClick={() => handleSelectSuggestion(suggestion)}
-                        >
-                          <i className="fas fa-map-marker-alt"></i>
-                          <span>{suggestion}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
                 {error && <div className="error-message">{error}</div>}
               </div>
             </div>

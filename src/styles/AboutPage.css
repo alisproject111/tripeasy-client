@@ -603,7 +603,7 @@
   .about-stats-grid,
   .travel-guide-row {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 20px;
   }
 
   .about-content-image {
@@ -615,12 +615,23 @@
   .about-value-card,
   .about-stat-item {
     padding: 15px;
+    max-width: 350px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .about-service-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
   }
 
   .about-why-choose-icon,
   .about-value-icon {
     width: 50px;
     height: 50px;
+    margin-bottom: 15px;
   }
 
   .about-service-icon {
@@ -632,8 +643,32 @@
     font-size: 2rem;
   }
 
+  .travel-guide-item {
+    max-width: 350px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
   .travel-guide-image {
     height: 220px;
+  }
+}
+
+@media (max-width: 375px) {
+  .about-page-title {
+    font-size: 1.5rem;
+  }
+
+  .about-page-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .about-stat-number {
+    font-size: 1.8rem;
+  }
+
+  .about-content-image {
+    height: 200px;
   }
 }
 
@@ -828,6 +863,12 @@
   .about-team-grid {
     grid-template-columns: 1fr;
     gap: 15px;
+  }
+  
+  .about-team-member {
+    max-width: 350px;
+    margin: 0 auto;
+    width: 100%;
   }
   
   .about-team-image {

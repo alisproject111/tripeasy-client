@@ -30,6 +30,27 @@ function CustomizePackageModal({ onClose }) {
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [toast, setToast] = useState({ show: false, message: "", type: "" })
   const [allDestinations, setAllDestinations] = useState([])
+  const [countdown, setCountdown] = useState(5)
+
+  useEffect(() => {
+    let timer
+    if (isSuccess) {
+      setCountdown(5)
+      timer = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer)
+            onClose()
+            return 0
+          }
+          return prev - 1
+        })
+      }, 1000)
+    }
+    return () => {
+      if (timer) clearInterval(timer)
+    }
+  }, [isSuccess, onClose])
 
   useEffect(() => {
     const fetchDestinations = async () => {
@@ -260,11 +281,6 @@ function CustomizePackageModal({ onClose }) {
       if (data.success) {
         setIsSubmitting(false)
         setIsSuccess(true)
-
-        // Reset form after 5 seconds and close modal
-        setTimeout(() => {
-          onClose()
-        }, 5000)
       } else {
         throw new Error(data.message || "Failed to submit request")
       }
@@ -325,7 +341,7 @@ function CustomizePackageModal({ onClose }) {
             <p>Our travel experts will contact you shortly.</p>
             <div className="success-timer">
               <div className="timer-bar"></div>
-              <p className="timer-text">Closing in 5 seconds...</p>
+              <p className="timer-text">Closing in {countdown} second{countdown !== 1 ? "s" : ""}...</p>
             </div>
           </div>
         ) : (
@@ -449,22 +465,10 @@ function CustomizePackageModal({ onClose }) {
                         name="destination"
                         value={formData.destination}
                         onChange={handleChange}
-                        onFocus={() => setShowSuggestions(true)}
                         className={errors.destination ? "error" : ""}
                         placeholder="Where do you want to go?"
                         autoComplete="off"
                       />
-                      {showSuggestions && suggestions.length > 0 && (
-                        <div className="destination-suggestions">
-                          <ul>
-                            {suggestions.slice(0, 5).map((suggestion, index) => (
-                              <li key={index} onClick={() => handleSelectSuggestion(suggestion)}>
-                                <i className="fas fa-map-marker-alt"></i> {suggestion}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
                     </div>
                     {errors.destination && <div className="error-message">{errors.destination}</div>}
                   </div>
@@ -553,7 +557,7 @@ function CustomizePackageModal({ onClose }) {
                     <label>Preferred Activities</label>
                     <div className="activities-grid">
                       {activityOptions.map((activity) => (
-                        <div className="activity-checkbox" key={activity.id}>
+                        <div className={`activity-checkbox ${formData.activities.includes(activity.id) ? "active" : ""}`} key={activity.id}>
                           <input
                             type="checkbox"
                             id={`modal-activity-${activity.id}`}

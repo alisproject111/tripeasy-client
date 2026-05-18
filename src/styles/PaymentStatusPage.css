@@ -676,6 +676,7 @@
 @media (max-width: 768px) {
   .ps-status-card {
     padding: 20px;
+    width: 95%;
   }
 
   .ps-details-grid {
@@ -684,12 +685,108 @@
 
   .ps-action-buttons {
     flex-direction: column;
+    gap: 12px;
   }
 
   .ps-home-button,
   .ps-retry-button,
   .ps-download-button {
     width: 100%;
+    padding: 11px 20px;
+    font-size: 15px;
+  }
+  
+  .ps-detail-value {
+    word-break: break-all;
+  }
+}
+
+@media (max-width: 576px) {
+  .ps-payment-status-container {
+    padding: 20px 0;
+  }
+
+  .ps-status-card {
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .ps-status-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+  }
+
+  .ps-status-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .ps-status-message {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
+  .ps-order-details {
+    padding: 15px;
+    margin: 15px 0;
+  }
+
+  .ps-order-details h3 {
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+
+  .ps-detail-item {
+    padding: 10px;
+  }
+
+  .ps-detail-label {
+    font-size: 13px;
+  }
+
+  .ps-detail-value {
+    font-size: 14px;
+  }
+
+  .ps-receipt-info {
+    font-size: 14px;
+    padding: 12px;
+    margin: 15px 0;
+  }
+
+  .ps-email-sending-fullscreen .ps-email-progress-container {
+    width: 90%;
+    max-width: 280px;
+  }
+
+  .ps-email-message p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 375px) {
+  .ps-status-card {
+    padding: 12px;
+    width: 98%;
+  }
+
+  .ps-status-title {
+    font-size: 18px;
+  }
+
+  .ps-status-message {
+    font-size: 14px;
+  }
+
+  .ps-order-details h3 {
+    font-size: 15px;
+  }
+
+  .ps-home-button,
+  .ps-retry-button,
+  .ps-download-button {
+    padding: 10px 16px;
+    font-size: 14px;
   }
 }
 

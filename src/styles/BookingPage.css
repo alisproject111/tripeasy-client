@@ -1191,11 +1191,11 @@
   }
 
   .bp-page-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 
   .bp-page-subtitle {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .bp-booking-summary,
@@ -1204,7 +1204,23 @@
   }
 
   .bp-summary-item {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .bp-traveler-header h3 {
+    font-size: 1rem;
+  }
+
+  .bp-traveler-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .bp-traveler-content-active {
+    padding: 15px;
+  }
+
+  .bp-checkbox-container label {
+    font-size: 0.8rem;
   }
 }
 

@@ -153,23 +153,22 @@
 /* Add styles for policy links in footer */
 .footer-policies {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   flex-wrap: wrap;
-  /* Allow wrapping if needed */
+  align-items: center;
 }
 
 .footer-policy-link {
   color: #bbb;
   font-size: 0.9rem;
   transition: color 0.3s ease;
-  position: relative;
+  display: inline-block;
+  text-decoration: none;
 }
 
-.footer-policy-link:not(:last-child)::after {
-  content: "|";
-  position: absolute;
-  right: -12px;
-  color: #666;
+.footer-policy-link:not(:last-child) {
+  border-right: 1px solid #444;
+  padding-right: 15px;
 }
 
 .footer-policy-link:hover {
@@ -237,20 +236,20 @@
 
   .footer-policies {
     justify-content: center;
-    gap: 15px;
+    gap: 12px;
   }
 
-  /* Reduce font size for policy links */
   .footer-policy-link {
     font-size: 0.85rem;
   }
+  
+  .footer-policy-link:not(:last-child) {
+    padding-right: 12px;
+  }
 }
-
-
 
 /* Update the footer policy links for better mobile display */
 @media (max-width: 576px) {
-
   .footer-bottom-container {
     flex-direction: column;
     gap: 10px;
@@ -259,16 +258,35 @@
   .footer-policies {
     width: 100%;
     justify-content: center;
+    gap: 8px;
+  }
+
+  /* Reduce general text & title sizes in footer */
+  .footer-section h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .footer-section p,
+  .footer-links a,
+  .contact-info a,
+  .contact-info p {
+    font-size: 0.8rem;
+  }
+
+  .social-link {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
   }
 
   /* Make the policy links even smaller */
   .footer-policy-link {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
   }
 
-  /* Adjust the separator */
-  .footer-policy-link:not(:last-child)::after {
-    right: -4px;
+  .footer-policy-link:not(:last-child) {
+    padding-right: 8px;
   }
 
   /* Reduce copyright text size */
@@ -287,19 +305,30 @@
   .footer-policies {
     width: 100%;
     justify-content: center;
+    gap: 6px;
   }
 
-  /* Make the policy links even smaller */
+  /* Extra compact text scaling */
+  .footer-section h3 {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+
+  .footer-section p,
+  .footer-links a,
+  .contact-info a,
+  .contact-info p {
+    font-size: 0.75rem;
+  }
+
   .footer-policy-link {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
   }
 
-  /* Adjust the separator */
-  .footer-policy-link:not(:last-child)::after {
-    right: -4px;
+  .footer-policy-link:not(:last-child) {
+    padding-right: 6px;
   }
 
-  /* Reduce copyright text size */
   .footer-copyright {
     font-size: 0.75rem !important;
   }

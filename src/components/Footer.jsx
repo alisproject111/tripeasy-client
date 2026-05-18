@@ -35,23 +35,30 @@ function Footer() {
             unforgettable experiences at affordable prices.
           </p>
           <div className="social-links">
-            <a href="#" className="social-link">
+            <a
+              href="/social-media-coming-soon?platform=facebook"
+              className="social-link"
+            >
               <i className="fab fa-facebook-f"></i>
             </a>
             <a
               href="https://x.com/i/flow/login?redirect_after_login=%2Fflyanytripindia"
+              target="_blank"
+              rel="noopener noreferrer"
               className="social-link"
             >
               <i className="fab fa-twitter"></i>
             </a>
             <a
-              href="https://www.instagram.com/flyanytripindia?igsh=MTkxbzcxenJnNjA5aw=="
+              href="/social-media-coming-soon?platform=instagram"
               className="social-link"
             >
               <i className="fab fa-instagram"></i>
             </a>
             <a
               href="https://www.linkedin.com/company/flyanytripindia/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="social-link"
             >
               <i className="fab fa-linkedin-in"></i>
@@ -106,10 +113,10 @@ function Footer() {
             </li>
             <li>
               <Link
-                to={`/package/dazzling-dubai-getaway`}
+                to={`/package/vietnam-budget-tour`}
                 onClick={() => window.scrollTo(0, 0)}
               >
-                <i className="fas fa-map-marker-alt footer-icon"></i> Dubai
+                <i className="fas fa-map-marker-alt footer-icon"></i> Vietnam
               </Link>
             </li>
             <li>

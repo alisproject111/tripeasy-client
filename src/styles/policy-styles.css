@@ -113,6 +113,12 @@
 }
 
 /* Responsive styles */
+@media (max-width: 992px) {
+    .policy-container {
+        padding: 30px 20px;
+    }
+}
+
 @media (max-width: 768px) {
     .policy-header {
         padding: 40px 0;
@@ -132,6 +138,10 @@
 }
 
 @media (max-width: 576px) {
+    .policy-container {
+        padding: 20px 15px;
+    }
+
     .policy-header {
         padding: 30px 0;
     }
@@ -146,5 +156,32 @@
 
     .policy-section h2 {
         font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .policy-container {
+        padding: 15px 10px;
+    }
+
+    .policy-content {
+        padding: 15px;
+    }
+
+    .policy-title {
+        font-size: 1.5rem;
+    }
+
+    .policy-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .policy-section h2 {
+        font-size: 1.1rem;
+    }
+    
+    .policy-back-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
     }
 }

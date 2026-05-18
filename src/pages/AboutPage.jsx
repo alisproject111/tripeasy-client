@@ -9,7 +9,7 @@ function AboutPage() {
     <div className="about-page">
       <SEOHead
         title="About TripEasy - Leading Travel Agency in India | Our Story & Services"
-        description="Learn about TripEasy, India's trusted travel agency since 2015. We offer best domestic & international tour packages with 10,000+ happy customers. Expert travel planning & 24/7 support."
+        description="Learn about TripEasy, India's trusted travel agency since 2025. We offer best domestic & international tour packages with 10,000+ happy customers. Expert travel planning & 24/7 support."
         keywords="about TripEasy, travel agency India, tour operator, travel company, vacation planner, holiday specialist, travel services, domestic tours, international tours, travel experts"
         canonical="https://tripeasy.in/about"
         structuredData={{
@@ -21,7 +21,7 @@ function AboutPage() {
           mainEntity: {
             "@type": "TravelAgency",
             name: "TripEasy",
-            foundingDate: "2015",
+            foundingDate: "2025",
             numberOfEmployees: "10-50",
             description:
               "Leading travel agency offering domestic and international tour packages",
@@ -57,7 +57,7 @@ function AboutPage() {
             <AnimatedElement animation="fade-right">
               <div className="about-content-text">
                 <p>
-                  TripEasy was founded in 2015 with a simple mission: to make
+                  TripEasy was founded in 2025 with a simple mission: to make
                   travel accessible, enjoyable, and enriching for everyone. We
                   believe that travel has the power to transform lives, broaden
                   perspectives, and create lasting memories.

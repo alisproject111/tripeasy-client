@@ -30,14 +30,9 @@ const PrivacyPolicy = lazy(() => import("./pages/privacy-policy"));
 const TermsAndConditions = lazy(() => import("./pages/terms-and-conditions"));
 const RefundPolicy = lazy(() => import("./pages/refund-policy"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const SocialMediaComingSoon = lazy(() => import("./pages/SocialMediaComingSoon"));
 
-// Admin components
-const AdminLogin = lazy(() => import("./components/admin/AdminLogin"));
-const AdminDashboard = lazy(() => import("./components/admin/AdminDashboard"));
-const AdminPackageForm = lazy(() =>
-  import("./components/admin/AdminPackageForm")
-);
-const ProtectedRoute = lazy(() => import("./components/admin/ProtectedRoute"));
+
 
 // ScrollToTop component to handle scrolling on route change
 function ScrollToTopOnNavigation() {
@@ -75,21 +70,16 @@ function ScrollToTopOnNavigation() {
   return null;
 }
 
-// Component to conditionally render navbar and footer
+// Component to render global layout with navbar and footer
 function ConditionalLayout({ children }) {
-  const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith("/admin");
-
   return (
     <>
-      {!isAdminRoute && <Navbar />}
-      <main
-        className={`main-content ${isAdminRoute ? "admin-main-content" : ""}`}
-      >
+      <Navbar />
+      <main className="main-content">
         {children}
       </main>
-      {!isAdminRoute && <Footer />}
-      {!isAdminRoute && <ScrollToTop />}
+      <Footer />
+      <ScrollToTop />
     </>
   );
 }
@@ -129,33 +119,9 @@ function App() {
                 element={<TermsAndConditions />}
               />
               <Route path="/refund-policy" element={<RefundPolicy />} />
+              <Route path="/social-media-coming-soon" element={<SocialMediaComingSoon />} />
 
-              {/* Admin Routes */}
-              <Route path="/admin/login" element={<AdminLogin />} />
-              <Route
-                path="/admin/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <AdminDashboard />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/edit/:id"
-                element={
-                  <ProtectedRoute>
-                    <AdminPackageForm />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/edit/new"
-                element={
-                  <ProtectedRoute>
-                    <AdminPackageForm />
-                  </ProtectedRoute>
-                }
-              />
+
 
               <Route path="*" element={<NotFoundPage />} />
             </Routes>

@@ -95,7 +95,8 @@
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  max-width: calc(270px * 4);
+  width: 100%;
+  max-width: 100%; /* Spans full container width */
   margin: 0 auto;
   min-height: 300px;
   will-change: transform, scroll-position;
@@ -134,7 +135,7 @@
 /* Enhance mobile responsiveness */
 @media (max-width: 1200px) {
   .destinations-scroll {
-    max-width: calc(230px * 3);
+    max-width: 100%;
     min-height: 280px;
   }
 
@@ -149,7 +150,7 @@
   }
 
   .destinations-scroll {
-    max-width: calc(220px * 2);
+    max-width: 100%;
     min-height: 260px;
   }
 
@@ -202,7 +203,7 @@
   }
 
   .destinations-scroll {
-    max-width: calc(200px * 1.5);
+    max-width: 100%;
     min-height: 240px;
     gap: 15px;
     scroll-snap-type: x mandatory;
@@ -233,7 +234,7 @@
   }
 
   .destinations-scroll {
-    max-width: calc(180px * 1.5);
+    max-width: 100%;
     min-height: 220px;
     gap: 12px;
   }
@@ -256,7 +257,7 @@
   }
 
   .destinations-scroll {
-    max-width: calc(160px * 1.5);
+    max-width: 100%;
     min-height: 200px;
   }
 

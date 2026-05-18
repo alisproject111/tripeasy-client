@@ -45,7 +45,7 @@
 
 /* Ensure package title is consistent */
 .pdp-package-title {
-  font-size: 1.3rem;
+  font-size: 2.2rem; /* Corrected premium desktop title size */
   margin-bottom: 10px;
   font-weight: 600;
   color: white;
@@ -535,7 +535,7 @@
   }
 
   .pdp-package-main-content>div {
-    padding: 20px;
+    padding: 18px;
     margin-bottom: 20px;
   }
 
@@ -547,6 +547,16 @@
   .pdp-highlights-list {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .pdp-overview-features {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .pdp-feature {
+    font-size: 0.9rem;
   }
 
   .pdp-day-header h3 {
@@ -585,7 +595,7 @@
   }
 
   .pdp-package-location {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 
   .pdp-package-main-content>div {
@@ -597,19 +607,82 @@
   }
 
   .pdp-package-main-content p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .pdp-highlight-item {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    padding: 10px;
   }
 
   .pdp-day-header {
     padding: 12px 15px;
   }
 
+  .pdp-day-header h3 {
+    font-size: 0.95rem;
+  }
+
+  .pdp-day-number {
+    font-size: 0.8rem;
+    padding: 3px 6px;
+  }
+
   .pdp-day-content-active {
     padding: 12px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .pdp-booking-detail {
+    gap: 10px;
+    font-size: 0.85rem;
+  }
+
+  .pdp-booking-price {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+  }
+
+  .pdp-price-value {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .pdp-package-hero {
+    height: 26vh;
+    min-height: 180px;
+  }
+
+  .pdp-package-title {
+    font-size: 1.15rem;
+  }
+
+  .pdp-package-main-content>div {
+    padding: 12px;
+  }
+
+  .pdp-section-title {
+    font-size: 1.1rem;
+  }
+
+  .pdp-day-header h3 {
+    font-size: 0.85rem;
+    gap: 6px;
+  }
+
+  .pdp-day-number {
+    font-size: 0.75rem;
+    padding: 2px 5px;
+  }
+
+  .pdp-price-value {
+    font-size: 1.5rem;
+  }
+
+  .pdp-book-now-button,
+  .pdp-inquiry-button {
+    padding: 8px;
+    font-size: 0.8rem;
   }
 }

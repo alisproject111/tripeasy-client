@@ -336,6 +336,16 @@ function PaymentStatus() {
 
       // If payment is successful, try to retrieve booking details one more time if not already set
       if (data.status === "PAID") {
+        // CHECK if receipt has already been sent for this order ID in localStorage
+        const hasSentReceipt = localStorage.getItem(`receipt_sent_${orderId}`) === "true"
+        if (hasSentReceipt) {
+          console.log("[v0] Receipt already sent for this order in a previous session, skipping email and database save.")
+          setReceiptSent(true)
+          setIsEmailSendingComplete(true)
+          setIsSendingEmail(false)
+          return
+        }
+
         let localBookingDetails = bookingDetails
         let localPackageDetails = packageDetails
 
@@ -624,6 +634,7 @@ function PaymentStatus() {
       }
 
       if (data.success) {
+        localStorage.setItem(`receipt_sent_${orderId}`, "true")
         setReceiptSent(true)
         setIsSendingEmail(false)
         setEmailSendProgress(100) // Complete progress

@@ -26,7 +26,7 @@ const ContactPage = () => {
 
   // Add this new state for the success popup
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-  const [countdown, setCountdown] = useState(3);
+  const [countdown, setCountdown] = useState(5);
 
   // Validate form fields and return an error object
   const [isMapLoaded, setIsMapLoaded] = useState(false);
@@ -156,7 +156,7 @@ const ContactPage = () => {
     let timer;
     let interval;
     if (showSuccessPopup) {
-      setCountdown(3); // Reset countdown to 3 seconds
+      setCountdown(5); // Reset countdown to 5 seconds
       timer = setTimeout(() => {
         setShowSuccessPopup(false);
       }, 5000);
@@ -279,23 +279,30 @@ const ContactPage = () => {
               </div>
 
               <div className="social-links1">
-                <a href="#" className="social-link1">
+                <a
+                  href="/social-media-coming-soon?platform=facebook"
+                  className="social-link1"
+                >
                   <i className="fab fa-facebook-f"></i>
                 </a>
                 <a
                   href="https://x.com/i/flow/login?redirect_after_login=%2Fflyanytripindia"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="social-link1"
                 >
                   <i className="fab fa-twitter"></i>
                 </a>
                 <a
-                  href="https://www.instagram.com/flyanytripindia?igsh=MTkxbzcxenJnNjA5aw=="
+                  href="/social-media-coming-soon?platform=instagram"
                   className="social-link1"
                 >
                   <i className="fab fa-instagram"></i>
                 </a>
                 <a
                   href="https://www.linkedin.com/company/flyanytripindia/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="social-link1"
                 >
                   <i className="fab fa-linkedin-in"></i>
@@ -490,7 +497,7 @@ const ContactPage = () => {
                 <div
                   style={{
                     height: "100%",
-                    width: `${((3 - countdown) / 3) * 100}%`,
+                    width: `${((5 - countdown) / 5) * 100}%`,
                     background: "#4caf50",
                     transition: "width 1s linear",
                   }}

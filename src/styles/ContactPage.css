@@ -557,6 +557,13 @@ LAYOUT & GENERAL STYLES
     font-size: 0.9rem;
   }
 
+  .contact-card,
+  .contact-form-container {
+    max-width: 450px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
   .contact-card {
     padding: 15px;
   }
@@ -598,6 +605,34 @@ LAYOUT & GENERAL STYLES
 
   .map-container {
     height: 300px;
+    max-width: 450px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 375px) {
+  .contact-hero .page-title {
+    font-size: 1.3rem;
+  }
+
+  .contact-hero .page-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .contact-card,
+  .contact-form-container,
+  .map-container {
+    max-width: 96%;
+  }
+
+  .map-container {
+    height: 240px;
+    border-width: 3px;
+  }
+  
+  .success-popup {
+    padding: 25px 15px;
   }
 }
 

@@ -883,11 +883,11 @@ function BookingPage() {
                   <Link to={`/package/${id}`} className="bp-back-link">
                     <i className="fas fa-arrow-left"></i> Back to Package
                   </Link>
-                  <button type="button" onClick={handleContinueToPayment} className="bp-continue-button">
-                    Continue to Payment <i className="fas fa-arrow-right"></i>
-                  </button>
                   <button type="submit" className="bp-send-request-button">
                     Send Request <i className="fas fa-paper-plane"></i>
+                  </button>
+                  <button type="button" onClick={handleContinueToPayment} className="bp-continue-button">
+                    Continue to Payment <i className="fas fa-arrow-right"></i>
                   </button>
                 </div>
               </form>

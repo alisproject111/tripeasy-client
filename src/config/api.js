@@ -24,11 +24,6 @@ export const apiEndpoints = {
   generateReceipt: `${API_BASE_URL}/api/generate-receipt`,
   healthCheck: `${API_BASE_URL}/api/ha`,
 
-  // Admin endpoints
-  getAllBookings: `${API_BASE_URL}/api/admin/bookings`,
-  getBookingById: (id) => `${API_BASE_URL}/api/bookings/${id}`,
-  adminPackages: `${API_BASE_URL}/api/admin/packages`,
-  adminPackageById: (id) => `${API_BASE_URL}/api/admin/packages/${id}`,
 }
 
 export default API_BASE_URL

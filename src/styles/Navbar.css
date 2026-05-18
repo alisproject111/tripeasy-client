@@ -21,6 +21,10 @@
   /* Fixed height when scrolled */
 }
 
+.navbar.scrolled .nav-brand {
+  height: 40px;
+}
+
 .navbar-container {
   display: flex;
   justify-content: space-between;
@@ -34,15 +38,26 @@
 .nav-brand {
   font-size: 1.5rem;
   font-weight: 700;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-brand a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  text-decoration: none;
 }
 
 .brand-logo {
   height: 10rem;
   width: 16rem;
   transition: transform 0.3s ease;
+  pointer-events: none; /* Ignore pointer events on the image itself to prevent vertical hover overflow */
 }
 
-.brand-logo:hover {
+.nav-brand a:hover .brand-logo {
   transform: scale(1.05);
 }
 
@@ -177,6 +192,14 @@
     height: 50px;
   }
 
+  .nav-brand {
+    height: 40px;
+  }
+
+  .navbar.scrolled .nav-brand {
+    height: 35px;
+  }
+
   .brand-logo {
     height: 7.5rem;
     width: 12rem;
@@ -225,6 +248,14 @@
   .navbar.scrolled {
     height: 45px;
     padding: 5px 0;
+  }
+
+  .nav-brand {
+    height: 35px;
+  }
+
+  .navbar.scrolled .nav-brand {
+    height: 30px;
   }
 
   .brand-logo {
