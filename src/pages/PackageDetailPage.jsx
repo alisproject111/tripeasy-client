@@ -358,7 +358,7 @@ function PackageDetailPage() {
                   <i className="fas fa-credit-card"></i> Book Now
                 </button>
 
-                <a href="tel:+91-9157450389">
+                <a href="tel:+91-7880789486">
                   <button className="pdp-book-now-button">
                     <i className="fas fa-phone"></i> Call Now
                   </button>

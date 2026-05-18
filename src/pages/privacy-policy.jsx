@@ -149,7 +149,7 @@ function PrivacyPolicy() {
                 <strong>Email:</strong> contact.us.tripeasy@gmail.com
               </p>
               <p>
-                <strong>Phone:</strong> +91 9157450389
+                <strong>Phone:</strong> +91 7880789486
               </p>
               <p>
                 <strong>Address:</strong> Shop No 16, 2nd Floor, VED TransCube

@@ -69,7 +69,7 @@ function HomePage() {
             url: "https://tripeasy.in",
             logo: "https://tripeasy.in/tripeasy-logo.png",
             image: "https://tripeasy.in/tripeasy-logo.png",
-            telephone: "+91-9157450389",
+            telephone: "+91-7880789486",
             email: "contact.us.tripeasy@gmail.com",
             address: {
               "@type": "PostalAddress",
@@ -160,7 +160,7 @@ function HomePage() {
           url: "https://tripeasy.in",
           logo: "https://tripeasy.in/tripeasy-logo.png",
           image: "https://tripeasy.in/tripeasy-logo.png",
-          telephone: "+91-9157450389",
+          telephone: "+91-7880789486",
           email: "contact.us.tripeasy@gmail.com",
           address: {
             "@type": "PostalAddress",

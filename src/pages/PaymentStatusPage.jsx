@@ -46,7 +46,6 @@ function PaymentStatus() {
   // Receipt state
   const [showReceipt, setShowReceipt] = useState(false)
   const [receiptSent, setReceiptSent] = useState(false)
-  const [isDownloading, setIsDownloading] = useState(false)
   const [isSendingEmail, setIsSendingEmail] = useState(false)
   const [emailSendProgress, setEmailSendProgress] = useState(0) // Add progress state for loader
   const [serverStatus, setServerStatus] = useState(true) // Track server connection status
@@ -664,159 +663,7 @@ function PaymentStatus() {
     }
   }
 
-  // Function to download receipt
-  const downloadReceipt = async () => {
-    try {
-      // Check server status first
-      let isServerRunning = false
-      try {
-        isServerRunning = await checkServerStatus()
-      } catch (err) {
-        console.warn("Could not check server status, proceeding to try download anyway", err)
-      }
 
-      if (!paymentStatus.orderDetails) {
-        setToastMessage("Cannot generate receipt: missing order details")
-        setToastType("error")
-        setShowToast(true)
-        return
-      }
-
-      // Check / retrieve booking and package details if missing in state
-      let retrievedBookingDetails = bookingDetails
-      let retrievedPackageDetails = packageDetails
-
-      if (!retrievedBookingDetails || !retrievedPackageDetails) {
-        const storedPackageId = sessionStorage.getItem("currentPackageId")
-        if (storedPackageId) {
-          try {
-            const storedBookingDetails = JSON.parse(sessionStorage.getItem(`bookingDetails_${storedPackageId}`))
-            const storedPackageDetails = JSON.parse(sessionStorage.getItem(`packageDetails_${storedPackageId}`))
-
-            if (storedBookingDetails) retrievedBookingDetails = storedBookingDetails
-            if (storedPackageDetails) retrievedPackageDetails = storedPackageDetails
-          } catch (err) {
-            console.error("[v0] Error retrieving booking details from sessionStorage", err)
-          }
-        }
-      }
-
-      if (!retrievedBookingDetails || !retrievedPackageDetails) {
-        setToastMessage("Cannot generate receipt: missing booking or package details")
-        setToastType("error")
-        setShowToast(true)
-        return
-      }
-
-      // Update state if retrieved
-      if (!bookingDetails) setBookingDetails(retrievedBookingDetails)
-      if (!packageDetails) setPackageDetails(retrievedPackageDetails)
-
-      // Show loading state
-      setIsDownloading(true)
-      setToastMessage("Generating receipt PDF...")
-      setToastType("info")
-      setShowToast(true)
-
-      let downloadSuccess = false
-
-      // Try server-side generation first if server is running
-      if (isServerRunning) {
-        try {
-          const response = await fetch(
-            `${apiEndpoints.generateReceipt || apiEndpoints.createBookingRequest.replace("/api/booking-requests", "/api/generate-receipt")}`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                orderData: paymentStatus.orderDetails,
-                bookingDetails: retrievedBookingDetails,
-                packageDetails: retrievedPackageDetails,
-              }),
-              signal: AbortSignal.timeout(15000), // 15 second timeout for server-side
-            }
-          )
-
-          if (response.ok) {
-            const blob = await response.blob()
-            const url = window.URL.createObjectURL(blob)
-            const link = document.createElement("a")
-            link.href = url
-            link.download = `TripEasy_Receipt_${paymentStatus.orderDetails.order_id}.pdf`
-            document.body.appendChild(link)
-            link.click()
-            document.body.removeChild(link)
-            window.URL.revokeObjectURL(url)
-            
-            downloadSuccess = true
-          } else {
-            const errData = await response.json().catch(() => ({}))
-            console.warn("Server PDF generation returned status:", response.status, errData.message)
-          }
-        } catch (serverError) {
-          console.warn("Server-side PDF generation failed or timed out, falling back to client-side:", serverError)
-        }
-      }
-
-      // If server-side generation failed/skipped, run client-side PDF generation
-      if (!downloadSuccess) {
-        console.log("Running client-side PDF generation...")
-        try {
-          // Dynamically load html2pdf
-          setToastMessage("Generating receipt directly in browser...")
-          const html2pdf = await loadHtml2Pdf()
-
-          // Get the hidden element
-          const element = document.getElementById("hidden-receipt-pdf")
-          if (!element) {
-            throw new Error("Hidden receipt element not found in DOM")
-          }
-
-          const opt = {
-            margin: [10, 10, 10, 10],
-            filename: `TripEasy_Receipt_${paymentStatus.orderDetails.order_id}.pdf`,
-            image: { type: "jpeg", quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true, logging: false },
-            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-          }
-
-          // Generate PDF and save
-          await html2pdf().set(opt).from(element).save()
-          downloadSuccess = true
-        } catch (clientPdfError) {
-          console.error("Client-side PDF generation failed, falling back to printing:", clientPdfError)
-          
-          // Final fallback: standard browser print dialog
-          setToastMessage("Opening browser print dialog...")
-          window.print()
-          downloadSuccess = true
-        }
-      }
-
-      setIsDownloading(false)
-      setShowToast(false)
-
-      if (downloadSuccess) {
-        setTimeout(() => {
-          setToastMessage("Receipt downloaded successfully")
-          setToastType("success")
-          setShowToast(true)
-        }, 300)
-      }
-    } catch (error) {
-      console.error("[v0] Error downloading receipt:", error)
-      setIsDownloading(false)
-
-      setShowToast(false)
-      setTimeout(() => {
-        setToastMessage(error.message || "Failed to download receipt. Please try again.")
-        setToastType("error")
-        setShowToast(true)
-      }, 300)
-    }
-  }
 
   // Function to toggle receipt view
   const toggleReceiptView = () => {
@@ -966,36 +813,26 @@ function PaymentStatus() {
                 <i className="fas fa-home"></i> Return to Home
               </Link>
               {paymentStatus.success && (
-                <>
-                  <button
-                    className="ps-download-button"
-                    onClick={downloadReceipt}
-                    disabled={isDownloading || !serverStatus}
-                  >
-                    <i className="fas fa-download"></i>
-                    {isDownloading ? "Downloading..." : "Download Receipt"}
-                  </button>
-                  <button
-                    className="ps-view-button"
-                    onClick={toggleReceiptView}
-                    style={{
-                      padding: "12px 24px",
-                      borderRadius: "50px",
-                      fontSize: "16px",
-                      fontWeight: "600",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      transition: "all 0.3s ease",
-                      cursor: "pointer",
-                      backgroundColor: "rgb(108,117,125)",
-                      color: "white",
-                      border: "none",
-                    }}
-                  >
-                    <i className="fas fa-eye" style={{ marginRight: "8px" }}></i> View Receipt
-                  </button>
-                </>
+                <button
+                  className="ps-view-button"
+                  onClick={toggleReceiptView}
+                  style={{
+                    padding: "12px 24px",
+                    borderRadius: "50px",
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    transition: "all 0.3s ease",
+                    cursor: "pointer",
+                    backgroundColor: "rgb(108,117,125)",
+                    color: "white",
+                    border: "none",
+                  }}
+                >
+                  <i className="fas fa-eye" style={{ marginRight: "8px" }}></i> View Receipt
+                </button>
               )}
               {!paymentStatus.success && (
                 <button className="ps-retry-button" onClick={() => navigate(-1)}>
@@ -1022,16 +859,6 @@ function PaymentStatus() {
                   bookingDetails={bookingDetails}
                   packageDetails={packageDetails}
                 />
-              </div>
-              <div className="ps-receipt-modal-footer">
-                <button
-                  className="ps-download-button"
-                  onClick={downloadReceipt}
-                  disabled={isDownloading || !serverStatus}
-                >
-                  <i className="fas fa-download"></i>
-                  {isDownloading ? "Downloading..." : "Download PDF"}
-                </button>
               </div>
             </div>
           </div>

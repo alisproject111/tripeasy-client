@@ -206,7 +206,7 @@ const ReceiptTemplate = ({ orderData, bookingDetails, packageDetails }) => {
           <p>
             For any queries, please contact us at{" "}
             <strong>booking.tripeasy@gmail.com</strong> or call{" "}
-            <strong>+91 9157450389</strong>
+            <strong>+91 7880789486</strong>
           </p>
           <p>© {new Date().getFullYear()} TripEasy. All rights reserved.</p>
         </div>

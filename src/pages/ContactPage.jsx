@@ -178,7 +178,7 @@ const ContactPage = () => {
       </Helmet>
       <SEOHead
         title="Contact TripEasy - Travel Agency in Vadodara | Book Tour Packages"
-        description="Contact TripEasy for best travel packages. Located in Vadodara, Gujarat. Call +91-9157450389 or email contact.us.tripeasy@gmail.com. Get expert travel advice & book your dream vacation."
+        description="Contact TripEasy for best travel packages. Located in Vadodara, Gujarat. Call +91-7880789486 or email contact.us.tripeasy@gmail.com. Get expert travel advice & book your dream vacation."
         keywords="contact TripEasy, travel agency Vadodara, tour booking, travel consultation, holiday planning, travel agent contact, Gujarat travel agency"
         canonical="https://tripeasy.in/contact"
         structuredData={{
@@ -245,7 +245,7 @@ const ContactPage = () => {
                   <h3>Phone Number</h3>
                 </div>
                 <p>
-                  <a href="tel:+919157450389">+91 91574 50389</a>
+                  <a href="tel:+917880789486">+91 78807 89486</a>
                 </p>
                 <p>
                   <a href="tel:+917862992570">+91 78629 92570</a>
