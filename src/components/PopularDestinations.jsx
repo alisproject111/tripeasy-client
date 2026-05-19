@@ -7,7 +7,7 @@ import AnimatedElement from "./AnimatedElement"
 import { getCachedDestinations, setCachedDestinations } from "../utils/dataCache"
 import { apiEndpoints } from "../config/api"
 
-const PopularDestinations = () => {
+const PopularDestinations = ({ onLoadComplete }) => {
   const domesticRef = useRef(null)
   const internationalRef = useRef(null)
   const [isPausedDomestic, setIsPausedDomestic] = useState(false)
@@ -36,6 +36,12 @@ const PopularDestinations = () => {
   const [domesticDestinations, setDomesticDestinations] = useState(initialDomestic)
   const [internationalDestinations, setInternationalDestinations] = useState(initialInternational)
   const [loading, setLoading] = useState(!cachedDestinations)
+
+  useEffect(() => {
+    if (!loading) {
+      if (onLoadComplete) onLoadComplete()
+    }
+  }, [loading, onLoadComplete])
 
   useEffect(() => {
     if (cachedDestinations) return

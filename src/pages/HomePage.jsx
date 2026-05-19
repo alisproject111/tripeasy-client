@@ -16,6 +16,8 @@ import "../styles/HomePage.css";
 function HomePage() {
   const location = useLocation();
   const [isMobile, setIsMobile] = useState(false);
+  const [loadRemaining, setLoadRemaining] = useState(false);
+  const [loadMonthlyDestinations, setLoadMonthlyDestinations] = useState(false);
 
   useEffect(() => {
     // Check if we're on mobile
@@ -32,6 +34,33 @@ function HomePage() {
     // Cleanup
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  useEffect(() => {
+    // If we have a state indicating a scroll target, trigger loading immediately
+    if (location.state && location.state.scrollToId) {
+      setLoadRemaining(true);
+      return;
+    }
+
+    const loadDeferred = () => {
+      setLoadRemaining(true);
+    };
+
+    // Load after 1 second or on scroll (whichever comes first)
+    const timer = setTimeout(loadDeferred, 1000);
+
+    const handleScroll = () => {
+      loadDeferred();
+      window.removeEventListener("scroll", handleScroll);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [location.state]);
 
   useEffect(() => {
     // Check if we need to scroll to a specific section
@@ -132,11 +161,15 @@ function HomePage() {
         </div>
 
         <div id="destinations">
-          <PopularDestinations />
+          {loadRemaining && (
+            <PopularDestinations onLoadComplete={() => setLoadMonthlyDestinations(true)} />
+          )}
         </div>
 
         <div id="monthly-destinations">
-          <MonthlyDestinations />
+          {loadMonthlyDestinations && (
+            <MonthlyDestinations />
+          )}
         </div>
         <CustomizePackageButton />
       </div>
@@ -227,15 +260,19 @@ function HomePage() {
       </div>
 
       <div id="destinations">
-        <AnimatedElement animation="fade-up">
-          <PopularDestinations />
-        </AnimatedElement>
+        {loadRemaining && (
+          <AnimatedElement animation="fade-up">
+            <PopularDestinations onLoadComplete={() => setLoadMonthlyDestinations(true)} />
+          </AnimatedElement>
+        )}
       </div>
 
       <div id="monthly-destinations">
-        <AnimatedElement animation="fade-up">
-          <MonthlyDestinations />
-        </AnimatedElement>
+        {loadMonthlyDestinations && (
+          <AnimatedElement animation="fade-up">
+            <MonthlyDestinations />
+          </AnimatedElement>
+        )}
       </div>
       <CustomizePackageButton />
     </div>

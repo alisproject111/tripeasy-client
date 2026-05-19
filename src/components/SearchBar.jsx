@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import "../styles/SearchBar.css"
 import { apiEndpoints } from "../config/api"
+import { getCachedDestinations, setCachedDestinations } from "../utils/dataCache"
 
 function SearchBar() {
   const [destination, setDestination] = useState("")
@@ -26,41 +27,62 @@ function SearchBar() {
 
   const navigate = useNavigate()
 
-  // Fetch destinations from API on component mount
-  useEffect(() => {
-    const fetchDestinations = async () => {
-      try {
-        console.log("[v0] Fetching search destinations from:", apiEndpoints.getDestinations)
-        const response = await fetch(apiEndpoints.getDestinations)
-        const data = await response.json()
-
-        if (data.success && data.data.destinations) {
-          const destinations = data.data.destinations.map((dest) => dest.name).sort()
-          setAllDestinations(destinations)
-        }
-      } catch (error) {
-        console.error("[v0] Error fetching destinations:", error)
-        setAllDestinations([])
-      }
+  // Fetch/load destinations for search suggestions
+  const loadSearchDestinations = useCallback(async () => {
+    // Check cache first
+    const cached = getCachedDestinations()
+    if (cached && cached.length > 0) {
+      const destNames = cached.map((dest) => dest.name).sort()
+      setAllDestinations(destNames)
+      return destNames
     }
 
-    fetchDestinations()
+    try {
+      console.log("[v0] Fetching search destinations from:", apiEndpoints.getDestinations)
+      const response = await fetch(apiEndpoints.getDestinations)
+      const data = await response.json()
+
+      if (data.success && data.data.destinations) {
+        setCachedDestinations(data.data.destinations)
+        const destNames = data.data.destinations.map((dest) => dest.name).sort()
+        setAllDestinations(destNames)
+        return destNames
+      }
+    } catch (error) {
+      console.error("[v0] Error fetching destinations:", error)
+      setAllDestinations([])
+    }
+    return []
   }, [])
 
+  // Fetch destinations from API with a delay to prioritize initial page load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      loadSearchDestinations()
+    }, 1500)
+
+    return () => clearTimeout(timer)
+  }, [loadSearchDestinations])
+
   // Handle destination input change and show suggestions
-  const handleDestinationChange = (e) => {
+  const handleDestinationChange = async (e) => {
     const value = e.target.value
     setDestination(value)
     setError("")
     setFocusedSuggestionIndex(-1)
 
+    let currentDestinations = allDestinations
+    if (allDestinations.length === 0) {
+      currentDestinations = await loadSearchDestinations()
+    }
+
     if (value.trim().length > 0) {
-      const filtered = allDestinations.filter((dest) => dest.toLowerCase().includes(value.toLowerCase()))
+      const filtered = currentDestinations.filter((dest) => dest.toLowerCase().includes(value.toLowerCase()))
 
       setSuggestions(filtered)
       setShowSuggestions(true)
     } else {
-      setSuggestions(allDestinations)
+      setSuggestions(currentDestinations)
       setShowSuggestions(true)
     }
   }
@@ -75,10 +97,14 @@ function SearchBar() {
   }
 
   // Show suggestions when input is focused - Fixed to not show dropdown if a destination is already selected
-  const handleDestinationFocus = () => {
+  const handleDestinationFocus = async () => {
+    let currentDestinations = allDestinations
+    if (allDestinations.length === 0) {
+      currentDestinations = await loadSearchDestinations()
+    }
     // Only show suggestions if the input is empty
     if (!destination.trim()) {
-      setSuggestions(allDestinations)
+      setSuggestions(currentDestinations)
       setShowSuggestions(true)
     }
   }
