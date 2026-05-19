@@ -7,12 +7,10 @@ import "../styles/PopularPackages.css"
 import AnimatedSection from "./AnimatedSection"
 import AnimatedElement from "./AnimatedElement"
 import { apiEndpoints } from "../config/api"
-import { getCachedData, setCachedData } from "../utils/cache"
 
 const PopularPackages = () => {
-  const cachedData = getCachedData("popularPackages")
-  const [popularPackages, setPopularPackages] = useState(cachedData || [])
-  const [loading, setLoading] = useState(!cachedData)
+  const [popularPackages, setPopularPackages] = useState([])
+  const [loading, setLoading] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
   const [error, setError] = useState(null)
   const [retryCount, setRetryCount] = useState(0)
@@ -44,7 +42,6 @@ const PopularPackages = () => {
           if (active) {
             console.log("[v0] Featured packages loaded:", data.packages.length)
             setPopularPackages(data.packages)
-            setCachedData("popularPackages", data.packages)
             setError(null)
             setLoading(false)
           }

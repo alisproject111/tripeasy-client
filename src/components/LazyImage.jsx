@@ -1,6 +1,7 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
 import { generatePlaceholder, createLazyLoadObserver, optimizeImageElement } from "../utils/imageOptimization";
-import { getCachedData, setCachedData } from "../utils/cache";
 
 /**
  * LazyImage Component
@@ -20,17 +21,13 @@ const LazyImage = ({
   decoding = "async",
   loading = "lazy",
 }) => {
-  const cacheKey = `img_loaded_${src}`;
-  const isImageCached = src ? getCachedData(cacheKey) : false;
-
-  const [imageSrc, setImageSrc] = useState(isImageCached ? src : null);
-  const [isLoading, setIsLoading] = useState(!isImageCached);
+  const [imageSrc, setImageSrc] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const imageRef = useRef(null);
   const observerRef = useRef(null);
 
   useEffect(() => {
-    if (isImageCached) return;
     if (!imageRef.current || !src) return;
 
     // Create intersection observer for lazy loading
@@ -46,7 +43,6 @@ const LazyImage = ({
             img.onload = () => {
               setIsLoading(false);
               setHasError(false);
-              setCachedData(cacheKey, true);
               if (onLoad) onLoad();
             };
             img.onerror = () => {
@@ -73,7 +69,7 @@ const LazyImage = ({
         observerRef.current.unobserve(imageRef.current);
       }
     };
-  }, [src, onLoad, onError, isImageCached, cacheKey]);
+  }, [src, onLoad, onError]);
 
   // Optimize the image element
   useEffect(() => {

@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react"
 import "../styles/CustomizePackageModal.css"
 import Toast from "./Toast"
 import { apiEndpoints } from "../config/api"
-import { getCachedData, setCachedData } from "../utils/cache"
 
 function CustomizePackageModal({ onClose }) {
   const modalRef = useRef(null)
@@ -30,9 +29,7 @@ function CustomizePackageModal({ onClose }) {
   const [suggestions, setSuggestions] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [toast, setToast] = useState({ show: false, message: "", type: "" })
-  
-  const cachedDestinations = getCachedData("allDestinations")
-  const [allDestinations, setAllDestinations] = useState(cachedDestinations || [])
+  const [allDestinations, setAllDestinations] = useState([])
   const [countdown, setCountdown] = useState(5)
 
   useEffect(() => {
@@ -56,8 +53,6 @@ function CustomizePackageModal({ onClose }) {
   }, [isSuccess, onClose])
 
   useEffect(() => {
-    if (cachedDestinations && cachedDestinations.length > 0) return
-
     const fetchDestinations = async () => {
       try {
         console.log("[v0] Fetching modal destinations from:", apiEndpoints.getDestinations)
@@ -67,7 +62,6 @@ function CustomizePackageModal({ onClose }) {
         if (data.success && data.data.destinations) {
           const destinations = data.data.destinations.map((dest) => dest.name).sort()
           setAllDestinations(destinations)
-          setCachedData("allDestinations", destinations)
         }
       } catch (error) {
         console.error("[v0] Error fetching destinations:", error)
@@ -76,7 +70,7 @@ function CustomizePackageModal({ onClose }) {
     }
 
     fetchDestinations()
-  }, [cachedDestinations])
+  }, [])
 
   // Activity options
   const activityOptions = [

@@ -131,7 +131,7 @@ function PaymentPage() {
                      (process.env.NODE_ENV === "production" && !window.location.hostname.includes("localhost"))
 
       if (isProd) {
-        script.src = "https://sdk.cashfree.com/js/ui/2.0.0/cashfree.prod.js"
+        script.src = "https://sdk.cashfree.com/js/ui/2.0.0/cashfree.js"
         console.log("[v0] Loading Live Cashfree JS SDK")
       } else {
         script.src = "https://sdk.cashfree.com/js/ui/2.0.0/cashfree.sandbox.js"

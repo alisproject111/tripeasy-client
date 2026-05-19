@@ -5,24 +5,19 @@ import { Link, useNavigate } from "react-router-dom"
 import { Helmet } from "react-helmet"
 import "../styles/NotFoundPage.css"
 import { apiEndpoints } from "../config/api"
-import { getCachedData, setCachedData } from "../utils/cache"
 
 const NotFoundPage = () => {
   const [searchQuery, setSearchQuery] = useState("")
   const [suggestions, setSuggestions] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [focusedSuggestionIndex, setFocusedSuggestionIndex] = useState(-1)
-  
-  const cachedDestinations = getCachedData("allDestinations")
-  const [allDestinations, setAllDestinations] = useState(cachedDestinations || [])
+  const [allDestinations, setAllDestinations] = useState([])
 
   const suggestionsRef = useRef(null)
   const searchInputRef = useRef(null)
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (cachedDestinations && cachedDestinations.length > 0) return
-
     const fetchDestinations = async () => {
       try {
         console.log("[v0] Fetching 404 page destinations from:", apiEndpoints.getDestinations)
@@ -32,7 +27,6 @@ const NotFoundPage = () => {
         if (data.success && data.data.destinations) {
           const destinations = data.data.destinations.map((dest) => dest.name).sort()
           setAllDestinations(destinations)
-          setCachedData("allDestinations", destinations)
         }
       } catch (error) {
         console.error("[v0] Error fetching destinations:", error)
@@ -41,7 +35,7 @@ const NotFoundPage = () => {
     }
 
     fetchDestinations()
-  }, [cachedDestinations])
+  }, [])
 
   // Extract unique destinations from API response (same as SearchBar)
   const destinations = allDestinations
@@ -188,9 +182,9 @@ const NotFoundPage = () => {
       icon: "🏖️",
     },
     {
-      name: "Vietnam Tours",
-      path: "/packages?destination=Vietnam#package-list",
-      icon: "🏮",
+      name: "Kerala Tours",
+      path: "/packages?destination=Kerala, India#package-list",
+      icon: "🌴",
     },
     {
       name: "Manali Trips",

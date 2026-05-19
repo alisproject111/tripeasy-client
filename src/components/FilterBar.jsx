@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback, useRef } from "react"
 import "../styles/SearchBar.css" // Use the SearchBar styles
 import "../styles/FilterBar.css" // Keep this for any specific FilterBar styles
 import { apiEndpoints } from "../config/api"
-import { getCachedData, setCachedData } from "../utils/cache"
 
 function FilterBar({ onFilterChange, initialFilters = {} }) {
   const [filters, setFilters] = useState({
@@ -19,10 +18,7 @@ function FilterBar({ onFilterChange, initialFilters = {} }) {
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [focusedSuggestionIndex, setFocusedSuggestionIndex] = useState(-1)
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
-  
-  const cachedAll = getCachedData("allPackagesData")
-  const cachedLocations = cachedAll ? [...new Set(cachedAll.map((pkg) => pkg.location))].sort() : null
-  const [allDestinations, setAllDestinations] = useState(cachedLocations || [])
+  const [allDestinations, setAllDestinations] = useState([])
 
   const suggestionsRef = useRef(null)
   const destinationInputRef = useRef(null)
@@ -31,8 +27,6 @@ function FilterBar({ onFilterChange, initialFilters = {} }) {
   const sortByDropdownRef = useRef(null)
 
   useEffect(() => {
-    if (cachedLocations && cachedLocations.length > 0) return
-
     const fetchDestinations = async () => {
       try {
         console.log("[v0] Fetching destinations from:", apiEndpoints.getAllPackages)
@@ -45,7 +39,6 @@ function FilterBar({ onFilterChange, initialFilters = {} }) {
           if (data.success && data.packages) {
             const destinationNames = [...new Set(data.packages.map((pkg) => pkg.location))].sort()
             setAllDestinations(destinationNames)
-            setCachedData("allPackagesData", data.packages)
             console.log("[v0] Destinations loaded:", destinationNames)
             return
           }
@@ -60,7 +53,7 @@ function FilterBar({ onFilterChange, initialFilters = {} }) {
     }
 
     fetchDestinations()
-  }, [cachedLocations])
+  }, [])
 
   // Handle destination input change and show suggestions
   const handleDestinationChange = (e) => {

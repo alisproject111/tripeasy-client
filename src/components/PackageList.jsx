@@ -5,17 +5,14 @@ import { useNavigate, useLocation } from "react-router-dom"
 import PackageCard from "./PackageCard"
 import "../styles/PackageList.css"
 import { apiEndpoints } from "../config/api"
-import { getCachedData, setCachedData } from "../utils/cache"
 
 function PackageList({ filters = {}, packageType = "all" }) {
   const location = useLocation()
   const navigate = useNavigate()
   const packagesPerPage = 6
   const packageListRef = useRef(null)
-  
-  const cachedAll = getCachedData("allPackagesData")
-  const [packagesData, setPackagesData] = useState(cachedAll || [])
-  const [loading, setLoading] = useState(!cachedAll)
+  const [packagesData, setPackagesData] = useState([])
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [retryCount, setRetryCount] = useState(0)
 
@@ -42,7 +39,6 @@ function PackageList({ filters = {}, packageType = "all" }) {
 
         if (data.success && data.packages) {
           setPackagesData(data.packages || [])
-          setCachedData("allPackagesData", data.packages || [])
           console.log(`[v0] Successfully loaded ${data.packages?.length || 0} packages`)
         } else {
           console.error("Failed to fetch packages data:", data.message)
@@ -249,7 +245,7 @@ function PackageList({ filters = {}, packageType = "all" }) {
   if (loading) {
     return (
       <div className="package-list-container" ref={packageListRef}>
-        <div className="loading-container">
+        <div className="package-loading">
           <div className="loading-spinner"></div>
           <p>Loading amazing packages for you...</p>
         </div>
