@@ -40,9 +40,6 @@ function PaymentPage() {
   // Add state to track if we're redirecting to payment gateway
   const [redirectingToGateway, setRedirectingToGateway] = useState(false)
 
-  // Add state to track if Cashfree SDK is loaded
-  const [isSdkLoaded, setIsSdkLoaded] = useState(false)
-
   // Add toggleCustomerDetails function
   const toggleCustomerDetails = () => {
     setShowCustomerDetails(!showCustomerDetails)
@@ -106,51 +103,6 @@ function PaymentPage() {
     return () => {
       window.removeEventListener("popstate", handlePopState)
     }
-  }, [])
-
-  // Dynamically load the Cashfree SDK script based on environment variable
-  useEffect(() => {
-    const loadCashfreeScript = () => {
-      const scriptId = "cashfree-sdk-script"
-      let script = document.getElementById(scriptId)
-
-      if (script) {
-        if (window.Cashfree) {
-          setIsSdkLoaded(true)
-        } else {
-          script.addEventListener("load", () => setIsSdkLoaded(true))
-        }
-        return
-      }
-
-      script = document.createElement("script")
-      script.id = scriptId
-
-      // Check if Cashfree env is production or we are on production domain
-      const isProd = process.env.REACT_APP_CASHFREE_ENV === "production" || 
-                     (process.env.NODE_ENV === "production" && !window.location.hostname.includes("localhost"))
-
-      if (isProd) {
-        script.src = "https://sdk.cashfree.com/js/ui/2.0.0/cashfree.js"
-        console.log("[v0] Loading Live Cashfree JS SDK")
-      } else {
-        script.src = "https://sdk.cashfree.com/js/ui/2.0.0/cashfree.sandbox.js"
-        console.log("[v0] Loading Sandbox Cashfree JS SDK")
-      }
-
-      script.async = true
-      script.onload = () => {
-        setIsSdkLoaded(true)
-        console.log("[v0] Cashfree JS SDK loaded successfully")
-      }
-      script.onerror = () => {
-        console.error("[v0] Failed to load Cashfree JS SDK")
-      }
-
-      document.head.appendChild(script)
-    }
-
-    loadCashfreeScript()
   }, [])
 
   // Update the createCashfreeOrder function to show a better loader
@@ -318,14 +270,6 @@ function PaymentPage() {
 
   // Function to handle payment initiation
   const handlePayment = async () => {
-    // Check if Cashfree SDK is loaded
-    if (!isSdkLoaded && !window.Cashfree) {
-      setToastMessage("Payment gateway is initializing. Please try again in a few seconds.")
-      setToastType("info")
-      setShowToast(true)
-      return
-    }
-
     // Show the loader immediately when Pay Now is clicked
     document.body.classList.add("pp-body-blur")
     setPaymentStatus({
