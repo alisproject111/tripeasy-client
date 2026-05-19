@@ -24,6 +24,7 @@
   border-left: 4px solid #10b981;
   transition: all 0.3s ease;
   pointer-events: auto;
+  position: relative;
 }
 
 .toast-container.success {

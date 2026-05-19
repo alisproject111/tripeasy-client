@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useMemo } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import PackageCard from "./PackageCard"
 import "../styles/PackageList.css"
+import { getCachedAllPackages, setCachedAllPackages } from "../utils/dataCache"
 import { apiEndpoints } from "../config/api"
 
 function PackageList({ filters = {}, packageType = "all" }) {
@@ -11,12 +12,16 @@ function PackageList({ filters = {}, packageType = "all" }) {
   const navigate = useNavigate()
   const packagesPerPage = 6
   const packageListRef = useRef(null)
-  const [packagesData, setPackagesData] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  
+  const cachedAllPackages = getCachedAllPackages()
+  
+  const [packagesData, setPackagesData] = useState(cachedAllPackages || [])
+  const [loading, setLoading] = useState(!cachedAllPackages)
   const [retryCount, setRetryCount] = useState(0)
 
   useEffect(() => {
+    if (cachedAllPackages) return
+
     const fetchPackagesData = async () => {
       try {
         console.log("[v0] Fetching packages from:", apiEndpoints.getAllPackages)
@@ -38,6 +43,7 @@ function PackageList({ filters = {}, packageType = "all" }) {
         console.log("[v0] API Response data:", data)
 
         if (data.success && data.packages) {
+          setCachedAllPackages(data.packages || [])
           setPackagesData(data.packages || [])
           console.log(`[v0] Successfully loaded ${data.packages?.length || 0} packages`)
         } else {
@@ -46,7 +52,6 @@ function PackageList({ filters = {}, packageType = "all" }) {
         }
       } catch (error) {
         console.error("[v0] Error fetching packages data:", error)
-        setError(`Error fetching packages data: ${error.message}`)
         setRetryCount((prevCount) => prevCount + 1)
         if (retryCount < 3) {
           setTimeout(fetchPackagesData, 2000)
@@ -59,17 +64,14 @@ function PackageList({ filters = {}, packageType = "all" }) {
     }
 
     fetchPackagesData()
-  }, [retryCount])
+  }, [retryCount, cachedAllPackages])
 
-  // Get current page from URL
-  const getPageFromUrl = () => {
+  // Set current page based on URL
+  const [currentPage, setCurrentPage] = useState(() => {
     const searchParams = new URLSearchParams(location.search)
     const page = searchParams.get("page")
     return page ? Number.parseInt(page, 10) : 1
-  }
-
-  // Set current page based on URL
-  const [currentPage, setCurrentPage] = useState(getPageFromUrl())
+  })
 
   // Use useMemo to optimize filtering logic
   const filteredPackages = useMemo(() => {
@@ -194,7 +196,9 @@ function PackageList({ filters = {}, packageType = "all" }) {
 
   // Validate current page and redirect to 404 if invalid
   useEffect(() => {
-    const pageFromUrl = getPageFromUrl()
+    const searchParams = new URLSearchParams(location.search)
+    const page = searchParams.get("page")
+    const pageFromUrl = page ? Number.parseInt(page, 10) : 1
 
     // Check if page number is invalid
     if (pageFromUrl < 1 || (totalPages > 0 && pageFromUrl > totalPages)) {
@@ -245,7 +249,7 @@ function PackageList({ filters = {}, packageType = "all" }) {
   if (loading) {
     return (
       <div className="package-list-container" ref={packageListRef}>
-        <div className="package-loading">
+        <div className="loading-container">
           <div className="loading-spinner"></div>
           <p>Loading amazing packages for you...</p>
         </div>
@@ -273,7 +277,7 @@ function PackageList({ filters = {}, packageType = "all" }) {
           </div>
 
           <div className="package-grid">
-            {filteredPackages.slice((currentPage - 1) * packagesPerPage, currentPage * packagesPerPage).map((pkg) => (
+            {currentPackages.map((pkg) => (
               <div key={pkg._id || pkg.id} className="package-card-wrapper">
                 <PackageCard key={pkg._id || pkg.id} package={pkg} />
               </div>

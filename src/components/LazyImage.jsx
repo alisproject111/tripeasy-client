@@ -8,6 +8,14 @@ import { generatePlaceholder, createLazyLoadObserver, optimizeImageElement } fro
  * Implements lazy loading with intersection observer for images
  * Shows placeholder while image is loading
  */
+// Global cache to track images that have already loaded successfully in this session
+const loadedImagesCache = new Set();
+
+/**
+ * LazyImage Component
+ * Implements lazy loading with intersection observer for images
+ * Shows placeholder while image is loading
+ */
 const LazyImage = ({
   src,
   alt,
@@ -21,55 +29,44 @@ const LazyImage = ({
   decoding = "async",
   loading = "lazy",
 }) => {
-  const [imageSrc, setImageSrc] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const isAlreadyLoaded = src ? loadedImagesCache.has(src) : false;
+  const [imageSrc, setImageSrc] = useState(isAlreadyLoaded ? src : null);
+  const [isLoading, setIsLoading] = useState(!isAlreadyLoaded);
   const [hasError, setHasError] = useState(false);
   const imageRef = useRef(null);
   const observerRef = useRef(null);
 
   useEffect(() => {
-    if (!imageRef.current || !src) return;
+    if (isAlreadyLoaded) return;
+    const currentElement = imageRef.current;
+    if (!currentElement || !src) return;
 
     // Create intersection observer for lazy loading
     observerRef.current = createLazyLoadObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           // Image is in viewport, load it
-          if (imageRef.current && src) {
+          if (src) {
             setImageSrc(src);
-
-            // Preload image to ensure it's loaded before displaying
-            const img = new Image();
-            img.onload = () => {
-              setIsLoading(false);
-              setHasError(false);
-              if (onLoad) onLoad();
-            };
-            img.onerror = () => {
-              setIsLoading(false);
-              setHasError(true);
-              if (onError) onError();
-            };
-            img.src = src;
           }
 
           // Stop observing after image is loaded
-          if (observerRef.current && imageRef.current) {
-            observerRef.current.unobserve(imageRef.current);
+          if (observerRef.current && currentElement) {
+            observerRef.current.unobserve(currentElement);
           }
         }
       });
     });
 
     // Start observing the image element
-    observerRef.current.observe(imageRef.current);
+    observerRef.current.observe(currentElement);
 
     return () => {
-      if (observerRef.current && imageRef.current) {
-        observerRef.current.unobserve(imageRef.current);
+      if (observerRef.current && currentElement) {
+        observerRef.current.unobserve(currentElement);
       }
     };
-  }, [src, onLoad, onError]);
+  }, [src, isAlreadyLoaded]);
 
   // Optimize the image element
   useEffect(() => {
@@ -87,22 +84,26 @@ const LazyImage = ({
       ref={imageRef}
       src={displaySrc || "/placeholder.svg"}
       alt={alt}
-      className={`${className} ${isLoading ? "loading" : ""} ${hasError ? "error" : ""}`}
+      className={`lazy-image ${className} ${isLoading ? "loading" : ""} ${hasError ? "error" : ""}`}
       width={width}
       height={height}
       style={{
         ...style,
         opacity: isLoading ? 0.7 : 1,
-        transition: "opacity 0.3s ease-in-out",
       }}
       onLoad={() => {
-        setIsLoading(false);
-        if (onLoad) onLoad();
+        if (imageSrc === src) {
+          setIsLoading(false);
+          loadedImagesCache.add(src);
+          if (onLoad) onLoad();
+        }
       }}
       onError={() => {
-        setIsLoading(false);
-        setHasError(true);
-        if (onError) onError();
+        if (imageSrc === src) {
+          setIsLoading(false);
+          setHasError(true);
+          if (onError) onError();
+        }
       }}
       loading={loading}
       decoding={decoding}

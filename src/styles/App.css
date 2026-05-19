@@ -4,6 +4,10 @@
   min-height: 100vh;
 }
 
+.lazy-image {
+  transition: opacity 0.3s ease-in-out;
+}
+
 /* Enable smooth scrolling */
 html {
   scroll-behavior: smooth;

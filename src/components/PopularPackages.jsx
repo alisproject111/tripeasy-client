@@ -6,11 +6,13 @@ import PackageCard from "./PackageCard"
 import "../styles/PopularPackages.css"
 import AnimatedSection from "./AnimatedSection"
 import AnimatedElement from "./AnimatedElement"
+import { getCachedPackages, setCachedPackages } from "../utils/dataCache"
 import { apiEndpoints } from "../config/api"
 
 const PopularPackages = () => {
-  const [popularPackages, setPopularPackages] = useState([])
-  const [loading, setLoading] = useState(true)
+  const cachedData = getCachedPackages()
+  const [popularPackages, setPopularPackages] = useState(cachedData || [])
+  const [loading, setLoading] = useState(!cachedData)
   const [isMobile, setIsMobile] = useState(false)
   const [error, setError] = useState(null)
   const [retryCount, setRetryCount] = useState(0)
@@ -18,6 +20,8 @@ const PopularPackages = () => {
 
   // Fetch packages data from API
   useEffect(() => {
+    if (cachedData) return
+
     let active = true
     const fetchPackagesData = async () => {
       try {
@@ -41,6 +45,7 @@ const PopularPackages = () => {
         if (data.success && data.packages) {
           if (active) {
             console.log("[v0] Featured packages loaded:", data.packages.length)
+            setCachedPackages(data.packages)
             setPopularPackages(data.packages)
             setError(null)
             setLoading(false)
@@ -60,7 +65,7 @@ const PopularPackages = () => {
     return () => {
       active = false
     }
-  }, [])
+  }, [cachedData])
 
   useEffect(() => {
     // Check if we're on mobile

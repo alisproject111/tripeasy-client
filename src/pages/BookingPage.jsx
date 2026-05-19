@@ -5,12 +5,14 @@ import { useParams, useNavigate, Link } from "react-router-dom"
 import "../styles/BookingPage.css"
 import AnimatedElement from "../components/AnimatedElement"
 import { apiEndpoints } from "../config/api"
+import { getCachedPackageByIdOrSlug, setCachedPackage } from "../utils/dataCache"
 
 function BookingPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const [packageData, setPackageData] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const cachedPackage = getCachedPackageByIdOrSlug(id)
+  const [packageData, setPackageData] = useState(cachedPackage)
+  const [loading, setLoading] = useState(!cachedPackage)
   const [error, setError] = useState(null)
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [activeCustomer, setActiveCustomer] = useState(0)
@@ -41,6 +43,8 @@ function BookingPage() {
     // Scroll to top when component mounts
     window.scrollTo({ top: 0, behavior: "smooth" })
 
+    if (cachedPackage) return
+
     let active = true
     const fetchPackageData = async () => {
       try {
@@ -57,6 +61,7 @@ function BookingPage() {
 
         if (data.success && data.package) {
           if (active) {
+            setCachedPackage(id, data.package)
             setPackageData(data.package)
             setError(null)
             setLoading(false)
@@ -77,7 +82,7 @@ function BookingPage() {
     return () => {
       active = false
     }
-  }, [id])
+  }, [id, cachedPackage])
 
   // Update additional travelers when traveler count changes
   useEffect(() => {

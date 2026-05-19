@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import DestinationCard from "./DestinationCard"
 import "../styles/MonthlyPackages.css"
 import AnimatedElement from "./AnimatedElement"
+import { getCachedDestinations, setCachedDestinations } from "../utils/dataCache"
 import { apiEndpoints } from "../config/api"
 
 function MonthlyDestinations() {
@@ -14,11 +15,14 @@ function MonthlyDestinations() {
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
   const [isTouchScrolling, setIsTouchScrolling] = useState(false)
+  
+  const cachedDestinations = getCachedDestinations()
+
   const [packagesData, setPackagesData] = useState({
     packages: [],
-    destinations: [],
+    destinations: cachedDestinations || [],
   })
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(!cachedDestinations)
   const [error, setError] = useState(null)
   const destinationsRef = useRef(null)
 
@@ -38,6 +42,8 @@ function MonthlyDestinations() {
   ]
 
   useEffect(() => {
+    if (cachedDestinations) return
+
     let active = true
     const fetchPackagesData = async () => {
       try {
@@ -59,6 +65,7 @@ function MonthlyDestinations() {
 
         if (data.success && data.data?.destinations) {
           if (active) {
+            setCachedDestinations(data.data.destinations)
             setPackagesData({
               packages: [],
               destinations: data.data.destinations || [],
@@ -81,7 +88,7 @@ function MonthlyDestinations() {
     return () => {
       active = false
     }
-  }, [])
+  }, [cachedDestinations])
 
   const getMonthlyDestinations = (month) => {
     return packagesData.destinations.filter((dest) => dest.favorableMonths && dest.favorableMonths.includes(month))

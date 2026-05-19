@@ -6,13 +6,15 @@ import SEOHead from "../components/SEOHead"
 import "../styles/PackageDetailPage.css"
 import AnimatedElement from "../components/AnimatedElement"
 import AnimatedSection from "../components/AnimatedSection"
+import { getCachedPackageByIdOrSlug, setCachedPackage } from "../utils/dataCache"
 import { apiEndpoints } from "../config/api"
 
 function PackageDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const [packageData, setPackageData] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const cachedPackage = getCachedPackageByIdOrSlug(id)
+  const [packageData, setPackageData] = useState(cachedPackage)
+  const [loading, setLoading] = useState(!cachedPackage)
   const [error, setError] = useState(null)
   const sidebarRef = useRef(null)
   const footerRef = useRef(null)
@@ -21,6 +23,8 @@ function PackageDetailPage() {
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo({ top: 0, behavior: "smooth" })
+
+    if (cachedPackage) return
 
     let active = true
     const fetchPackageData = async () => {
@@ -39,6 +43,7 @@ function PackageDetailPage() {
 
         if (data.success && data.package) {
           if (active) {
+            setCachedPackage(id, data.package)
             setPackageData(data.package)
             setError(null)
             setLoading(false)
@@ -59,7 +64,7 @@ function PackageDetailPage() {
     return () => {
       active = false
     }
-  }, [id])
+  }, [id, cachedPackage])
 
   // Effect for sticky sidebar that stays visible until footer
   useEffect(() => {

@@ -170,6 +170,49 @@ const ContactPage = () => {
     };
   }, [showSuccessPopup]);
 
+  useEffect(() => {
+    let active = true;
+    
+    const updatePosition = () => {
+      if (!active) return;
+      const placeholder = document.getElementById("map-iframe-placeholder");
+      if (placeholder && window.setGlobalMapPosition) {
+        const rect = placeholder.getBoundingClientRect();
+        const top = rect.top + window.scrollY;
+        const left = rect.left + window.scrollX;
+        const width = rect.width;
+        const height = rect.height;
+        
+        window.setGlobalMapPosition({
+          top: `${top}px`,
+          left: `${left}px`,
+          width: `${width}px`,
+          height: `${height}px`,
+        });
+        setIsMapLoaded(true);
+      }
+    };
+
+    updatePosition();
+
+    const timeouts = [100, 300, 500, 1000].map(delay => 
+      setTimeout(updatePosition, delay)
+    );
+
+    window.addEventListener("resize", updatePosition);
+    window.addEventListener("scroll", updatePosition);
+
+    return () => {
+      active = false;
+      timeouts.forEach(clearTimeout);
+      window.removeEventListener("resize", updatePosition);
+      window.removeEventListener("scroll", updatePosition);
+      if (window.hideGlobalMap) {
+        window.hideGlobalMap();
+      }
+    };
+  }, []);
+
   return (
     <div className="contact-page">
       <Helmet>
@@ -192,7 +235,7 @@ const ContactPage = () => {
       <div
         className="contact-hero"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/assets/contact/contact-hero.jpg)`, // Updated path
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/assets/contact/contact-hero.jpg)`,
         }}
       >
         <div className="container">
@@ -437,7 +480,11 @@ const ContactPage = () => {
             </div>
           </AnimatedElement>
           <AnimatedElement animation="zoom-in" delay={300}>
-            <div className="map-container" style={{ position: "relative" }}>
+            <div 
+              id="map-iframe-placeholder" 
+              className="map-container" 
+              style={{ position: "relative", height: "450px", width: "100%" }}
+            >
               {!isMapLoaded && (
                 <div className="map-skeleton-loader">
                   <div className="map-skeleton-icon">
@@ -447,20 +494,6 @@ const ContactPage = () => {
                   <p>Establishing secure connection to Google Maps</p>
                 </div>
               )}
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d461.38220708861104!2d73.18106761565096!3d22.31365911089673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc575c736f7db%3A0x2bd8a3c08cdad680!2sFlyAnyTrip.com!5e0!3m2!1sen!2sin!4v1742556553157!5m2!1sen!2sin"
-                width="100%"
-                height="450"
-                style={{ 
-                  border: 0,
-                  opacity: isMapLoaded ? 1 : 0,
-                  transition: "opacity 0.5s ease"
-                }}
-                allowFullScreen=""
-                loading="eager"
-                onLoad={() => setIsMapLoaded(true)}
-                title="Office Location"
-              ></iframe>
             </div>
           </AnimatedElement>
         </div>

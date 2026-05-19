@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react"
 import DestinationCard from "./DestinationCard"
 import "../styles/PopularDestinations.css"
 import AnimatedElement from "./AnimatedElement"
+import { getCachedDestinations, setCachedDestinations } from "../utils/dataCache"
 import { apiEndpoints } from "../config/api"
 
 const PopularDestinations = () => {
@@ -21,11 +22,24 @@ const PopularDestinations = () => {
   const [canScrollLeftInternational, setCanScrollLeftInternational] = useState(false)
   const [canScrollRightInternational, setCanScrollRightInternational] = useState(true)
   const [isTouchScrolling, setIsTouchScrolling] = useState(false)
-  const [domesticDestinations, setDomesticDestinations] = useState([])
-  const [internationalDestinations, setInternationalDestinations] = useState([])
-  const [loading, setLoading] = useState(true)
+
+  const cachedDestinations = getCachedDestinations()
+
+  const initialDomestic = cachedDestinations
+    ? cachedDestinations.filter((dest) => dest.location && dest.location.toLowerCase().includes("india"))
+    : []
+
+  const initialInternational = cachedDestinations
+    ? cachedDestinations.filter((dest) => !dest.location || !dest.location.toLowerCase().includes("india"))
+    : []
+
+  const [domesticDestinations, setDomesticDestinations] = useState(initialDomestic)
+  const [internationalDestinations, setInternationalDestinations] = useState(initialInternational)
+  const [loading, setLoading] = useState(!cachedDestinations)
 
   useEffect(() => {
+    if (cachedDestinations) return
+
     let active = true
     const fetchData = async () => {
       try {
@@ -34,15 +48,16 @@ const PopularDestinations = () => {
         const destData = await destResponse.json()
         const destinations = destData.data?.destinations || []
 
-        const domesticDestinations = destinations
+        const domesticDest = destinations
           .filter((dest) => dest.location && dest.location.toLowerCase().includes("india"))
 
-        const internationalDestinations = destinations
+        const internationalDest = destinations
           .filter((dest) => !dest.location || !dest.location.toLowerCase().includes("india"))
 
         if (active) {
-          setDomesticDestinations(domesticDestinations)
-          setInternationalDestinations(internationalDestinations)
+          setCachedDestinations(destinations)
+          setDomesticDestinations(domesticDest)
+          setInternationalDestinations(internationalDest)
           setLoading(false)
         }
       } catch (error) {
@@ -57,7 +72,7 @@ const PopularDestinations = () => {
     return () => {
       active = false
     }
-  }, [])
+  }, [cachedDestinations])
 
   // Handle touch events for mobile devices
   useEffect(() => {
