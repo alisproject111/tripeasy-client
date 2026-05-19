@@ -7,12 +7,15 @@ import "../styles/PackageDetailPage.css"
 import AnimatedElement from "../components/AnimatedElement"
 import AnimatedSection from "../components/AnimatedSection"
 import { apiEndpoints } from "../config/api"
+import { getCachedData, setCachedData } from "../utils/cache"
 
 function PackageDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const [packageData, setPackageData] = useState(null)
-  const [loading, setLoading] = useState(true)
+  
+  const cachedPackage = getCachedData(`packageDetails_${id}`)
+  const [packageData, setPackageData] = useState(cachedPackage || null)
+  const [loading, setLoading] = useState(!cachedPackage)
   const [error, setError] = useState(null)
   const sidebarRef = useRef(null)
   const footerRef = useRef(null)
@@ -40,6 +43,7 @@ function PackageDetailPage() {
         if (data.success && data.package) {
           if (active) {
             setPackageData(data.package)
+            setCachedData(`packageDetails_${id}`, data.package)
             setError(null)
             setLoading(false)
             console.log("[v0] Package loaded successfully:", data.package.name)

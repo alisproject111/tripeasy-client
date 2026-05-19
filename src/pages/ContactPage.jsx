@@ -6,6 +6,7 @@ import "../styles/ContactPage.css";
 import AnimatedElement from "../components/AnimatedElement";
 import AnimatedSection from "../components/AnimatedSection";
 import SEOHead from "../components/SEOHead";
+import { getCachedData, setCachedData } from "../utils/cache";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -29,7 +30,8 @@ const ContactPage = () => {
   const [countdown, setCountdown] = useState(5);
 
   // Validate form fields and return an error object
-  const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const cachedMapLoaded = getCachedData("isGoogleMapLoaded");
+  const [isMapLoaded, setIsMapLoaded] = useState(cachedMapLoaded || false);
 
   const validateForm = () => {
     const errors = {};
@@ -458,7 +460,10 @@ const ContactPage = () => {
                 }}
                 allowFullScreen=""
                 loading="eager"
-                onLoad={() => setIsMapLoaded(true)}
+                onLoad={() => {
+                  setIsMapLoaded(true);
+                  setCachedData("isGoogleMapLoaded", true);
+                }}
                 title="Office Location"
               ></iframe>
             </div>

@@ -5,12 +5,15 @@ import { useParams, useNavigate, Link } from "react-router-dom"
 import "../styles/BookingPage.css"
 import AnimatedElement from "../components/AnimatedElement"
 import { apiEndpoints } from "../config/api"
+import { getCachedData, setCachedData } from "../utils/cache"
 
 function BookingPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const [packageData, setPackageData] = useState(null)
-  const [loading, setLoading] = useState(true)
+  
+  const cachedPackage = getCachedData(`packageDetails_${id}`)
+  const [packageData, setPackageData] = useState(cachedPackage || null)
+  const [loading, setLoading] = useState(!cachedPackage)
   const [error, setError] = useState(null)
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [activeCustomer, setActiveCustomer] = useState(0)
@@ -58,6 +61,7 @@ function BookingPage() {
         if (data.success && data.package) {
           if (active) {
             setPackageData(data.package)
+            setCachedData(`packageDetails_${id}`, data.package)
             setError(null)
             setLoading(false)
             console.log("[v0] Booking: Package loaded successfully")

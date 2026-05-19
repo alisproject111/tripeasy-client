@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import "../styles/SearchBar.css"
 import { apiEndpoints } from "../config/api"
+import { getCachedData, setCachedData } from "../utils/cache"
 
 function SearchBar() {
   const [destination, setDestination] = useState("")
@@ -16,7 +17,9 @@ function SearchBar() {
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [focusedSuggestionIndex, setFocusedSuggestionIndex] = useState(-1)
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
-  const [allDestinations, setAllDestinations] = useState([])
+  
+  const cachedDestinations = getCachedData("allDestinations")
+  const [allDestinations, setAllDestinations] = useState(cachedDestinations || [])
 
   const suggestionsRef = useRef(null)
   const destinationInputRef = useRef(null)
@@ -28,6 +31,8 @@ function SearchBar() {
 
   // Fetch destinations from API on component mount
   useEffect(() => {
+    if (cachedDestinations && cachedDestinations.length > 0) return
+
     const fetchDestinations = async () => {
       try {
         console.log("[v0] Fetching search destinations from:", apiEndpoints.getDestinations)
@@ -37,6 +42,7 @@ function SearchBar() {
         if (data.success && data.data.destinations) {
           const destinations = data.data.destinations.map((dest) => dest.name).sort()
           setAllDestinations(destinations)
+          setCachedData("allDestinations", destinations)
         }
       } catch (error) {
         console.error("[v0] Error fetching destinations:", error)
@@ -45,7 +51,7 @@ function SearchBar() {
     }
 
     fetchDestinations()
-  }, [])
+  }, [cachedDestinations])
 
   // Handle destination input change and show suggestions
   const handleDestinationChange = (e) => {

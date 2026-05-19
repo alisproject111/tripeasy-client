@@ -5,6 +5,7 @@ import DestinationCard from "./DestinationCard"
 import "../styles/MonthlyPackages.css"
 import AnimatedElement from "./AnimatedElement"
 import { apiEndpoints } from "../config/api"
+import { getCachedData, setCachedData } from "../utils/cache"
 
 function MonthlyDestinations() {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
@@ -14,11 +15,13 @@ function MonthlyDestinations() {
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
   const [isTouchScrolling, setIsTouchScrolling] = useState(false)
-  const [packagesData, setPackagesData] = useState({
+  
+  const cachedMonthly = getCachedData("monthlyPackagesData")
+  const [packagesData, setPackagesData] = useState(cachedMonthly || {
     packages: [],
     destinations: [],
   })
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(!cachedMonthly)
   const [error, setError] = useState(null)
   const destinationsRef = useRef(null)
 
@@ -59,10 +62,12 @@ function MonthlyDestinations() {
 
         if (data.success && data.data?.destinations) {
           if (active) {
-            setPackagesData({
+            const fetchedData = {
               packages: [],
               destinations: data.data.destinations || [],
-            })
+            }
+            setPackagesData(fetchedData)
+            setCachedData("monthlyPackagesData", fetchedData)
             setError(null)
             setLoading(false)
           }

@@ -279,7 +279,27 @@ function PaymentStatus() {
     }
   }
 
-  // Update the verifyPayment function to ensure it only runs once
+  // Handle try again by cleanly navigating back to payment page
+  const handleTryAgain = () => {
+    if (bookingDetails && packageDetails) {
+      const packageId = packageDetails.id || packageDetails._id
+      const totalPrice = (paymentStatus.orderDetails && paymentStatus.orderDetails.order_amount) 
+        || (packageDetails.price * bookingDetails.travelers)
+      
+      navigate(`/payment/${packageId}`, {
+        state: {
+          bookingDetails,
+          packageDetails,
+          totalPrice,
+        },
+      })
+    } else {
+      console.log("Missing booking or package details, falling back to navigate(-1)")
+      navigate(-1)
+    }
+  }
+
+  // Update the verifyPayment function to ensure it only runs once and polls if not paid immediately
   const verifyPayment = async () => {
     // Check if payment has already been verified in this session
     if (paymentVerified) {
@@ -290,30 +310,54 @@ function PaymentStatus() {
     // Set flag BEFORE making the request to prevent race conditions
     setPaymentVerified(true)
 
-    let data
-    try {
-      // Check server status first
-      const isServerRunning = await checkServerStatus()
-      if (!isServerRunning) {
-        throw new Error("Server connection error. Please make sure the server is running.")
-      }
+    const maxAttempts = 5
+    let attempt = 0
+    let isPaid = false
+    let verificationData = null
+    let latestResponseOk = false
 
-      const response = await fetch(
-        `${apiEndpoints.createBookingRequest.replace("/api/booking-requests", "/api/verify-payment")}/${orderId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
+    while (attempt < maxAttempts && !isPaid) {
+      attempt++
+      console.log(`[v0] Verifying payment attempt ${attempt}/${maxAttempts} for order ${orderId}...`)
+
+      try {
+        // Check server status first
+        const isServerRunning = await checkServerStatus()
+        if (!isServerRunning) {
+          throw new Error("Server connection error. Please make sure the server is running.")
+        }
+
+        const response = await fetch(
+          `${apiEndpoints.createBookingRequest.replace("/api/booking-requests", "/api/verify-payment")}/${orderId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
           },
-        },
-      )
+        )
 
-      data = await response.json()
+        const data = await response.json()
+        latestResponseOk = response.ok
+        verificationData = data
 
-      if (!response.ok) {
-        throw new Error(data.message || "Failed to verify payment")
+        if (response.ok && data.status === "PAID") {
+          isPaid = true
+          console.log(`[v0] Payment verified as PAID on attempt ${attempt}`)
+          break
+        }
+      } catch (err) {
+        console.error(`[v0] Error in verification attempt ${attempt}:`, err)
       }
 
+      if (attempt < maxAttempts) {
+        console.log(`[v0] Payment not paid yet. Retrying in 2 seconds...`)
+        await new Promise((resolve) => setTimeout(resolve, 2000))
+      }
+    }
+
+    if (isPaid && verificationData) {
+      const data = verificationData
       // Get current date and time for payment time if not available
       const currentDate = new Date()
 
@@ -328,216 +372,207 @@ function PaymentStatus() {
 
       setPaymentStatus({
         loading: false,
-        success: data.status === "PAID",
-        error: data.status !== "PAID",
-        message: data.message,
+        success: true,
+        error: false,
+        message: "Payment successful",
         orderDetails: updatedOrderDetails,
       })
 
       // If payment is successful, try to retrieve booking details one more time if not already set
-      if (data.status === "PAID") {
-        // CHECK if receipt has already been sent for this order ID in localStorage
-        const hasSentReceipt = localStorage.getItem(`receipt_sent_${orderId}`) === "true"
-        if (hasSentReceipt) {
-          console.log("[v0] Receipt already sent for this order in a previous session, skipping email and database save.")
-          setReceiptSent(true)
-          setIsEmailSendingComplete(true)
-          setIsSendingEmail(false)
-          return
-        }
+      // CHECK if receipt has already been sent for this order ID in localStorage
+      const hasSentReceipt = localStorage.getItem(`receipt_sent_${orderId}`) === "true"
+      if (hasSentReceipt) {
+        console.log("[v0] Receipt already sent for this order in a previous session, skipping email and database save.")
+        setReceiptSent(true)
+        setIsEmailSendingComplete(true)
+        setIsSendingEmail(false)
+        return
+      }
 
-        let localBookingDetails = bookingDetails
-        let localPackageDetails = packageDetails
+      let localBookingDetails = bookingDetails
+      let localPackageDetails = packageDetails
 
-        if (!bookingDetails || !packageDetails) {
-          const storedPackageId = sessionStorage.getItem("currentPackageId")
-          console.log("Trying to retrieve booking details from sessionStorage with packageId:", storedPackageId)
+      if (!bookingDetails || !packageDetails) {
+        const storedPackageId = sessionStorage.getItem("currentPackageId")
+        console.log("Trying to retrieve booking details from sessionStorage with packageId:", storedPackageId)
 
-          if (storedPackageId) {
-            try {
-              const storedBookingDetails = JSON.parse(sessionStorage.getItem(`bookingDetails_${storedPackageId}`))
-              const storedPackageDetails = JSON.parse(sessionStorage.getItem(`packageDetails_${storedPackageId}`))
+        if (storedPackageId) {
+          try {
+            const storedBookingDetails = JSON.parse(sessionStorage.getItem(`bookingDetails_${storedPackageId}`))
+            const storedPackageDetails = JSON.parse(sessionStorage.getItem(`packageDetails_${storedPackageId}`))
 
-              console.log("Retrieved from sessionStorage:", {
-                hasBookingDetails: !!storedBookingDetails,
-                hasPackageDetails: !!storedPackageDetails,
-              })
-
-              if (storedBookingDetails) {
-                localBookingDetails = storedBookingDetails
-                setBookingDetails(storedBookingDetails)
-              }
-              if (storedPackageDetails) {
-                localPackageDetails = storedPackageDetails
-                setPackageDetails(storedPackageDetails)
-              }
-            } catch (err) {
-              console.error("Error retrieving booking details from sessionStorage", err)
-            }
-          } else {
-            // Try to get booking details from URL state if available
-            const urlParams = new URLSearchParams(window.location.search)
-            const bookingDataParam = urlParams.get("bookingData")
-            const packageDataParam = urlParams.get("packageData")
-
-            console.log("Trying to retrieve booking details from URL params:", {
-              hasBookingParam: !!bookingDataParam,
-              hasPackageParam: !!packageDataParam,
+            console.log("Retrieved from sessionStorage:", {
+              hasBookingDetails: !!storedBookingDetails,
+              hasPackageDetails: !!storedPackageDetails,
             })
 
-            if (bookingDataParam && packageDataParam) {
-              try {
-                const parsedBookingDetails = JSON.parse(decodeURIComponent(bookingDataParam))
-                const parsedPackageDetails = JSON.parse(decodeURIComponent(packageDataParam))
+            if (storedBookingDetails) {
+              localBookingDetails = storedBookingDetails
+              setBookingDetails(storedBookingDetails)
+            }
+            if (storedPackageDetails) {
+              localPackageDetails = storedPackageDetails
+              setPackageDetails(storedPackageDetails)
+            }
+          } catch (err) {
+            console.error("Error retrieving booking details from sessionStorage", err)
+          }
+        } else {
+          // Try to get booking details from URL state if available
+          const urlParams = new URLSearchParams(window.location.search)
+          const bookingDataParam = urlParams.get("bookingData")
+          const packageDataParam = urlParams.get("packageData")
 
-                localBookingDetails = parsedBookingDetails
-                localPackageDetails = parsedPackageDetails
+          console.log("Trying to retrieve booking details from URL params:", {
+            hasBookingParam: !!bookingDataParam,
+            hasPackageParam: !!packageDataParam,
+          })
 
-                setBookingDetails(parsedBookingDetails)
-                setPackageDetails(parsedPackageDetails)
-              } catch (err) {
-                console.error("Error parsing URL parameters", err)
-              }
+          if (bookingDataParam && packageDataParam) {
+            try {
+              const parsedBookingDetails = JSON.parse(decodeURIComponent(bookingDataParam))
+              const parsedPackageDetails = JSON.parse(decodeURIComponent(packageDataParam))
+
+              localBookingDetails = parsedBookingDetails
+              localPackageDetails = parsedPackageDetails
+
+              setBookingDetails(parsedBookingDetails)
+              setPackageDetails(parsedPackageDetails)
+            } catch (err) {
+              console.error("Error parsing URL parameters", err)
             }
           }
         }
+      }
 
-        // After retrieving booking details, process only if we have all required data
-        if (localBookingDetails && localPackageDetails && updatedOrderDetails) {
-          // Use a single timeout to prevent multiple calls
-          setTimeout(async () => {
-            console.log("Processing successful payment with:", {
-              hasBookingDetails: !!localBookingDetails,
-              hasPackageDetails: !!localPackageDetails,
-              hasOrderDetails: !!updatedOrderDetails,
-            })
+      // After retrieving booking details, process only if we have all required data
+      if (localBookingDetails && localPackageDetails && updatedOrderDetails) {
+        // Use a single timeout to prevent multiple calls
+        setTimeout(async () => {
+          console.log("Processing successful payment with:", {
+            hasBookingDetails: !!localBookingDetails,
+            hasPackageDetails: !!localPackageDetails,
+            hasOrderDetails: !!updatedOrderDetails,
+          })
 
-            try {
-              // Save booking to database first with the updated order details
-              // Use await to ensure we wait for the result before proceeding
-              const saveResult = await saveBookingToDatabase(
-                updatedOrderDetails,
-                localBookingDetails,
-                localPackageDetails,
-              )
+          try {
+            // Save booking to database first with the updated order details
+            // Use await to ensure we wait for the result before proceeding
+            const saveResult = await saveBookingToDatabase(
+              updatedOrderDetails,
+              localBookingDetails,
+              localPackageDetails,
+            )
 
-              // Only proceed with email sending if booking was saved or already exists
-              if (saveResult && saveResult.success) {
-                // Show loader for email sending
-                setIsSendingEmail(true)
-                setEmailSendProgress(0) // Start progress at 0%
-                setIsEmailSendingComplete(false) // Reset email sending state
-                setLoadingMessage("Preparing your receipt...") // Initial message
+            // Only proceed with email sending if booking was saved or already exists
+            if (saveResult && saveResult.success) {
+              // Show loader for email sending
+              setIsSendingEmail(true)
+              setEmailSendProgress(0) // Start progress at 0%
+              setIsEmailSendingComplete(false) // Reset email sending state
+              setLoadingMessage("Preparing your receipt...") // Initial message
 
-                // Create an array of loading messages to cycle through
-                const loadingMessages = [
-                  "Preparing your receipt...",
-                  "Generating PDF document...",
-                  "Adding booking details...",
-                  "Formatting your receipt...",
-                  "Sending to your email...",
-                  "Almost done...",
-                ]
+              // Create an array of loading messages to cycle through
+              const loadingMessages = [
+                "Preparing your receipt...",
+                "Generating PDF document...",
+                "Adding booking details...",
+                "Formatting your receipt...",
+                "Sending to your email...",
+                "Almost done...",
+              ]
 
-                // Start progress animation with message changes
-                let messageIndex = 0
-                const progressInterval = setInterval(() => {
-                  setEmailSendProgress((prev) => {
-                    // Increase progress gradually up to 85% (reserve the rest for completion)
-                    if (prev < 85) {
-                      // Change message every ~20% progress
-                      if (prev % 20 === 0 && messageIndex < loadingMessages.length - 1) {
-                        messageIndex++
-                        setLoadingMessage(loadingMessages[messageIndex])
-                      }
-                      return prev + 2
+              // Start progress animation with message changes
+              let messageIndex = 0
+              const progressInterval = setInterval(() => {
+                setEmailSendProgress((prev) => {
+                  // Increase progress gradually up to 85% (reserve the rest for completion)
+                  if (prev < 85) {
+                    // Change message every ~20% progress
+                    if (prev % 20 === 0 && messageIndex < loadingMessages.length - 1) {
+                      messageIndex++
+                      setLoadingMessage(loadingMessages[messageIndex])
                     }
-                    return prev
-                  })
-                }, 120) // Update more frequently for smoother animation
+                    return prev + 2
+                  }
+                  return prev
+                })
+              }, 120) // Update more frequently for smoother animation
 
-                try {
-                  // Send the email
-                  await sendReceiptEmail(updatedOrderDetails, localBookingDetails, localPackageDetails)
+              try {
+                // Send the email
+                await sendReceiptEmail(updatedOrderDetails, localBookingDetails, localPackageDetails)
 
-                  // Clear the interval when done
-                  clearInterval(progressInterval)
+                // Clear the interval when done
+                clearInterval(progressInterval)
 
-                  // Set final message
-                  setLoadingMessage("Receipt sent successfully!")
+                // Set final message
+                setLoadingMessage("Receipt sent successfully!")
 
-                  // Complete the progress
-                  setEmailSendProgress(100)
+                // Complete the progress
+                setEmailSendProgress(100)
 
-                  // Set email sending complete after a delay to ensure the progress bar completes visually
-                  setTimeout(() => {
-                    setIsEmailSendingComplete(true)
-
-                    // Show toast only after email is sent
-                    setToastMessage("Receipt has been sent to your email")
-                    setToastType("success")
-                    setShowToast(true)
-                  }, 500)
-                } catch (emailError) {
-                  clearInterval(progressInterval)
-                  console.error("Error sending receipt email:", emailError)
+                // Set email sending complete after a delay to ensure the progress bar completes visually
+                setTimeout(() => {
                   setIsEmailSendingComplete(true)
-                  setToastMessage("Could not send receipt email. Please try again later.")
-                  setToastType("error")
+
+                  // Show toast only after email is sent
+                  setToastMessage("Receipt has been sent to your email")
+                  setToastType("success")
                   setShowToast(true)
-                }
-              } else {
-                console.error("Cannot proceed with email: booking save failed")
-                setToastMessage("Could not save booking details. Please try again later.")
+                }, 500)
+              } catch (emailError) {
+                clearInterval(progressInterval)
+                console.error("Error sending receipt email:", emailError)
+                setIsEmailSendingComplete(true)
+                setToastMessage("Could not send receipt email. Please try again later.")
                 setToastType("error")
                 setShowToast(true)
               }
-            } catch (error) {
-              console.error("Error in payment processing:", error)
-              setToastMessage("Error processing payment. Please try again later.")
+            } else {
+              console.error("Cannot proceed with email: booking save failed")
+              setToastMessage("Could not save booking details. Please try again later.")
               setToastType("error")
               setShowToast(true)
             }
-          }, 1000) // Reduced timeout to 1 second for faster response
-        } else if (data.status === "PAID") {
-          console.error("Cannot process payment: missing required details")
-          setToastMessage("Could not process payment: missing required details")
-          setToastType("error")
-          setShowToast(true)
-        }
-      }
-
-      // Only show toast for errors, not for successful verification
-      if (data.status !== "PAID") {
-        setToastMessage(data.message)
+          } catch (error) {
+            console.error("Error in payment processing:", error)
+            setToastMessage("Error processing payment. Please try again later.")
+            setToastType("error")
+            setShowToast(true)
+          }
+        }, 1000) // Reduced timeout to 1 second for faster response
+      } else {
+        console.error("Cannot process payment: missing required details")
+        setToastMessage("Could not process payment: missing required details")
         setToastType("error")
         setShowToast(true)
       }
-    } catch (error) {
-      // If verification fails, reset the flag to allow retries
-      setPaymentVerified(false)
-
-      console.error("Error verifying payment:", error)
-
-      // Get current date and time as fallback
+    } else {
+      // Payment verification failed or order is not paid
+      console.log("[v0] Payment verification concluded: Not PAID after max attempts.")
       const currentDate = new Date()
-      const currentDateISOString = currentDate.toISOString()
+      const fallbackDetails = (verificationData && verificationData.data) ? {
+        ...verificationData.data,
+        payment_time: verificationData.data.payment_time || currentDate.toISOString(),
+        booking_date: verificationData.data.booking_date || currentDate.toISOString(),
+      } : {
+        order_id: orderId,
+        order_status: (verificationData && verificationData.status) || "ACTIVE",
+        order_amount: 0,
+        payment_time: currentDate.toISOString(),
+        booking_date: currentDate.toISOString(),
+      }
 
       setPaymentStatus({
         loading: false,
         success: false,
         error: true,
-        message: "Failed to verify payment. Please try again later.",
-        orderDetails: {
-          order_id: orderId || "Unknown",
-          order_amount: 0,
-          order_status: "FAILED",
-          payment_time: currentDateISOString,
-          booking_date: currentDateISOString,
-        },
+        message: (verificationData && verificationData.message) || "Payment failed or pending",
+        orderDetails: fallbackDetails,
       })
 
-      setToastMessage(error.message || "Failed to verify payment. Please try again later.")
+      setToastMessage((verificationData && verificationData.message) || "Payment failed or pending")
       setToastType("error")
       setShowToast(true)
     }
@@ -846,7 +881,7 @@ function PaymentStatus() {
                 </button>
               )}
               {!paymentStatus.success && (
-                <button className="ps-retry-button" onClick={() => navigate(-1)}>
+                <button className="ps-retry-button" onClick={handleTryAgain}>
                   <i className="fas fa-redo"></i> Try Again
                 </button>
               )}

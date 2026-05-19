@@ -5,6 +5,7 @@ import DestinationCard from "./DestinationCard"
 import "../styles/PopularDestinations.css"
 import AnimatedElement from "./AnimatedElement"
 import { apiEndpoints } from "../config/api"
+import { getCachedData, setCachedData } from "../utils/cache"
 
 const PopularDestinations = () => {
   const domesticRef = useRef(null)
@@ -21,9 +22,12 @@ const PopularDestinations = () => {
   const [canScrollLeftInternational, setCanScrollLeftInternational] = useState(false)
   const [canScrollRightInternational, setCanScrollRightInternational] = useState(true)
   const [isTouchScrolling, setIsTouchScrolling] = useState(false)
-  const [domesticDestinations, setDomesticDestinations] = useState([])
-  const [internationalDestinations, setInternationalDestinations] = useState([])
-  const [loading, setLoading] = useState(true)
+  
+  const cachedDomestic = getCachedData("domesticDestinations")
+  const cachedInternational = getCachedData("internationalDestinations")
+  const [domesticDestinations, setDomesticDestinations] = useState(cachedDomestic || [])
+  const [internationalDestinations, setInternationalDestinations] = useState(cachedInternational || [])
+  const [loading, setLoading] = useState(!cachedDomestic || !cachedInternational)
 
   useEffect(() => {
     let active = true
@@ -43,6 +47,8 @@ const PopularDestinations = () => {
         if (active) {
           setDomesticDestinations(domesticDestinations)
           setInternationalDestinations(internationalDestinations)
+          setCachedData("domesticDestinations", domesticDestinations)
+          setCachedData("internationalDestinations", internationalDestinations)
           setLoading(false)
         }
       } catch (error) {
