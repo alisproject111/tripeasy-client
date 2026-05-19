@@ -249,7 +249,7 @@ function PackageList({ filters = {}, packageType = "all" }) {
   if (loading) {
     return (
       <div className="package-list-container" ref={packageListRef}>
-        <div className="package-loading">
+        <div className="loading-container">
           <div className="loading-spinner"></div>
           <p>Loading amazing packages for you...</p>
         </div>
