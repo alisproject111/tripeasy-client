@@ -8,7 +8,7 @@ function AboutPage() {
   return (
     <div className="about-page">
       <SEOHead
-        title="About TripEasy - Leading Travel Agency in India | Our Story & Services"
+        title="About Us | TripEasy - Best Travel & Holiday Agency"
         description="Learn about TripEasy, India's trusted travel agency since 2025. We offer best domestic & international tour packages with 10,000+ happy customers. Expert travel planning & 24/7 support."
         keywords="about TripEasy, travel agency India, tour operator, travel company, vacation planner, holiday specialist, travel services, domestic tours, international tours, travel experts"
         canonical="https://tripeasy.in/about"

@@ -215,7 +215,7 @@ const ContactPage = () => {
         <link rel="preconnect" href="https://maps.gstatic.com" crossOrigin="anonymous" />
       </Helmet>
       <SEOHead
-        title="Contact TripEasy - Travel Agency in Vadodara | Book Tour Packages"
+        title="Contact Us | TripEasy - Best Travel & Holiday Agency"
         description="Contact TripEasy for best travel packages. Located in Vadodara, Gujarat. Call +91-7880789486 or email contact.us.tripeasy@gmail.com. Get expert travel advice & book your dream vacation."
         keywords="contact TripEasy, travel agency Vadodara, tour booking, travel consultation, holiday planning, travel agent contact, Gujarat travel agency"
         canonical="https://tripeasy.in/contact"

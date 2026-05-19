@@ -1,14 +1,12 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/policy-styles.css";
+import SEOHead from "../components/SEOHead";
 
 function RefundPolicy() {
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo({ top: 0, behavior: "smooth" });
-
-    // Set document title
-    document.title = "Refund Policy - TripEasy";
   }, []);
 
   // Background image URL - assuming the image is in public folder
@@ -18,6 +16,12 @@ function RefundPolicy() {
 
   return (
     <div className="policy-page">
+      <SEOHead
+        title="Refund Policy | TripEasy"
+        description="Cancellation guidelines and refund terms of TripEasy Travel Services."
+        keywords="refund policy, cancellation refund, tour cancel, travel return, TripEasy refund policy"
+        canonical="https://tripeasy.in/refund-policy"
+      />
       <div className="policy-header" style={headerBackground}>
         <div className="container">
           <h1 className="policy-title">Refund Policy</h1>

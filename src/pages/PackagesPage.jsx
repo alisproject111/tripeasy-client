@@ -106,7 +106,13 @@ function PackagesPage() {
   return (
     <div className="packages-page">
       <SEOHead
-        title="Travel Packages - Domestic & International Tour Packages | TripEasy"
+        title={
+          packageType === "domestic"
+            ? "Domestic Tour Packages | TripEasy"
+            : packageType === "international"
+            ? "International Tour Packages | TripEasy"
+            : "Travel Packages - Domestic & International Tour Packages | TripEasy"
+        }
         description="Browse our extensive collection of travel packages. Domestic tours to Goa, Kerala, Manali, Rajasthan & international packages to Bali, Thailand, Vietnam. Book now with best prices!"
         keywords="travel packages, tour packages, holiday packages, domestic tour packages, international tour packages, vacation packages, India tour packages, Goa packages, Kerala packages, Manali packages, Bali packages, Thailand packages, Vietnam packages, affordable travel packages, best travel deals"
         canonical="https://tripeasy.in/packages"

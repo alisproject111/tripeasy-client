@@ -4,6 +4,7 @@ import "../styles/PaymentPage.css"
 import AnimatedElement from "../components/AnimatedElement"
 import Toast from "../components/Toast"
 import { apiEndpoints } from "../config/api"
+import SEOHead from "../components/SEOHead"
 
 function PaymentPage() {
   const { id } = useParams()
@@ -369,6 +370,12 @@ function PaymentPage() {
 
   return (
     <div className="pp-payment-page">
+      <SEOHead
+        title={`Complete Payment | TripEasy`}
+        description={`Complete secure payment checkout online for your booking of ${packageDetails ? packageDetails.name : "travel package"}.`}
+        keywords="payment, secure payment, cashfree, checkout page, booking payment, TripEasy"
+        canonical={`https://tripeasy.in/payment/${id}`}
+      />
       {/* Updated header with inline background image */}
       <div 
         className="pp-payment-header"

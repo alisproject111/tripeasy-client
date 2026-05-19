@@ -4,6 +4,7 @@ import "../styles/BookingPage.css"
 import AnimatedElement from "../components/AnimatedElement"
 import { apiEndpoints } from "../config/api"
 import { getCachedPackageByIdOrSlug, setCachedPackage } from "../utils/dataCache"
+import SEOHead from "../components/SEOHead"
 
 function BookingPage() {
   const { id } = useParams()
@@ -489,6 +490,12 @@ function BookingPage() {
 
   return (
     <div className="bp-booking-page">
+      <SEOHead
+        title={`Book ${packageData ? packageData.name : "Package"} | TripEasy`}
+        description={`Securely book the ${packageData ? packageData.name : "travel"} package at TripEasy. Fill out the traveler form to initiate your booking request.`}
+        keywords="booking, travel booking, book tour, holiday packages, tourist trip booking, TripEasy"
+        canonical={`https://tripeasy.in/booking/${id}`}
+      />
       {isSending && (
         <div className="bp-sending-overlay">
           <div className="bp-sending-content">

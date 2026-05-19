@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { Helmet } from "react-helmet"
+import SEOHead from "../components/SEOHead"
 import "../styles/NotFoundPage.css"
 import { apiEndpoints } from "../config/api"
 
@@ -205,14 +205,12 @@ const NotFoundPage = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Page Not Found - TripEasy | Travel Packages India</title>
-        <meta
-          name="description"
-          content="Oops! The page you're looking for doesn't exist. Explore our amazing travel packages and find your perfect holiday destination with TripEasy."
-        />
-        <meta name="robots" content="noindex, follow" />
-      </Helmet>
+      <SEOHead
+        title="Page Not Found | TripEasy"
+        description="Oops! The page you're looking for doesn't exist. Explore our amazing travel packages and find your perfect holiday destination with TripEasy."
+        keywords="404 page, page not found, travel packages, TripEasy"
+        canonical="https://tripeasy.in/not-found"
+      />
 
       <div className="not-found-page-wrapper">
         <div className="not-found-page-content">

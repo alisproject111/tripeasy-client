@@ -1,14 +1,12 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/policy-styles.css";
+import SEOHead from "../components/SEOHead";
 
 function TermsAndConditions() {
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo({ top: 0, behavior: "smooth" });
-
-    // Set document title
-    document.title = "Terms & Conditions - TripEasy";
   }, []);
 
   // Background image URL - assuming the image is in public folder
@@ -18,6 +16,12 @@ function TermsAndConditions() {
 
   return (
     <div className="policy-page">
+      <SEOHead
+        title="Terms & Conditions | TripEasy"
+        description="Read the terms and conditions and booking agreement of TripEasy Travel Services."
+        keywords="terms and conditions, booking rules, cancellation policies, liability, travel agreement, TripEasy"
+        canonical="https://tripeasy.in/terms-and-conditions"
+      />
       <div className="policy-header" style={headerBackground}>
         <div className="container">
           <h1 className="policy-title">Terms & Conditions</h1>

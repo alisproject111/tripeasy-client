@@ -1,14 +1,12 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/policy-styles.css";
+import SEOHead from "../components/SEOHead";
 
 function PrivacyPolicy() {
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo({ top: 0, behavior: "smooth" });
-
-    // Set document title
-    document.title = "Privacy Policy - TripEasy";
   }, []);
 
   // Background image URL - assuming the image is in public folder
@@ -18,6 +16,12 @@ function PrivacyPolicy() {
 
   return (
     <div className="policy-page">
+      <SEOHead
+        title="Privacy Policy | TripEasy"
+        description="Privacy policy and data protection guidelines of TripEasy Travel Services."
+        keywords="privacy policy, data protection, security, booking terms, TripEasy"
+        canonical="https://tripeasy.in/privacy-policy"
+      />
       <div className="policy-header" style={headerBackground}>
         <div className="container">
           <h1 className="policy-title">Privacy Policy</h1>

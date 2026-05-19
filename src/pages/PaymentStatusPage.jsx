@@ -5,6 +5,7 @@ import AnimatedElement from "../components/AnimatedElement"
 import Toast from "../components/Toast"
 import ReceiptTemplate from "../components/ReceiptTemplate"
 import { apiEndpoints } from "../config/api"
+import SEOHead from "../components/SEOHead"
 
 // Dynamic script loader helper for html2pdf.js
 const loadHtml2Pdf = () => {
@@ -698,6 +699,12 @@ function PaymentStatus() {
   if (paymentStatus.loading) {
     return (
       <div className="ps-payment-status-container">
+        <SEOHead
+          title="Verifying Payment | TripEasy"
+          description="Verifying your payment status for the tour package booking."
+          keywords="payment verification, verification, status, TripEasy"
+          canonical="https://tripeasy.in/payment-status"
+        />
         <div className="ps-loading-container">
           <div className="ps-loading-spinner"></div>
           <p>Verifying payment status...</p>
@@ -710,6 +717,12 @@ function PaymentStatus() {
   if (paymentStatus.success && isSendingEmail && !isEmailSendingComplete) {
     return (
       <div className="ps-payment-status-container" style={{ backgroundColor: "white" }}>
+        <SEOHead
+          title="Sending Receipt | TripEasy"
+          description="Generating your booking receipt and sending it to your email."
+          keywords="email receipt, receipt processing, TripEasy"
+          canonical="https://tripeasy.in/payment-status"
+        />
         <div className="ps-email-sending-fullscreen">
           <div className="ps-email-animation-container">
             <div className="ps-email-icon">
@@ -754,6 +767,12 @@ function PaymentStatus() {
 
   return (
     <div className="ps-payment-status-container">
+      <SEOHead
+        title={paymentStatus.success ? "Booking Confirmed | TripEasy" : "Booking Failed | TripEasy"}
+        description="Verify the transaction status of your holiday package booking with TripEasy."
+        keywords="booking status, payment verification, trip packages, TripEasy"
+        canonical="https://tripeasy.in/payment-status"
+      />
       <div className="container">
         <AnimatedElement animation="fade-up">
           <div className={`ps-status-card ${paymentStatus.success ? "ps-success" : "ps-error"}`}>
