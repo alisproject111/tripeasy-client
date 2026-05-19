@@ -585,7 +585,7 @@ function PaymentStatus() {
             margin: [10, 10, 10, 10],
             filename: `TripEasy_Receipt_${orderData.order_id}.pdf`,
             image: { type: "jpeg", quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true, logging: false },
+            html2canvas: { scale: 2, useCORS: true, logging: false, scrollY: 0, scrollX: 0 },
             jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
           }
           const pdfDataUri = await html2pdf().set(opt).from(element).outputPdf('datauristring')
@@ -738,7 +738,7 @@ function PaymentStatus() {
 
         {/* Hidden receipt element for client-side PDF generation */}
         {paymentStatus.orderDetails && bookingDetails && packageDetails && (
-          <div style={{ position: "absolute", left: "-9999px", top: "-9999px" }}>
+          <div style={{ position: "fixed", top: 0, left: 0, width: "800px", opacity: 0, pointerEvents: "none", zIndex: -9999 }}>
             <div id="hidden-receipt-pdf">
               <ReceiptTemplate
                 orderData={paymentStatus.orderDetails}
@@ -892,7 +892,7 @@ function PaymentStatus() {
 
       {/* Hidden receipt element for client-side PDF generation */}
       {paymentStatus.orderDetails && bookingDetails && packageDetails && (
-        <div style={{ position: "absolute", left: "-9999px", top: "-9999px" }}>
+        <div style={{ position: "fixed", top: 0, left: 0, width: "800px", opacity: 0, pointerEvents: "none", zIndex: -9999 }}>
           <div id="hidden-receipt-pdf">
             <ReceiptTemplate
               orderData={paymentStatus.orderDetails}
