@@ -1,5 +1,3 @@
-"use client";
-
 import { Suspense, lazy, useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -89,7 +87,7 @@ function App() {
   const { ToastContainer } = useToast();
 
   return (
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <ScrollToTopOnNavigation />
       <div className="app">
         <ConditionalLayout>

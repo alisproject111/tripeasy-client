@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import PackageCard from "./PackageCard"
@@ -14,9 +12,6 @@ const PopularPackages = () => {
   const [popularPackages, setPopularPackages] = useState(cachedData || [])
   const [loading, setLoading] = useState(!cachedData)
   const [isMobile, setIsMobile] = useState(false)
-  const [error, setError] = useState(null)
-  const [retryCount, setRetryCount] = useState(0)
-  const [isRetrying, setIsRetrying] = useState(false)
 
   // Fetch packages data from API
   useEffect(() => {
@@ -47,7 +42,6 @@ const PopularPackages = () => {
             console.log("[v0] Featured packages loaded:", data.packages.length)
             setCachedPackages(data.packages)
             setPopularPackages(data.packages)
-            setError(null)
             setLoading(false)
           }
         } else {

@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect, useCallback, useRef } from "react"
 import "../styles/SearchBar.css" // Use the SearchBar styles
 import "../styles/FilterBar.css" // Keep this for any specific FilterBar styles

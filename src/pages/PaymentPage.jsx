@@ -1,6 +1,4 @@
-"use client"
-
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useParams, useLocation, useNavigate, Link } from "react-router-dom"
 import "../styles/PaymentPage.css"
 import AnimatedElement from "../components/AnimatedElement"
@@ -13,7 +11,7 @@ function PaymentPage() {
   const navigate = useNavigate()
 
   // Get booking details from location state with sessionStorage fallback
-  const [bookingDetails, setBookingDetails] = useState(() => {
+  const [bookingDetails] = useState(() => {
     if (location.state?.bookingDetails) {
       return location.state.bookingDetails
     }
@@ -25,7 +23,7 @@ function PaymentPage() {
     }
   })
 
-  const [packageDetails, setPackageDetails] = useState(() => {
+  const [packageDetails] = useState(() => {
     if (location.state?.packageDetails) {
       return location.state.packageDetails
     }
@@ -37,7 +35,7 @@ function PaymentPage() {
     }
   })
 
-  const [totalPrice, setTotalPrice] = useState(() => {
+  const [totalPrice] = useState(() => {
     if (location.state?.totalPrice !== undefined) {
       return location.state.totalPrice
     }
@@ -65,9 +63,6 @@ function PaymentPage() {
   // Booking reference
   const [bookingReference, setBookingReference] = useState("")
 
-  // Payment session data
-  const [paymentSessionData, setPaymentSessionData] = useState(null)
-
   // Add state for customer details modal
   const [showCustomerDetails, setShowCustomerDetails] = useState(false)
 
@@ -78,6 +73,103 @@ function PaymentPage() {
   const toggleCustomerDetails = () => {
     setShowCustomerDetails(!showCustomerDetails)
   }
+
+  // Function to verify payment after redirect
+  const verifyPaymentFromRedirect = useCallback(async (orderId) => {
+    document.body.classList.add("pp-body-blur")
+    setPaymentStatus({
+      processing: true,
+      success: false,
+      error: false,
+      message: "Verifying payment...",
+    })
+
+    try {
+      const response = await fetch(
+        `${apiEndpoints.createBookingRequest.replace("/api/booking-requests", "/api/verify-payment")}/${orderId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-version": "2023-08-01",
+          },
+        },
+      )
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        console.error("[v0] Payment verification error:", data)
+        document.body.classList.remove("pp-body-blur")
+        throw new Error("Payment verification failed")
+      }
+
+      // Check payment status
+      if (data.status === "PAID") {
+        // Generate a booking reference if not already set
+        setBookingReference((prev) => prev || `TP${id}B${Math.floor(Math.random() * 10000)}`)
+
+        // Store booking and package details in sessionStorage for receipt email
+        if (bookingDetails && packageDetails) {
+          console.log("[v0] Storing booking details in sessionStorage before redirect")
+          sessionStorage.setItem("currentPackageId", id)
+          sessionStorage.setItem(`bookingDetails_${id}`, JSON.stringify(bookingDetails))
+          sessionStorage.setItem(`packageDetails_${id}`, JSON.stringify(packageDetails))
+          sessionStorage.setItem(`totalPrice_${id}`, JSON.stringify(totalPrice))
+        }
+
+        // Payment verified successfully
+        document.body.classList.remove("pp-body-blur")
+        setPaymentStatus({
+          processing: false,
+          success: true,
+          error: false,
+          message: "Payment successful! Your booking is confirmed.",
+        })
+
+        setToastMessage("Payment successful! Your booking is confirmed.")
+        setToastType("success")
+        setShowToast(true)
+
+        // Add URL parameters with booking and package details
+        const bookingDataParam = encodeURIComponent(JSON.stringify(bookingDetails))
+        const packageDataParam = encodeURIComponent(JSON.stringify(packageDetails))
+
+        // Redirect to payment status page after a short delay
+        setTimeout(() => {
+          navigate(
+            `/payment-status?order_id=${orderId}&bookingData=${bookingDataParam}&packageData=${packageDataParam}`,
+          )
+        }, 1500)
+      } else {
+        // Payment not successful
+        document.body.classList.remove("pp-body-blur")
+        setPaymentStatus({
+          processing: false,
+          success: false,
+          error: true,
+          message: `Payment not successful. Status: ${data.status}`,
+        })
+
+        setToastMessage(`Payment not successful. Status: ${data.status}`)
+        setToastType("error")
+        setShowToast(true)
+      }
+    } catch (error) {
+      console.error("[v0] Error verifying payment:", error)
+      document.body.classList.remove("pp-body-blur")
+      setPaymentStatus({
+        processing: false,
+        success: false,
+        error: true,
+        message: "Payment verification failed. Please contact support.",
+      })
+
+      setToastMessage("Payment verification failed. Please contact support.")
+      setToastType("error")
+      setShowToast(true)
+    }
+  }, [id, bookingDetails, packageDetails, totalPrice, navigate])
 
   useEffect(() => {
     // Scroll to top when component mounts
@@ -117,7 +209,7 @@ function PaymentPage() {
       // Make sure to remove the blur class when component unmounts
       document.body.classList.remove("pp-body-blur")
     }
-  }, [bookingDetails, packageDetails, id, navigate, redirectingToGateway])
+  }, [bookingDetails, packageDetails, id, navigate, redirectingToGateway, verifyPaymentFromRedirect])
 
   // Add event listener for popstate (back button)
   useEffect(() => {
@@ -182,7 +274,6 @@ function PaymentPage() {
         throw new Error(data.message || "Failed to create order")
       }
 
-      setPaymentSessionData(data)
       return data
     } catch (error) {
       console.error("[v0] Error creating order:", error)
@@ -199,106 +290,6 @@ function PaymentPage() {
       setShowToast(true)
 
       return null
-    }
-  }
-
-  // Function to verify payment after redirect
-  const verifyPaymentFromRedirect = async (orderId) => {
-    document.body.classList.add("pp-body-blur")
-    setPaymentStatus({
-      processing: true,
-      success: false,
-      error: false,
-      message: "Verifying payment...",
-    })
-
-    try {
-      const response = await fetch(
-        `${apiEndpoints.createBookingRequest.replace("/api/booking-requests", "/api/verify-payment")}/${orderId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-version": "2023-08-01",
-          },
-        },
-      )
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        console.error("[v0] Payment verification error:", data)
-        document.body.classList.remove("pp-body-blur")
-        throw new Error("Payment verification failed")
-      }
-
-      // Check payment status
-      if (data.status === "PAID") {
-        // Generate a booking reference if not already set
-        if (!bookingReference) {
-          const bookingRef = `TP${id}B${Math.floor(Math.random() * 10000)}`
-          setBookingReference(bookingRef)
-        }
-
-        // Store booking and package details in sessionStorage for receipt email
-        if (bookingDetails && packageDetails) {
-          console.log("[v0] Storing booking details in sessionStorage before redirect")
-          sessionStorage.setItem("currentPackageId", id)
-          sessionStorage.setItem(`bookingDetails_${id}`, JSON.stringify(bookingDetails))
-          sessionStorage.setItem(`packageDetails_${id}`, JSON.stringify(packageDetails))
-          sessionStorage.setItem(`totalPrice_${id}`, JSON.stringify(totalPrice))
-        }
-
-        // Payment verified successfully
-        document.body.classList.remove("pp-body-blur")
-        setPaymentStatus({
-          processing: false,
-          success: true,
-          error: false,
-          message: "Payment successful! Your booking is confirmed.",
-        })
-
-        setToastMessage("Payment successful! Your booking is confirmed.")
-        setToastType("success")
-        setShowToast(true)
-
-        // Add URL parameters with booking and package details
-        const bookingDataParam = encodeURIComponent(JSON.stringify(bookingDetails))
-        const packageDataParam = encodeURIComponent(JSON.stringify(packageDetails))
-
-        // Redirect to payment status page after a short delay
-        setTimeout(() => {
-          navigate(
-            `/payment-status?order_id=${orderId}&bookingData=${bookingDataParam}&packageData=${packageDataParam}`,
-          )
-        }, 1500)
-      } else {
-        // Payment not successful
-        document.body.classList.remove("pp-body-blur")
-        setPaymentStatus({
-          processing: false,
-          success: false,
-          error: true,
-          message: `Payment not successful. Status: ${data.status}`,
-        })
-
-        setToastMessage(`Payment not successful. Status: ${data.status}`)
-        setToastType("error")
-        setShowToast(true)
-      }
-    } catch (error) {
-      console.error("[v0] Error verifying payment:", error)
-      document.body.classList.remove("pp-body-blur")
-      setPaymentStatus({
-        processing: false,
-        success: false,
-        error: true,
-        message: "Payment verification failed. Please contact support.",
-      })
-
-      setToastMessage("Payment verification failed. Please contact support.")
-      setToastType("error")
-      setShowToast(true)
     }
   }
 

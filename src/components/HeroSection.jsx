@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/HeroSection.css";
@@ -74,7 +72,7 @@ function HeroSection() {
                 alt={slide.title}
                 className="hero-image"
                 loading="eager"
-                fetchPriority="high"
+                fetchpriority="high"
                 style={{
                   width: "100%",
                   height: "100%",

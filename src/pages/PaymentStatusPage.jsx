@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect, useRef } from "react"
 import { useSearchParams, useNavigate, Link } from "react-router-dom"
 import "../styles/PaymentStatusPage.css"

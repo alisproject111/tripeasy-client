@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect, useRef } from "react";
 import { generatePlaceholder, createLazyLoadObserver, optimizeImageElement } from "../utils/imageOptimization";
 

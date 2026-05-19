@@ -1,6 +1,4 @@
-"use client"
-
-import { useRef, useEffect, useState } from "react"
+import { useRef, useEffect, useState, useCallback } from "react"
 import DestinationCard from "./DestinationCard"
 import "../styles/PopularDestinations.css"
 import AnimatedElement from "./AnimatedElement"
@@ -80,6 +78,33 @@ const PopularDestinations = ({ onLoadComplete }) => {
     }
   }, [cachedDestinations])
 
+  const checkScrollPosition = useCallback((ref) => {
+    if (!ref || !ref.current) return
+    const { scrollLeft, scrollWidth, clientWidth } = ref.current
+
+    if (ref === domesticRef) {
+      setCanScrollLeftDomestic(scrollLeft > 10)
+      setCanScrollRightDomestic(scrollLeft + clientWidth < scrollWidth - 10)
+      if (scrollLeft + clientWidth >= scrollWidth - 10) {
+        setReachedEndDomestic(true)
+        setScrollDirectionDomestic("left")
+      } else if (scrollLeft <= 10 && scrollDirectionDomestic === "left") {
+        setReachedEndDomestic(false)
+        setScrollDirectionDomestic("right")
+      }
+    } else if (ref === internationalRef) {
+      setCanScrollLeftInternational(scrollLeft > 10)
+      setCanScrollRightInternational(scrollLeft + clientWidth < scrollWidth - 10)
+      if (scrollLeft + clientWidth >= scrollWidth - 10) {
+        setReachedEndInternational(true)
+        setScrollDirectionInternational("left")
+      } else if (scrollLeft <= 10 && scrollDirectionInternational === "left") {
+        setReachedEndInternational(false)
+        setScrollDirectionInternational("right")
+      }
+    }
+  }, [scrollDirectionDomestic, scrollDirectionInternational])
+
   // Handle touch events for mobile devices
   useEffect(() => {
     const handleTouchStart = () => {
@@ -95,32 +120,35 @@ const PopularDestinations = ({ onLoadComplete }) => {
       }, 1500)
     }
 
+    const domRef = domesticRef.current
+    const intRef = internationalRef.current
+
     // Add touch event listeners to both scroll containers
-    if (domesticRef.current) {
-      domesticRef.current.addEventListener("touchstart", handleTouchStart, {
+    if (domRef) {
+      domRef.addEventListener("touchstart", handleTouchStart, {
         passive: true,
       })
-      domesticRef.current.addEventListener("touchend", handleTouchEnd, {
+      domRef.addEventListener("touchend", handleTouchEnd, {
         passive: true,
       })
     }
 
-    if (internationalRef.current) {
-      internationalRef.current.addEventListener("touchstart", handleTouchStart, { passive: true })
-      internationalRef.current.addEventListener("touchend", handleTouchEnd, {
+    if (intRef) {
+      intRef.addEventListener("touchstart", handleTouchStart, { passive: true })
+      intRef.addEventListener("touchend", handleTouchEnd, {
         passive: true,
       })
     }
 
     // Clean up event listeners
     return () => {
-      if (domesticRef.current) {
-        domesticRef.current.removeEventListener("touchstart", handleTouchStart)
-        domesticRef.current.removeEventListener("touchend", handleTouchEnd)
+      if (domRef) {
+        domRef.removeEventListener("touchstart", handleTouchStart)
+        domRef.removeEventListener("touchend", handleTouchEnd)
       }
-      if (internationalRef.current) {
-        internationalRef.current.removeEventListener("touchstart", handleTouchStart)
-        internationalRef.current.removeEventListener("touchend", handleTouchEnd)
+      if (intRef) {
+        intRef.removeEventListener("touchstart", handleTouchStart)
+        intRef.removeEventListener("touchend", handleTouchEnd)
       }
     }
   }, [])
@@ -143,30 +171,37 @@ const PopularDestinations = ({ onLoadComplete }) => {
       }
     }
 
-    if (domesticRef.current) {
-      domesticRef.current.addEventListener("scroll", () => handleScroll(domesticRef), { passive: true })
+    const domRef = domesticRef.current
+    const intRef = internationalRef.current
+
+    const handleDomScroll = () => handleScroll(domesticRef)
+    const handleIntScroll = () => handleScroll(internationalRef)
+
+    if (domRef) {
+      domRef.addEventListener("scroll", handleDomScroll, { passive: true })
     }
 
-    if (internationalRef.current) {
-      internationalRef.current.addEventListener("scroll", () => handleScroll(internationalRef), { passive: true })
+    if (intRef) {
+      intRef.addEventListener("scroll", handleIntScroll, { passive: true })
     }
 
     // Initial check
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       checkScrollPosition(domesticRef)
       checkScrollPosition(internationalRef)
     }, 100)
 
     return () => {
-      if (domesticRef.current) {
-        domesticRef.current.removeEventListener("scroll", () => handleScroll(domesticRef))
+      if (domRef) {
+        domRef.removeEventListener("scroll", handleDomScroll)
       }
-      if (internationalRef.current) {
-        internationalRef.current.removeEventListener("scroll", () => handleScroll(internationalRef))
+      if (intRef) {
+        intRef.removeEventListener("scroll", handleIntScroll)
       }
+      clearTimeout(timer)
       clearTimeout(window.scrollTimeout)
     }
-  }, [domesticDestinations, internationalDestinations, isTouchScrolling])
+  }, [domesticDestinations, internationalDestinations, isTouchScrolling, checkScrollPosition])
 
   // Auto-scroll functionality with improved direction change
   useEffect(() => {
@@ -215,34 +250,8 @@ const PopularDestinations = ({ onLoadComplete }) => {
     reachedEndDomestic,
     reachedEndInternational,
     isTouchScrolling,
+    checkScrollPosition,
   ])
-
-  const checkScrollPosition = (ref) => {
-    if (!ref || !ref.current) return
-    const { scrollLeft, scrollWidth, clientWidth } = ref.current
-
-    if (ref === domesticRef) {
-      setCanScrollLeftDomestic(scrollLeft > 10)
-      setCanScrollRightDomestic(scrollLeft + clientWidth < scrollWidth - 10)
-      if (scrollLeft + clientWidth >= scrollWidth - 10) {
-        setReachedEndDomestic(true)
-        setScrollDirectionDomestic("left")
-      } else if (scrollLeft <= 10 && scrollDirectionDomestic === "left") {
-        setReachedEndDomestic(false)
-        setScrollDirectionDomestic("right")
-      }
-    } else if (ref === internationalRef) {
-      setCanScrollLeftInternational(scrollLeft > 10)
-      setCanScrollRightInternational(scrollLeft + clientWidth < scrollWidth - 10)
-      if (scrollLeft + clientWidth >= scrollWidth - 10) {
-        setReachedEndInternational(true)
-        setScrollDirectionInternational("left")
-      } else if (scrollLeft <= 10 && scrollDirectionInternational === "left") {
-        setReachedEndInternational(false)
-        setScrollDirectionInternational("right")
-      }
-    }
-  }
 
   const scroll = (ref, direction) => {
     if (!ref || !ref.current) return

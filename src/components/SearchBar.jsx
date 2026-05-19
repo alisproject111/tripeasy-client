@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useCallback, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import "../styles/SearchBar.css"

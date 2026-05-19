@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import "../styles/PackageCard.css";
@@ -21,15 +19,17 @@ function PackageCard({ package: pkg }) {
     return `${nights}N/${days}D`;
   }, []);
 
-  // Calculate discount percentage
-  const calculateDiscount = useCallback((originalPrice, currentPrice) => {
-    return Math.round(((originalPrice - currentPrice) / originalPrice) * 100);
-  }, []);
-
   // Memoize original price calculation
   const originalPrice = useMemo(() => {
     return Math.round(pkg.price * (1 + Math.random() * 0.1 + 0.1));
   }, [pkg.price]);
+
+  // Copy to clipboard
+  const copyToClipboard = useCallback((text) => {
+    navigator.clipboard.writeText(text).catch((error) => {
+      console.error("Error copying to clipboard:", error);
+    });
+  }, []);
 
   // Handle sharing functionality
   const handleShare = useCallback((e) => {
@@ -54,14 +54,7 @@ function PackageCard({ package: pkg }) {
     } else {
       copyToClipboard(shareUrl);
     }
-  }, [pkg.name]);
-
-  // Copy to clipboard
-  const copyToClipboard = useCallback((text) => {
-    navigator.clipboard.writeText(text).catch((error) => {
-      console.error("Error copying to clipboard:", error);
-    });
-  }, []);
+  }, [pkg.name, copyToClipboard]);
 
   // Optimized PDF download with on-demand loading
   const handleDownload = useCallback(async (e) => {

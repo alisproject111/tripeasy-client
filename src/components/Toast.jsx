@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import "../styles/Toast.css";

@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect, useRef } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import SEOHead from "../components/SEOHead"
@@ -76,7 +74,6 @@ function PackageDetailPage() {
 
       if (!sidebar || !footer) return
 
-      const sidebarRect = sidebar.getBoundingClientRect()
       const footerRect = footer.getBoundingClientRect()
       const windowHeight = window.innerHeight
 

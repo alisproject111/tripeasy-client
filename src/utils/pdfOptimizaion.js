@@ -145,10 +145,12 @@ export const getPDFCacheSize = () => {
   return pdfCache.size;
 };
 
-export default {
+const pdfOptimization = {
   preloadPDF,
   downloadPDFOnDemand,
   checkPDFAvailability,
   clearPDFCache,
   getPDFCacheSize,
 };
+
+export default pdfOptimization;

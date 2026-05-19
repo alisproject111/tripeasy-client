@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect, useRef, useMemo } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import PackageCard from "./PackageCard"
@@ -287,11 +285,7 @@ function PackageList({ filters = {}, packageType = "all" }) {
           {totalPages > 1 && (
             <div className="package-pagination">
               <button
-                onClick={() => {
-                  const searchParams = new URLSearchParams(location.search)
-                  searchParams.set("page", Math.max(1, currentPage - 1).toString())
-                  navigate(`${location.pathname}?${searchParams.toString()}`)
-                }}
+                onClick={() => paginate(Math.max(1, currentPage - 1))}
                 disabled={currentPage === 1}
                 className="package-pagination-button"
                 aria-label="Previous page"
@@ -303,11 +297,7 @@ function PackageList({ filters = {}, packageType = "all" }) {
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                   <button
                     key={`page-${page}`}
-                    onClick={() => {
-                      const searchParams = new URLSearchParams(location.search)
-                      searchParams.set("page", page.toString())
-                      navigate(`${location.pathname}?${searchParams.toString()}`)
-                    }}
+                    onClick={() => paginate(page)}
                     className={`package-page-number ${currentPage === page ? "package-page-active" : ""}`}
                     aria-label={`Page ${page}`}
                     aria-current={currentPage === page ? "page" : undefined}
@@ -318,11 +308,7 @@ function PackageList({ filters = {}, packageType = "all" }) {
               </div>
 
               <button
-                onClick={() => {
-                  const searchParams = new URLSearchParams(location.search)
-                  searchParams.set("page", Math.min(totalPages, currentPage + 1).toString())
-                  navigate(`${location.pathname}?${searchParams.toString()}`)
-                }}
+                onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
                 disabled={currentPage === totalPages}
                 className="package-pagination-button"
                 aria-label="Next page"

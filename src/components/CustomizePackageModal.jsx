@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect, useRef } from "react"
 import "../styles/CustomizePackageModal.css"
 import Toast from "./Toast"
@@ -26,10 +24,7 @@ function CustomizePackageModal({ onClose }) {
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
-  const [suggestions, setSuggestions] = useState([])
-  const [showSuggestions, setShowSuggestions] = useState(false)
   const [toast, setToast] = useState({ show: false, message: "", type: "" })
-  const [allDestinations, setAllDestinations] = useState([])
   const [countdown, setCountdown] = useState(5)
 
   useEffect(() => {
@@ -51,26 +46,6 @@ function CustomizePackageModal({ onClose }) {
       if (timer) clearInterval(timer)
     }
   }, [isSuccess, onClose])
-
-  useEffect(() => {
-    const fetchDestinations = async () => {
-      try {
-        console.log("[v0] Fetching modal destinations from:", apiEndpoints.getDestinations)
-        const response = await fetch(apiEndpoints.getDestinations)
-        const data = await response.json()
-
-        if (data.success && data.data.destinations) {
-          const destinations = data.data.destinations.map((dest) => dest.name).sort()
-          setAllDestinations(destinations)
-        }
-      } catch (error) {
-        console.error("[v0] Error fetching destinations:", error)
-        setAllDestinations([])
-      }
-    }
-
-    fetchDestinations()
-  }, [])
 
   // Activity options
   const activityOptions = [
@@ -139,27 +114,6 @@ function CustomizePackageModal({ onClose }) {
         [name]: value,
       })
     }
-
-    // Show destination suggestions
-    if (name === "destination") {
-      if (value.trim().length > 0) {
-        const filtered = allDestinations.filter((dest) => dest.toLowerCase().includes(value.toLowerCase()))
-        setSuggestions(filtered)
-        setShowSuggestions(true)
-      } else {
-        setSuggestions(allDestinations)
-        setShowSuggestions(false)
-      }
-    }
-  }
-
-  // Handle destination suggestion selection
-  const handleSelectSuggestion = (suggestion) => {
-    setFormData({
-      ...formData,
-      destination: suggestion,
-    })
-    setShowSuggestions(false)
   }
 
   // Handle checkbox change for activities

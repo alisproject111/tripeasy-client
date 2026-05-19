@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import "../styles/BookingPage.css"
@@ -86,26 +84,29 @@ function BookingPage() {
 
   // Update additional travelers when traveler count changes
   useEffect(() => {
-    const currentTravelers = formData.additionalTravelers || []
-    const newTravelerCount = Math.max(0, formData.travelers - 1)
+    setFormData((prev) => {
+      const currentTravelers = prev.additionalTravelers || []
+      const newTravelerCount = Math.max(0, prev.travelers - 1)
 
-    if (currentTravelers.length < newTravelerCount) {
-      // Add more traveler slots
-      const newTravelers = [...currentTravelers]
-      for (let i = currentTravelers.length; i < newTravelerCount; i++) {
-        newTravelers.push({ fullName: "", gender: "", age: "" })
+      if (currentTravelers.length < newTravelerCount) {
+        // Add more traveler slots
+        const newTravelers = [...currentTravelers]
+        for (let i = currentTravelers.length; i < newTravelerCount; i++) {
+          newTravelers.push({ fullName: "", gender: "", age: "" })
+        }
+        return {
+          ...prev,
+          additionalTravelers: newTravelers,
+        }
+      } else if (currentTravelers.length > newTravelerCount) {
+        // Remove excess traveler slots
+        return {
+          ...prev,
+          additionalTravelers: currentTravelers.slice(0, newTravelerCount),
+        }
       }
-      setFormData((prev) => ({
-        ...prev,
-        additionalTravelers: newTravelers,
-      }))
-    } else if (currentTravelers.length > newTravelerCount) {
-      // Remove excess traveler slots
-      setFormData((prev) => ({
-        ...prev,
-        additionalTravelers: currentTravelers.slice(0, newTravelerCount),
-      }))
-    }
+      return prev
+    })
   }, [formData.travelers])
 
   // Set minimum date for travel date (tomorrow)

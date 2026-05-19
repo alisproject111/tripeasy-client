@@ -1,6 +1,4 @@
-"use client"
-
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import DestinationCard from "./DestinationCard"
 import "../styles/MonthlyPackages.css"
 import AnimatedElement from "./AnimatedElement"
@@ -23,7 +21,6 @@ function MonthlyDestinations() {
     destinations: cachedDestinations || [],
   })
   const [loading, setLoading] = useState(!cachedDestinations)
-  const [error, setError] = useState(null)
   const destinationsRef = useRef(null)
 
   const months = [
@@ -70,7 +67,6 @@ function MonthlyDestinations() {
               packages: [],
               destinations: data.data.destinations || [],
             })
-            setError(null)
             setLoading(false)
           }
         } else {
@@ -90,26 +86,42 @@ function MonthlyDestinations() {
     }
   }, [cachedDestinations])
 
-  const getMonthlyDestinations = (month) => {
-    return packagesData.destinations.filter((dest) => dest.favorableMonths && dest.favorableMonths.includes(month))
-  }
-
   const [monthlyDestinationsList, setMonthlyDestinationsList] = useState([])
+
+  // Check if scroll has reached the end or beginning
+  const checkScrollPosition = useCallback(() => {
+    if (!destinationsRef || !destinationsRef.current) return
+
+    const { scrollLeft, scrollWidth, clientWidth } = destinationsRef.current
+
+    setCanScrollLeft(scrollLeft > 10)
+    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 10)
+
+    if (scrollLeft + clientWidth >= scrollWidth - 10) {
+      setScrollDirection("left")
+    } else if (scrollLeft <= 10 && scrollDirection === "left") {
+      setScrollDirection("right")
+    }
+  }, [scrollDirection])
 
   useEffect(() => {
     if (!loading && packagesData.destinations.length > 0) {
-      const destinations = getMonthlyDestinations(currentMonth)
+      const destinations = packagesData.destinations.filter(
+        (dest) => dest.favorableMonths && dest.favorableMonths.includes(currentMonth)
+      )
       setMonthlyDestinationsList(destinations)
 
       if (destinationsRef.current) {
         destinationsRef.current.scrollLeft = 0
       }
 
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         checkScrollPosition()
       }, 100)
+
+      return () => clearTimeout(timer)
     }
-  }, [currentMonth, packagesData, loading])
+  }, [currentMonth, packagesData, loading, checkScrollPosition])
 
   const handleMonthChange = (month) => {
     setCurrentMonth(month)
@@ -135,22 +147,6 @@ function MonthlyDestinations() {
     }, 300)
   }
 
-  // Check if scroll has reached the end or beginning
-  const checkScrollPosition = () => {
-    if (!destinationsRef || !destinationsRef.current) return
-
-    const { scrollLeft, scrollWidth, clientWidth } = destinationsRef.current
-
-    setCanScrollLeft(scrollLeft > 10)
-    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 10)
-
-    if (scrollLeft + clientWidth >= scrollWidth - 10) {
-      setScrollDirection("left")
-    } else if (scrollLeft <= 10 && scrollDirection === "left") {
-      setScrollDirection("right")
-    }
-  }
-
   useEffect(() => {
     const handleTouchStart = () => {
       setIsTouchScrolling(true)
@@ -164,19 +160,20 @@ function MonthlyDestinations() {
       }, 1500)
     }
 
-    if (destinationsRef.current) {
-      destinationsRef.current.addEventListener("touchstart", handleTouchStart, {
+    const currentRef = destinationsRef.current
+    if (currentRef) {
+      currentRef.addEventListener("touchstart", handleTouchStart, {
         passive: true,
       })
-      destinationsRef.current.addEventListener("touchend", handleTouchEnd, {
+      currentRef.addEventListener("touchend", handleTouchEnd, {
         passive: true,
       })
     }
 
     return () => {
-      if (destinationsRef.current) {
-        destinationsRef.current.removeEventListener("touchstart", handleTouchStart)
-        destinationsRef.current.removeEventListener("touchend", handleTouchEnd)
+      if (currentRef) {
+        currentRef.removeEventListener("touchstart", handleTouchStart)
+        currentRef.removeEventListener("touchend", handleTouchEnd)
       }
     }
   }, [])
@@ -195,19 +192,20 @@ function MonthlyDestinations() {
       }
     }
 
-    if (destinationsRef.current) {
-      destinationsRef.current.addEventListener("scroll", handleScroll, {
+    const currentRef = destinationsRef.current
+    if (currentRef) {
+      currentRef.addEventListener("scroll", handleScroll, {
         passive: true,
       })
     }
 
     return () => {
-      if (destinationsRef.current) {
-        destinationsRef.current.removeEventListener("scroll", handleScroll)
+      if (currentRef) {
+        currentRef.removeEventListener("scroll", handleScroll)
       }
       clearTimeout(window.monthlyScrollTimeout)
     }
-  }, [scrollDirection, isTouchScrolling])
+  }, [scrollDirection, isTouchScrolling, checkScrollPosition])
 
   useEffect(() => {
     if (!autoScrollEnabled || monthlyDestinationsList.length === 0 || isTouchScrolling) return
@@ -228,7 +226,7 @@ function MonthlyDestinations() {
     const scrollInterval = setInterval(scrollDestinations, 30)
 
     return () => clearInterval(scrollInterval)
-  }, [isPaused, monthlyDestinationsList, autoScrollEnabled, scrollDirection, isTouchScrolling])
+  }, [isPaused, monthlyDestinationsList, autoScrollEnabled, scrollDirection, isTouchScrolling, checkScrollPosition])
 
   if (loading) {
     return (
