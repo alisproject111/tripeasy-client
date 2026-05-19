@@ -23,7 +23,7 @@ export const apiEndpoints = {
   sendReceipt: `${API_BASE_URL}/api/send-receipt`,
   generateReceipt: `${API_BASE_URL}/api/generate-receipt`,
   healthCheck: `${API_BASE_URL}/api/ha`,
-
+  contact: `${API_BASE_URL}/api/contact`,
 }
 
 export default API_BASE_URL

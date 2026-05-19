@@ -6,6 +6,7 @@ import "../styles/ContactPage.css";
 import AnimatedElement from "../components/AnimatedElement";
 import AnimatedSection from "../components/AnimatedSection";
 import SEOHead from "../components/SEOHead";
+import { apiEndpoints } from "../config/api";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -99,23 +100,17 @@ const ContactPage = () => {
     });
 
     try {
-      // Dynamically import EmailJS
-      const emailjs = await import("@emailjs/browser");
-
-      const result = await emailjs.send(
-        "service_aopwv0d", // Replace with your EmailJS service ID
-        "template_gwm27n6", // Replace with your EmailJS template ID
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          from_phone: formData.phone,
-          from_subject: formData.subject,
-          message: formData.message,
+      const response = await fetch(apiEndpoints.contact, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        "MCrppxAsPoyKn-siI" // Replace with your EmailJS public key
-      );
+        body: JSON.stringify(formData),
+      });
 
-      if (result.status === 200) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         setFormStatus({
           submitted: true,
           submitting: false,
@@ -135,6 +130,8 @@ const ContactPage = () => {
           message: "",
         });
         setFormErrors({});
+      } else {
+        throw new Error(result.message || "Failed to send message");
       }
     } catch (error) {
       console.error("Email sending failed:", error);
