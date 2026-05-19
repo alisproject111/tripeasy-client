@@ -681,6 +681,22 @@ function PaymentStatus() {
     setShowReceipt(!showReceipt)
   }
 
+  // Function to handle retry navigation to PaymentPage
+  const handleRetry = () => {
+    const packageId = packageDetails?.id || packageDetails?._id || sessionStorage.getItem("currentPackageId")
+    if (packageId) {
+      navigate(`/payment/${packageId}`, {
+        state: {
+          bookingDetails,
+          packageDetails,
+          totalPrice: sessionStorage.getItem(`totalPrice_${packageId}`) ? JSON.parse(sessionStorage.getItem(`totalPrice_${packageId}`)) : (packageDetails?.price * (bookingDetails?.travelers || 1))
+        }
+      })
+    } else {
+      navigate("/")
+    }
+  }
+
   if (paymentStatus.loading) {
     return (
       <div className="ps-payment-status-container">
@@ -846,7 +862,7 @@ function PaymentStatus() {
                 </button>
               )}
               {!paymentStatus.success && (
-                <button className="ps-retry-button" onClick={() => navigate(-1)}>
+                <button className="ps-retry-button" onClick={handleRetry}>
                   <i className="fas fa-redo"></i> Try Again
                 </button>
               )}

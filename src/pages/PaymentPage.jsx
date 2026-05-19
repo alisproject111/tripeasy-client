@@ -12,8 +12,42 @@ function PaymentPage() {
   const location = useLocation()
   const navigate = useNavigate()
 
-  // Get booking details from location state
-  const { bookingDetails, packageDetails, totalPrice } = location.state || {}
+  // Get booking details from location state with sessionStorage fallback
+  const [bookingDetails, setBookingDetails] = useState(() => {
+    if (location.state?.bookingDetails) {
+      return location.state.bookingDetails
+    }
+    try {
+      const stored = sessionStorage.getItem(`bookingDetails_${id}`)
+      return stored ? JSON.parse(stored) : null
+    } catch (e) {
+      return null
+    }
+  })
+
+  const [packageDetails, setPackageDetails] = useState(() => {
+    if (location.state?.packageDetails) {
+      return location.state.packageDetails
+    }
+    try {
+      const stored = sessionStorage.getItem(`packageDetails_${id}`)
+      return stored ? JSON.parse(stored) : null
+    } catch (e) {
+      return null
+    }
+  })
+
+  const [totalPrice, setTotalPrice] = useState(() => {
+    if (location.state?.totalPrice !== undefined) {
+      return location.state.totalPrice
+    }
+    try {
+      const stored = sessionStorage.getItem(`totalPrice_${id}`)
+      return stored ? JSON.parse(stored) : 0
+    } catch (e) {
+      return 0
+    }
+  })
 
   // Payment status
   const [paymentStatus, setPaymentStatus] = useState({
