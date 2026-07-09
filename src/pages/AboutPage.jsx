@@ -31,7 +31,7 @@ function AboutPage() {
       <div
         className="about-hero-section"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/assets/about/about-hero.jpg)`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/assets/about/about-hero.webp)`,
         }}
       >
         <div className="container">
@@ -81,7 +81,7 @@ function AboutPage() {
             <AnimatedElement animation="fade-left">
               <div className="about-content-image">
                 <LazyImage
-                  src="/assets/about/about-img-1.jpg"
+                  src="/assets/about/about-img-1.webp"
                   alt="Our team planning travel experiences"
                 />
               </div>
@@ -349,7 +349,7 @@ function AboutPage() {
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
                     <LazyImage
-                      src="/assets/team/anshuman.jpg"
+                      src="/assets/team/anshuman.webp"
                       alt="Anshuman Singh"
                       className="about-team-image"
                     />
@@ -385,7 +385,7 @@ function AboutPage() {
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
                     <LazyImage
-                      src="/assets/team/vibhu.jpg"
+                      src="/assets/team/vibhu.webp"
                       alt="Vibhu Panchal"
                       className="about-team-image"
                     />
@@ -421,7 +421,7 @@ function AboutPage() {
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
                     <LazyImage
-                      src="/assets/team/alis.jpg"
+                      src="/assets/team/alis.webp"
                       alt="Alis Patel"
                       className="about-team-image"
                     />
@@ -457,7 +457,7 @@ function AboutPage() {
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
                     <LazyImage
-                      src="/assets/team/abhishek.jpg"
+                      src="/assets/team/abhishek.webp"
                       alt="Abhishek Jha"
                       className="about-team-image"
                     />
@@ -492,7 +492,7 @@ function AboutPage() {
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
                     <LazyImage
-                      src="/assets/team/swastik.jpg"
+                      src="/assets/team/swastik.webp"
                       alt="Swastik Moolya"
                       className="about-team-image"
                     />
@@ -527,7 +527,7 @@ function AboutPage() {
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
                     <LazyImage
-                      src="/assets/team/divya.jpg"
+                      src="/assets/team/divya.webp"
                       alt="Divya Panchariya"
                       className="about-team-image"
                     />
@@ -563,7 +563,7 @@ function AboutPage() {
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
                     <LazyImage
-                      src="/assets/team/ayushi.jpg"
+                      src="/assets/team/ayushi.webp"
                       alt="Ayushi Babu"
                       className="about-team-image"
                     />
@@ -598,7 +598,7 @@ function AboutPage() {
                 <div className="about-team-img">
                   <div className="about-team-img-effects">
                     <LazyImage
-                      src="/assets/team/parth.jpg"
+                      src="/assets/team/parth.webp"
                       alt="Parth Raval"
                       className="about-team-image"
                     />

@@ -10,19 +10,19 @@ function HeroSection() {
 
   const slides = [
     {
-      image: "/assets/hero/hero-background-1.jpg", // Updated path
+      image: "/assets/hero/hero-background-1.webp", // Updated path
       title: "Best Travel Packages in India - Domestic & International Tours",
       subtitle:
         "Discover incredible India with our premium holiday packages. Goa beaches, Kerala backwaters, Himachal mountains - all at unbeatable prices",
     },
     {
-      image: "/assets/hero/hero-background-2.jpg", // Updated path
+      image: "/assets/hero/hero-background-2.webp", // Updated path
       title: "International Holiday Packages - Bali, Thailand, Vietnam Tours",
       subtitle:
         "Explore exotic destinations with our affordable international tour packages. Bali temples, Thailand beaches, Vietnam culture - book now!",
     },
     {
-      image: "/assets/hero/hero-background-3.jpg", // Updated path
+      image: "/assets/hero/hero-background-3.webp", // Updated path
       title: "Family Vacation & Honeymoon Packages - Create Lasting Memories",
       subtitle:
         "Perfect family holidays and romantic honeymoon packages tailored for you. Adventure tours, cultural trips, beach vacations - all inclusive deals",

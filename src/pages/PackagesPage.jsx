@@ -129,7 +129,7 @@ function PackagesPage() {
       <div
         className="packages-header"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/assets/hero/packages-header.jpg)`, // Updated path
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/assets/hero/packages-header.webp)`, // Updated path
         }}
       >
         <div className="container">

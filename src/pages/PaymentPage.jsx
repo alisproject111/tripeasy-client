@@ -380,7 +380,7 @@ function PaymentPage() {
       <div 
         className="pp-payment-header"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/hero/payment-header.jpg')`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/hero/payment-header.webp')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           color: 'white',
@@ -510,7 +510,7 @@ function PaymentPage() {
 
                 <div className="pp-cashfree-info">
                   <div className="pp-cashfree-logo">
-                    <img src="/assets/logos/cashfree-logo.png" alt="Cashfree" className="pp-cashfree-logo-img" /> {/* Updated path */}
+                    <img src="/assets/logos/cashfree-logo.webp" alt="Cashfree" className="pp-cashfree-logo-img" /> {/* Updated path */}
                     <span>Cashfree Payments</span>
                   </div>
                   <p>

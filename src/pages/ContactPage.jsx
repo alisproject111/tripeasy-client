@@ -230,7 +230,7 @@ const ContactPage = () => {
       <div
         className="contact-hero"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/assets/contact/contact-hero.jpg)`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/assets/contact/contact-hero.webp)`,
         }}
       >
         <div className="container">

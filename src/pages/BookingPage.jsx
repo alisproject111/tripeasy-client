@@ -523,7 +523,7 @@ function BookingPage() {
       <div 
         className="bp-booking-header"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/hero/booking-header.jpg')`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/hero/booking-header.webp')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           color: 'white',

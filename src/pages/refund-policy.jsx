@@ -11,7 +11,7 @@ function RefundPolicy() {
 
   // Background image URL - assuming the image is in public folder
   const headerBackground = {
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/assets/hero/policy-header.jpg")`,
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/assets/hero/policy-header.webp")`,
   };
 
   return (

@@ -108,7 +108,7 @@ function Navbar() {
         <div className="nav-brand">
           <Link to="/" onClick={closeMenu}>
             <img
-              src="/assets/logos/travel-logo.png" // Updated path
+              src="/assets/logos/travel-logo.webp" // Updated path
               alt="TravelPackages Logo"
               className="brand-logo"
             />
